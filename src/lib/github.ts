@@ -8,9 +8,9 @@ export interface Repo {
   name: string;
   description: string | null;
   url: string;
-  demo: string | null | undefined;
-  language: string | null | undefined;
-  stars: number | null | undefined;
+  demo: string | null;
+  language: string | null;
+  stars: number | null;
 }
 
 export interface UserProfile {
@@ -43,9 +43,9 @@ export async function fetchUserRepos(username: string) {
         name: repo.name,
         description: repo.description,
         url: repo.html_url,
-        demo: repo.homepage,
-        language: repo.language,
-        stars: repo.stargazers_count,
+        demo: repo.homepage ?? null,
+        language: repo.language ?? null,
+        stars: repo.stargazers_count ?? null,
       }));
 
     if (cleanRepos.length === 0) {
