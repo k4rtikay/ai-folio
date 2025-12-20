@@ -13,6 +13,17 @@ export interface Repo {
   stars: number | null | undefined;
 }
 
+export interface UserProfile {
+  name: string | null;
+  bio: string | null;
+  avatarUrl: string | null;
+  location: string | null;
+  twitterUsername: string | null;
+  email: string | null;
+  blog: string | null;
+  company: string | null;
+}
+
 export async function fetchUserRepos(username: string) {
   try {
     const response = await octokit.rest.repos.listForUser({
@@ -23,7 +34,7 @@ export async function fetchUserRepos(username: string) {
       type: "owner",
     })
 
-    const cleanRepos:Repo[] = response.data
+    const cleanRepos: Repo[] = response.data
       .filter((repo) => !repo.fork)
       .filter((repo) => repo.description)
       .sort((a, b) => (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0))
@@ -48,4 +59,34 @@ export async function fetchUserRepos(username: string) {
     console.error("Error fetching repositories:", error);
     throw error;
   }
-} 
+}
+
+export async function fetchUserProfile(username: string) {
+  try {
+    const response = await octokit.rest.users.getByUsername({
+      username,
+    });
+
+    const profile = {
+      name: response.data.name,
+      bio: response.data.bio,
+      avatarUrl: response.data.avatar_url,
+      location: response.data.location,
+      twitterUsername: response.data.twitter_username,
+      email: response.data.email,
+      blog: response.data.blog,
+      company: response.data.company,
+    };
+
+    if(profile.name === null && profile.bio === null && profile.avatarUrl === null) {
+      throw new Error("User profile not found.");
+    }
+
+    return profile;
+
+  }
+  catch (error) {
+    console.error("Error fetching user profile:", error);
+    throw error;
+  }
+}
