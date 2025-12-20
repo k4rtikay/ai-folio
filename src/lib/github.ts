@@ -78,15 +78,26 @@ export async function fetchUserProfile(username: string) {
       company: response.data.company,
     };
 
-    if(profile.name === null && profile.bio === null && profile.avatarUrl === null) {
-      throw new Error("User profile not found.");
-    }
-
     return profile;
 
   }
   catch (error) {
     console.error("Error fetching user profile:", error);
+    throw error;
+  }
+}
+
+export async function getGithubData(username: string) {
+  try {
+    const [profile, repos] = await Promise.all([
+      fetchUserProfile(username),
+      fetchUserRepos(username),
+    ]);
+
+    return { profile, repos };
+  }
+  catch (error) {
+    console.error("Error fetching GitHub data:", error);
     throw error;
   }
 }

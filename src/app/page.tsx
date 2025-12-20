@@ -1,10 +1,4 @@
-// import { fetchUserProfile, fetchUserRepos } from "@/lib/github";
-
-// import { getGroqChatCompletion, main } from "@/lib/groq";
-
 export default async function HomePage() {
-
-  // console.log(await main());
 
   return (
     <main>
