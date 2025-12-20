@@ -11,6 +11,7 @@
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "groq-sdk": "^0.37.0",
     "lucide-react": "^0.562.0",
     "motion": "^12.23.26",
     "next": "16.1.0",
