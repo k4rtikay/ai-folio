@@ -1,6 +1,11 @@
-export default function EditorPanel() {
+interface EditorPanelProps {
+    username: string;
+    className?: string;
+}
+
+export default function EditorPanel({ username, className }: EditorPanelProps) {
     return (
-        <div>
+        <div className={className}>
             <h1>Editor Panel</h1>
         </div>
     );
