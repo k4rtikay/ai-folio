@@ -1,3 +1,5 @@
+import { UsernameForm } from "@/components/shared/username-form";
+
 export default async function HomePage() {
 
   return (
@@ -19,17 +21,7 @@ export default async function HomePage() {
             Turn your github into your brand. Choose from many fun templates.
           </p>
         </div>
-        <form action="" className="mt-6 flex gap-2">
-          <label htmlFor="username" className="sr-only">Enter Username:</label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="Enter your github username..."
-            className="rounded-md border border-gray-300 px-3 py-2 w-60"
-          />
-          <button type="submit" className="rounded-md bg-black px-3 py-2 text-white">Create</button>
-        </form>
+        <UsernameForm />
       </main>
 
       <footer className="flex flex-col gap-2 w-full bg-gray-50 py-2">
@@ -56,21 +48,12 @@ export default async function HomePage() {
               <a href="#" className="text-sm text-gray-600 hover:text-gray-900">Feedback</a>
             </div>
 
-            <form action="" className="flex flex-col gap-2">
-              <label htmlFor="username" className="sr-only">Enter Username:</label>
-              <input
-                type="text"
-                name="username"
-                placeholder="Enter your github username..."
-                id="username"
-                className="rounded-md border border-gray-300 px-3 py-2 w-40 lg:w-60 h-fit"
-              />
-              <button type="submit" className="rounded-md bg-black px-3 py-2 text-white h-fit w-fit">Create</button>
-            </form>
+            <UsernameForm />
+
           </div>
         </div>
         <h1
-        className="text-center text-[80px] md:text-[200px] font-bold text-gray-200">GitExhibit</h1>
+        className="text-center text-[80px] md:text-[200px] font-bold text-gray-200 select-none">GitExhibit</h1>
         <p className="text-center text-gray-600">© 2025 Exhibit AI. All rights reserved.</p>
       </footer>
     </div>

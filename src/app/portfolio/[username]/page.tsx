@@ -1,5 +1,5 @@
-export function PortfolioPage({ params }: { params: { username: string } }) {
-    const { username } = params;
+export default async function PortfolioPage({ params }: { params: Promise<{ username: string }> }) {
+    const { username } = await params;
 
     return (
         <div>
