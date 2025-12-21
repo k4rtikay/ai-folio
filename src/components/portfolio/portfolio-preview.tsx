@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Forward, MonitorSmartphone } from "lucide-react";
+import StandardTemplate from "./templates/standard/standard-layout";
 
 interface PortfolioPreviewProps {
     username: string;
@@ -33,6 +34,9 @@ export default function PortfolioPreview({ username, className }: PortfolioPrevi
                     </Button>
                 </div>
             </header>
+            <main>
+                <StandardTemplate />
+            </main>
         </div>
     );
 }
