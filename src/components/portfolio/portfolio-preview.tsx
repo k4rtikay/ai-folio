@@ -10,10 +10,10 @@ export default function PortfolioPreview({ username, className }: PortfolioPrevi
     return (
         <div className={className}>
             <header className="flex justify-between items-center bg-gray-100 p-2 text-sm tracking-wide ">
-                <div className="flex gap-1 items-center">
-                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                    <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
-                    <span className="w-2 h-2 bg-red-500 rounded-full"></span>  
+                <div className="flex gap-2 items-center">
+                    <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+                    <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
+                    <span className="w-3 h-3 bg-red-500 rounded-full"></span>  
                 </div>
 
                 <h1 className="font-semibold">Preview</h1>
