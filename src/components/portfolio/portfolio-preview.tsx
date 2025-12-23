@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Forward, MonitorSmartphone } from "lucide-react";
 import StandardTemplate from "./templates/standard/standard-layout";
+import { cn } from "@/lib/utils";
 
 interface PortfolioPreviewProps {
     username: string;
@@ -9,8 +10,8 @@ interface PortfolioPreviewProps {
 
 export default function PortfolioPreview({ username, className }: PortfolioPreviewProps) {
     return (
-        <div className={className}>
-            <header className="flex justify-between items-center bg-gray-100 p-2 text-sm tracking-wide ">
+        <div className={cn("flex flex-col", className)}>
+            <header className="flex justify-between items-center bg-white dark:bg-gray-800 p-2 text-sm tracking-wide ">
                 <div className="flex gap-2 items-center">
                     <span className="w-3 h-3 bg-green-500 rounded-full"></span>
                     <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
@@ -34,7 +35,7 @@ export default function PortfolioPreview({ username, className }: PortfolioPrevi
                     </Button>
                 </div>
             </header>
-            <main>
+            <main className="h-full w-full">
                 <StandardTemplate />
             </main>
         </div>

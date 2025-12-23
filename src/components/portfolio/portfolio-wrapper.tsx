@@ -14,7 +14,7 @@ export default function PortfolioWrapper({ username, className }: PortfolioWrapp
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
     return (
-        <div className="flex min-h-screen">
+        <div className={cn("flex min-h-screen w-full", className)}>
             <aside className={cn("border-r border-gray-200 transition-all", isSidebarOpen ? "w-1/4" : "w-fit")}>
                 <EditorPanel
                     username={username}
