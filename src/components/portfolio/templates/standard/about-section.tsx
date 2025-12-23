@@ -3,8 +3,8 @@ import { MapPinIcon } from "lucide-react";
 
 export default function AboutSection() {
     return (
-        <div className="flex flex-col gap-4 w-full items-center justify-center border-t border-b border-gray-200 p-2">
-            <div className="flex gap-4 w-full items-center">
+        <div className="flex flex-col gap-4 w-full items-center justify-center border-t border-b border-gray-200">
+            <div className="flex gap-4 w-full p-4 items-center border-b border-gray-200 dark:border-gray-800">
                 <div
                     className="w-[160px] h-[160px] rounded-full overflow-hidden border-2 border-gray-200"
                 >
@@ -38,7 +38,7 @@ export default function AboutSection() {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 p-4">
                 <h2 className="text-2xl font-semibold">About Me</h2>
                 <p className="text-base tracking-wide opacity-70">I am a Full Stack Engineer with over 5 years of experience in the JavaScript ecosystem. Currently working at Vercel, I specialize in building high-performance UI libraries and robust CI/CD pipelines. When I'm not coding, I'm writing about software architecture or contributing to open-source tools that simplify database management.</p>
             </div>
