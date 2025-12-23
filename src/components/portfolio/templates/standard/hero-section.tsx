@@ -17,7 +17,7 @@ export default function HeroSection() {
     ];
 
     return (
-        <div className="relative flex flex-col gap-2 w-full h-[200px] md:h-[400px] items-center justify-center border border-gray-200">
+        <div className="relative flex flex-col gap-2 w-full h-[200px] md:h-[400px] items-center justify-center border-t border-b border-gray-200 dark:border-gray-800">
             <h1 className="text-2xl md:text-4xl font-bold text-shadow-sm">Crafting Digital Experiences That Matter</h1>
             <p className="text-sm md:text-base tracking-wide opacity-70 text-shadow-xs">Full-stack developer specializing in React, Typescript, and modern web technologies.</p>
 
