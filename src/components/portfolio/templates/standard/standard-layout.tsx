@@ -2,6 +2,7 @@ import HeroSection from "./hero-section";
 import AboutSection from "./about-section";
 import Divider from "./divider";
 import ProjectsSection from "./projects-section";
+import SkillsSection from "./skills-section";
 
 export default function StandardTemplate() {
     return (
@@ -12,6 +13,8 @@ export default function StandardTemplate() {
                 <AboutSection />
                 <Divider />
                 <ProjectsSection />
+                <Divider />
+                <SkillsSection />
                 <Divider />
             </div>
         </div>
