@@ -21,18 +21,18 @@ const projects = [
 
 export default function ProjectsSection() {
     return (
-        <div className="flex flex-col gap-2">
+        <div className="w-full flex flex-col gap-2">
             <div className="p-4 border-t border-b border-gray-200 dark:border-gray-800">
                 <h2 className="text-2xl font-semibold">Projects</h2>
                 <p className="text-base tracking-wide opacity-70">Here are some of my works.</p>
             </div>
-            <div className="flex flex-col">
+            <div className="w-full flex flex-col">
                 {projects.map((project, index) => (
-                    <div key={index} className="flex gap-4 p-4 border-b border-gray-200 dark:border-gray-800">
-                        <div>
-                            <Image src={""} alt="" width={240} height={160} />
+                    <div key={index} className="w-full flex gap-4 p-4 border-b border-gray-200 dark:border-gray-800">
+                        <div className="w-[240px] h-[160px] rounded-md overflow-hidden border border-gray-200">
+                            {/* <Image src={""} alt="" width={240} height={160} /> */}
                         </div>
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2 w-full">
                             <h3 className="text-xl font-semibold">{project.title}</h3>
                             <p className="text-base tracking-wide opacity-70">{project.description}</p>
                             <p className="text-base tracking-wide opacity-70">{project.techStack.join(", ")}</p>
