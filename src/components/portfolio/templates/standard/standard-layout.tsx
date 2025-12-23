@@ -3,6 +3,7 @@ import AboutSection from "./about-section";
 import Divider from "./divider";
 import ProjectsSection from "./projects-section";
 import SkillsSection from "./skills-section";
+import StandardFooter from "./standard-footer";
 
 export default function StandardTemplate() {
     return (
@@ -16,6 +17,7 @@ export default function StandardTemplate() {
                 <Divider />
                 <SkillsSection />
                 <Divider />
+                <StandardFooter />
             </div>
         </div>
     );
