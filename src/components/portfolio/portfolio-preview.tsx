@@ -40,9 +40,9 @@ export default function PortfolioPreview({ username, portfolio, profile, repos, 
                     </Button>
                 </div>
             </header>
-            <main className="h-full w-full overflow-y-auto">
+            <div className="h-full w-full overflow-y-auto">
                 <StandardTemplate username={username} portfolio={portfolio} profile={profile} repos={repos} />
-            </main>
+            </div>
         </div>
     );
 }

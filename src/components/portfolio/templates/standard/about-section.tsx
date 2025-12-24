@@ -1,29 +1,36 @@
 import Image from "next/image";
 import { MapPinIcon } from "lucide-react";
 
-export default function AboutSection() {
+interface AboutSectionProps{
+    about: string;
+    name: string;
+    location: string;
+    username: string;
+    avatar: string;
+}
+
+export default function AboutSection({ about, name, location, username, avatar }: AboutSectionProps) {
     return (
         <div className="flex flex-col gap-4 w-full items-center justify-center border-t border-b border-gray-200">
             <div className="flex gap-4 w-full p-4 items-center border-b border-gray-200 dark:border-gray-800">
                 <div
                     className="w-[160px] h-[160px] rounded-full overflow-hidden border-2 border-gray-200"
                 >
-                    <Image src="https://images.unsplash.com/photo-1603480395003-2b5bc9efba56?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    <Image src={avatar}
                         alt="Profile"
                         width={160}
                         height={160}
                     />
                 </div>
-                <div className="h-full flex flex-col justify-between gap-2 px-4">
+                <div className="h-full flex flex-col gap-4 px-4">
                     <div className="flex flex-col gap-2">
                         <span>
-                            <h1 className="text-2xl font-bold">Alex Rivera</h1>
-                            <p className="text-sm tracking-wide opacity-70">@git_alex</p>
+                            <h1 className="text-2xl font-bold">{name}</h1>
+                            <p className="text-sm tracking-wide opacity-70">@{username}</p>
                         </span>
-                        <p className="text-sm tracking-wide opacity-70">Full Stack Engineer | Open Source Enthusiast | Building tools for devs</p>
                         <span className="flex items-center gap-1">
                             <MapPinIcon className="w-4 h-4" />
-                            <p className="text-sm tracking-wide opacity-70">New York, NY</p>
+                            <p className="text-sm tracking-wide opacity-70">{location}</p>
                         </span>
                     </div>
                     <div className="flex gap-6 items-center border border-gray-200 p-2 rounded-md w-fit">
@@ -40,7 +47,7 @@ export default function AboutSection() {
 
             <div className="flex flex-col gap-2 p-4">
                 <h2 className="text-2xl font-semibold">About Me</h2>
-                <p className="text-base tracking-wide opacity-70">I am a Full Stack Engineer with over 5 years of experience in the JavaScript ecosystem. Currently working at Vercel, I specialize in building high-performance UI libraries and robust CI/CD pipelines. When I'm not coding, I'm writing about software architecture or contributing to open-source tools that simplify database management.</p>
+                <p className="text-base tracking-wide opacity-70">{about}</p>
             </div>
         </div>
     );

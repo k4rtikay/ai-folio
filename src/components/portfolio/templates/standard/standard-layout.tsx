@@ -22,7 +22,7 @@ export default function StandardTemplate({ portfolio, profile, repos, username }
                 <Header name={profile.name ?? username}/>
                 <HeroSection heroText={portfolio.heroText ?? ""} heroSubText={portfolio.heroSubText ?? ""}/>
                 <Divider />
-                <AboutSection />
+                <AboutSection about={portfolio.about ?? ""} name={profile.name ?? username} location={profile.location ?? ""} username={username} avatar={profile.avatarUrl ?? ""}/>
                 <Divider />
                 <ProjectsSection />
                 <Divider />
