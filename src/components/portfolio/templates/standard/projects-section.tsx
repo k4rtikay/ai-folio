@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Repo } from "@/lib/github";
+import { Star } from "lucide-react";
 
 interface ProjectsSectionProps {
     repos: Repo[];
@@ -21,11 +22,16 @@ export default function ProjectsSection({ repos }: ProjectsSectionProps) {
                             {/* <Image src={""} alt="" width={240} height={160} /> */}
                         </div>
                         <div className="flex flex-col gap-2 w-full">
-                            <h3 className="text-xl font-semibold">{project.name}</h3>
+                            <span className="flex w-full justify-between items-center">
+                                <h3 className="text-xl font-semibold">{project.name}</h3>
+                                <span className="flex w-fit gap-2 px-2 py-1 rounded-md items-center text-base tracking-wide opacity-70 border-2 border-gray-200 dark:border-gray-800">
+                                    <Star className="w-4 h-4" /> {project.stars}
+                                </span>
+                            </span>
                             <p className="text-base tracking-wide opacity-70">{project.description}</p>
                             <p className="text-base tracking-wide opacity-70">{project.language}</p>
-                            <a href="" rel="noreferrer nopener" target="_blank">
-                                <button className="mt-4 bg-zinc-800 hover:bg-zinc-700 text-white px-2 py-1 rounded-sm">View Project</button>
+                            <a href={project.url} rel="noreferrer nopener" target="_blank">
+                                <button className="mt-4 bg-zinc-800 hover:bg-zinc-700 text-white px-2 py-1 rounded-md">View Project</button>
                             </a>
                         </div>
                     </div>
