@@ -1,4 +1,9 @@
-export default function HeroSection() {
+interface HeroSectionProps {
+    heroText: string;
+    heroSubText: string;
+}
+
+export default function HeroSection({ heroText, heroSubText }: HeroSectionProps) {
 
     const bars = [
         { height: "65%", opacity: 0.3 },
@@ -18,8 +23,8 @@ export default function HeroSection() {
 
     return (
         <div className="relative flex flex-col gap-2 w-full h-[200px] md:h-[400px] items-center justify-center border-t border-b border-gray-200 dark:border-gray-800">
-            <h1 className="text-2xl md:text-4xl font-bold text-shadow-sm">Crafting Digital Experiences That Matter</h1>
-            <p className="text-sm md:text-base tracking-wide opacity-70 text-shadow-xs">Full-stack developer specializing in React, Typescript, and modern web technologies.</p>
+            <h1 className="text-2xl md:text-4xl font-bold text-shadow-sm">{heroText}</h1>
+            <p className="text-sm md:text-base tracking-wide opacity-70 text-shadow-xs">{heroSubText}</p>
 
             <div className="absolute inset-0 flex items-end w-full h-full gap-0 justify-between pb-0 pointer-events-none">
                 {bars.map((bar, index) => (
