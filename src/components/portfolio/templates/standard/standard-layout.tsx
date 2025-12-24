@@ -24,7 +24,7 @@ export default function StandardTemplate({ portfolio, profile, repos, username }
                 <Divider />
                 <AboutSection about={portfolio.about ?? ""} name={profile.name ?? username} location={profile.location ?? ""} username={username} avatar={profile.avatarUrl ?? ""}/>
                 <Divider />
-                <ProjectsSection repos={repos}/>
+                <ProjectsSection repos={repos} projectsInfo={portfolio.projects ?? []}/>
                 <Divider />
                 <SkillsSection skills={portfolio.skills ?? []} />
                 <Divider />
