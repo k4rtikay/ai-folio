@@ -19,7 +19,7 @@ export default function StandardTemplate({ portfolio, profile, repos, username }
     return (
         <div className="bg-[#F5F7FA] w-full h-full px-16 md:px-32 dark:bg-[#111827]">
             <div className="flex flex-col border-r border-l border-gray-200 dark:border-gray-800">
-                <Header profile={profile} username={username}/>
+                <Header name={profile.name ?? username}/>
                 <HeroSection />
                 <Divider />
                 <AboutSection />
