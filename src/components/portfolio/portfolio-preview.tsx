@@ -2,13 +2,18 @@ import { Button } from "@/components/ui/button";
 import { Forward, MonitorSmartphone } from "lucide-react";
 import StandardTemplate from "./templates/standard/standard-layout";
 import { cn } from "@/lib/utils";
+import { AIFolio } from "@/schemas/aifolio.schema";
+import { Repo, UserProfile } from "@/lib/github";
 
 interface PortfolioPreviewProps {
     username: string;
+    portfolio: AIFolio;
+    profile: UserProfile;
+    repos: Repo[];
     className?: string;
 }
 
-export default function PortfolioPreview({ username, className }: PortfolioPreviewProps) {
+export default function PortfolioPreview({ username, portfolio, profile, repos, className }: PortfolioPreviewProps) {
     return (
         <div className={cn("flex flex-col", className)}>
             <header className="flex justify-between items-center bg-white dark:bg-gray-800 p-2 text-sm tracking-wide">
@@ -36,7 +41,7 @@ export default function PortfolioPreview({ username, className }: PortfolioPrevi
                 </div>
             </header>
             <main className="h-full w-full overflow-y-auto">
-                <StandardTemplate />
+                <StandardTemplate username={username} portfolio={portfolio} profile={profile} repos={repos} />
             </main>
         </div>
     );

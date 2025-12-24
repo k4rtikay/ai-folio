@@ -4,13 +4,18 @@ import { useState } from "react";
 import EditorPanel from "../editor/editor-panel";
 import PortfolioPreview from "./portfolio-preview";
 import { cn } from "@/lib/utils";
+import { AIFolio } from "@/schemas/aifolio.schema";
+import { UserProfile, Repo } from "@/lib/github";
 
 interface PortfolioWrapperProps {
     username: string;
+    portfolio: AIFolio;
+    repos: Repo[];
+    profile: UserProfile;
     className?: string;
 }
 
-export default function PortfolioWrapper({ username, className }: PortfolioWrapperProps) {
+export default function PortfolioWrapper({ username, portfolio, profile, repos, className }: PortfolioWrapperProps) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
     return (
@@ -26,6 +31,9 @@ export default function PortfolioWrapper({ username, className }: PortfolioWrapp
             <main className="flex-1 px-2 py-2">
                 <PortfolioPreview
                     username={username}
+                    portfolio={portfolio}
+                    profile={profile}
+                    repos={repos}
                     className="h-full w-full border-2 border-gray-200 rounded-md"
                 />
             </main>

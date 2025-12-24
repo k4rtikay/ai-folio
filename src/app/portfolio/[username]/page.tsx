@@ -10,11 +10,11 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
 
     const portfolio = MOCK_PORTFOLIO;
 
-    console.log("📋 SNAPSHOT:", JSON.stringify(portfolio, null, 2));
+    // console.log("📋 SNAPSHOT:", JSON.stringify(portfolio, null, 2));
 
     return (
         <div className="flex min-h-screen">
-            <PortfolioWrapper username={username} />
+            <PortfolioWrapper username={username} portfolio={portfolio} profile={profile} repos = {repos}/>
         </div>
     );
 };
