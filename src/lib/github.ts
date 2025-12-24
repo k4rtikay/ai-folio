@@ -68,14 +68,14 @@ export async function fetchUserProfile(username: string) {
     });
 
     const profile = {
-      name: response.data.name,
-      bio: response.data.bio,
-      avatarUrl: response.data.avatar_url,
-      location: response.data.location,
-      twitterUsername: response.data.twitter_username,
-      email: response.data.email,
-      blog: response.data.blog,
-      company: response.data.company,
+      name: response.data.name ?? null,
+      bio: response.data.bio ?? null,
+      avatarUrl: response.data.avatar_url ?? null,
+      location: response.data.location ?? null,
+      twitterUsername: response.data.twitter_username ?? null,
+      email: response.data.email ?? null,
+      blog: response.data.blog ?? null,
+      company: response.data.company ?? null,
     };
 
     return profile;

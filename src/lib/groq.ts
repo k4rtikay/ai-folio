@@ -6,8 +6,8 @@ import { UserProfile, Repo } from "./github";
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export async function generatePortfolio(profile: UserProfile, repos: Repo[]) {
-    const chatCompletion = await getGroqChatCompletion(profile, repos);
-    return chatCompletion;
+    const portfolio = await getGroqChatCompletion(profile, repos);
+    return portfolio;
 }
 
 export async function getGroqChatCompletion(profile: UserProfile, repos: Repo[]) {
