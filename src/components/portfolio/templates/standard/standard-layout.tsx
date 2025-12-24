@@ -26,7 +26,7 @@ export default function StandardTemplate({ portfolio, profile, repos, username }
                 <Divider />
                 <ProjectsSection repos={repos}/>
                 <Divider />
-                <SkillsSection />
+                <SkillsSection skills={portfolio.skills ?? []} />
                 <Divider />
                 <StandardFooter />
             </div>

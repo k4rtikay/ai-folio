@@ -1,15 +1,8 @@
-const skills = [
-    "TypeScript",
-    "React",
-    "Next.js",
-    "Node.js",
-    "PostgreSQL",
-    "Docker",
-    "AWS",
-    "Tailwind CSS"
-]
+interface SkillsProps{
+    skills: string[]
+}
 
-export default function SkillsSection() {
+export default function SkillsSection({skills}: SkillsProps) {
     return (
         <div className="flex flex-col gap-2 p-4 border-t border-b border-gray-200 dark:border-gray-800">
             <h2 className="text-2xl font-semibold">Skills</h2>
