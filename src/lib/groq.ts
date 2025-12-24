@@ -1,15 +1,16 @@
 import { aifolioSchema } from "@/schemas/aifolio.schema";
 import Groq from "groq-sdk";
 import z from "zod";
+import { UserProfile, Repo } from "./github";
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-export async function generatePortfolio(profile: object, repos: object[]) {
+export async function generatePortfolio(profile: UserProfile, repos: Repo[]) {
     const chatCompletion = await getGroqChatCompletion(profile, repos);
     return chatCompletion;
 }
 
-export async function getGroqChatCompletion(profile: object, repos: object[]) {
+export async function getGroqChatCompletion(profile: UserProfile, repos: Repo[]) {
     try {
         const chatCompletion = await groq.chat.completions.create({
             messages: [
