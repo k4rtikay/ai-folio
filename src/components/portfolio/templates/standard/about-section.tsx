@@ -32,14 +32,14 @@ export default function AboutSection({ about, name, location, username, avatar, 
 
                 <div className="h-full flex flex-col gap-4 px-4">
                     <div className="flex flex-col gap-2">
-                        <span>
+                        <div>
                             <h1 className="text-2xl font-bold">{name}</h1>
                             <p className="text-sm tracking-wide opacity-70">@{username}</p>
-                        </span>
-                        <span className="flex items-center gap-1">
+                        </div>
+                        <div className="flex items-center gap-1">
                             <MapPinIcon className="w-4 h-4" />
                             <p className="text-sm tracking-wide opacity-70">{location}</p>
-                        </span>
+                        </div>
                     </div>
 
                     <div className="flex gap-6 items-center border border-gray-200 p-2 rounded-md w-fit">
@@ -68,10 +68,10 @@ export default function AboutSection({ about, name, location, username, avatar, 
                         <div className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center">
                             <Briefcase className="w-6 h-6" />
                         </div>
-                        <span>
+                        <div>
                             <h2 className="text-xl font-semibold">Currently</h2>
                             <p className="text-base tracking-wide opacity-70">{company}</p>
-                        </span>
+                        </div>
                     </div>
                 )
             }
