@@ -37,7 +37,7 @@ export default function StandardTemplate({ portfolio, profile, repos, username }
 
                 <Divider /> 
 
-                <GitStatsSection  followers={profile.followers} following={profile.following} repos={profile.repos}/>
+                <GitStatsSection  followers={profile.followers} following={profile.following} repos={profile.repos} username={username}/>
 
                 <Divider /> 
 
