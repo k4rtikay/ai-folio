@@ -8,6 +8,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
     const { profile, repos } = await getGithubData(username);
     // const portfolio = await generatePortfolio(profile, repos);
 
+    console.log(profile);
+
     const portfolio = MOCK_PORTFOLIO;
 
     // console.log("📋 SNAPSHOT:", JSON.stringify(portfolio, null, 2));
