@@ -6,11 +6,11 @@ import { MOCK_PORTFOLIO } from "@/lib/mock-data";
 export default async function PortfolioPage({ params }: { params: Promise<{ username: string }> }) {
     const { username } = await params;
     const { profile, repos } = await getGithubData(username);
-    const portfolio = await generatePortfolio(profile, repos);
+    // const portfolio = await generatePortfolio(profile, repos);
 
     console.log(profile);
 
-    // const portfolio = MOCK_PORTFOLIO;
+    const portfolio = MOCK_PORTFOLIO;
 
     // console.log("📋 SNAPSHOT:", JSON.stringify(portfolio, null, 2));
 

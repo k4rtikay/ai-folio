@@ -8,7 +8,7 @@ export default function SkillsSection({skills}: SkillsProps) {
             <h2 className="text-2xl font-semibold">Skills</h2>
             <div className="flex gap-2">
                 {skills.map((skill, index) => (
-                    <span key={index} className="px-2 py-1 rounded-sm bg-gray-200 dark:bg-gray-800">{skill}</span>
+                    <span key={index} className="px-2 py-1 rounded-sm bg-gray-100 dark:bg-gray-900">{skill}</span>
                 ))}
             </div>
         </div>
