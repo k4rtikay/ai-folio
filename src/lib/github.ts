@@ -11,6 +11,10 @@ export interface Repo {
   demo: string | null;
   language: string | null;
   stars: number | null;
+  topics?: string[] | null;
+  homepage?: string | null;
+  forks: number | null;
+  open_graph_image_url?: string;
 }
 
 export interface UserProfile {
@@ -46,6 +50,10 @@ export async function fetchUserRepos(username: string) {
         demo: repo.homepage ?? null,
         language: repo.language ?? null,
         stars: repo.stargazers_count ?? null,
+        topics: repo.topics ?? null,
+        homepage: repo.homepage ?? null,
+        forks: repo.forks_count ?? null,
+        // open_graph_image_url: repo.open_graph_image_url ?? null,
       }));
 
     if (cleanRepos.length === 0) {
