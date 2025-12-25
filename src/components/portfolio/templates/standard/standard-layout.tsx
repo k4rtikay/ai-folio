@@ -20,14 +20,30 @@ export default function StandardTemplate({ portfolio, profile, repos, username }
         <div className="bg-[#F5F7FA] w-full h-full px-16 md:px-32 dark:bg-[#111827]">
             <div className="flex flex-col border-r border-l border-gray-200 dark:border-gray-800">
                 <Header name={profile.name ?? username}/>
+
                 <HeroSection heroText={portfolio.heroText ?? ""} heroSubText={portfolio.heroSubText ?? ""}/>
+
                 <Divider />
-                <AboutSection about={portfolio.about ?? ""} name={profile.name ?? username} location={profile.location ?? ""} username={username} avatar={profile.avatarUrl ?? ""} links={ {blog: profile.blog, twitterUsername: profile.twitterUsername}}/>
+
+                <AboutSection
+                about={portfolio.about ?? ""}
+                name={profile.name ?? username}
+                location={profile.location ?? ""} 
+                username={username} avatar={profile.avatarUrl ?? ""} 
+                links={ {blog: profile.blog, twitterUsername: profile.twitterUsername}}
+                company={profile.company ?? ""}
+                />
+
                 <Divider />
+
                 <ProjectsSection repos={repos}/>
+
                 <Divider />
+
                 <SkillsSection skills={portfolio.skills ?? []} />
+
                 <Divider />
+
                 <StandardFooter name={profile.name ?? username}/>
             </div>
         </div>
