@@ -7,6 +7,7 @@ import StandardFooter from "./standard-footer";
 import Header from "./header";
 import { AIFolio } from "@/schemas/aifolio.schema";
 import { Repo, UserProfile } from "@/lib/github";
+import GitStatsSection from "./git-stats-section";
 
 interface StandardTemplateProps {
     username: string;
@@ -31,10 +32,14 @@ export default function StandardTemplate({ portfolio, profile, repos, username }
                 location={profile.location ?? ""} 
                 username={username} avatar={profile.avatarUrl ?? ""} 
                 links={ {blog: profile.blog, twitterUsername: profile.twitterUsername}}
-                company={profile.company ?? ""}
+                company={profile.company}
                 />
 
-                <Divider />
+                <Divider /> 
+
+                <GitStatsSection  followers={profile.followers} following={profile.following} repos={profile.repos}/>
+
+                <Divider /> 
 
                 <ProjectsSection repos={repos}/>
 

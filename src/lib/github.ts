@@ -26,6 +26,9 @@ export interface UserProfile {
   email: string | null;
   blog: string | null;
   company: string | null;
+  followers: number | null;
+  following: number | null;
+  repos: number | null;
 }
 
 export async function fetchUserRepos(username: string) {
@@ -84,6 +87,9 @@ export async function fetchUserProfile(username: string) {
       email: response.data.email ?? null,
       blog: response.data.blog ?? null,
       company: response.data.company ?? null,
+      followers: response.data.followers ?? null,
+      following: response.data.following ?? null,
+      repos: response.data.public_repos ?? null,
     };
 
     return profile;
