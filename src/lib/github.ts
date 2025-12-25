@@ -42,7 +42,7 @@ export async function fetchUserRepos(username: string) {
       .filter((repo) => !repo.fork)
       .filter((repo) => repo.description)
       .sort((a, b) => (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0))
-      .slice(0, 6)
+      .slice(0, 8)
       .map((repo) => ({
         name: repo.name,
         description: repo.description,
