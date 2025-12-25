@@ -1,46 +1,112 @@
-import Image from "next/image";
 import { Repo } from "@/lib/github";
-import { Star } from "lucide-react";
-
-type Project = {
-    title: string;
-    description: string;
-    techStack: string[];
-}
+import { Star, GitFork, ExternalLink, Github } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 interface ProjectsSectionProps {
     repos: Repo[];
-    projectsInfo: Project[];
 }
 
-export default function ProjectsSection({ repos, projectsInfo }: ProjectsSectionProps) {
-
+function ProjectCard({ repo }: { repo: Repo }) {
     return (
-        <div className="w-full flex flex-col gap-2">
-            <div className="p-4 border-t border-b border-gray-200 dark:border-gray-800">
-                <h2 className="text-2xl font-semibold">Projects</h2>
-                <p className="text-base tracking-wide opacity-70">Here are some of my works.</p>
+        <div
+            className="flex flex-col md:flex-row gap-4 p-4 border border-gray-200 dark:border-gray-800 hover:bg-accent/5 transition-colors"
+        >
+            {/* IMAGE SECTION */}
+            <div className="shrink-0 w-full md:w-[320px] h-[180px] md:h-[160px] relative rounded-md overflow-hidden border border-border bg-muted">
+                {repo.open_graph_image_url ? (
+                    <Image
+                        src={repo.open_graph_image_url}
+                        alt={`${repo.name} preview`}
+                        fill
+                        className="object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                ) : (
+                    // Fallback if no OG image exists
+                    <div className="flex items-center justify-center h-full w-full bg-secondary text-secondary-foreground">
+                        <svg role="img" className="w-8 h-8 opacity-20 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" /></svg>
+                    </div>
+                )}
             </div>
-            <div className="w-full flex flex-col">
-                {projectsInfo.map((project, index) => (
-                    <div key={index} className="w-full flex gap-4 p-4 border-b border-gray-200 dark:border-gray-800">
-                        <div className="w-[240px] h-[160px] rounded-md overflow-hidden border border-gray-200">
-                            {/* <Image src={""} alt="" width={240} height={160} /> */}
-                        </div>
-                        <div className="flex flex-col gap-2 w-full">
-                            <span className="flex w-full justify-between items-center">
-                                <h3 className="text-xl font-semibold">{project.title}</h3>
-                                <span className="flex w-fit gap-2 px-2 py-1 rounded-md items-center text-base tracking-wide opacity-70 border-2 border-gray-200 dark:border-gray-800">
-                                    <Star className="w-4 h-4" /> {repos[index].stars}
-                                </span>
-                            </span>
-                            <p className="text-base tracking-wide opacity-70">{project.description}</p>
-                            <p className="text-base tracking-wide opacity-70">{project.techStack.join(",")}</p>
-                            <a href={repos[index].url} rel="noreferrer nopener" target="_blank">
-                                <button className="mt-4 bg-zinc-800 hover:bg-zinc-700 text-white px-2 py-1 rounded-md">View Project</button>
-                            </a>
+
+            {/* CONTENT SECTION */}
+            <div className="flex flex-1 flex-col justify-between min-h-[160px]">
+                <div>
+                    <div className="flex justify-between items-start mb-2">
+                        <h3 className="text-xl font-semibold capitalize tracking-tight">
+                            {repo.name.replace(/-/g, " ")}
+                        </h3>
+
+                        {/* Stats Badge */}
+                        <div className="flex gap-2 shrink-0 ml-2">
+                            {repo.stars && repo.stars > 0 && (
+                                <Badge variant="secondary" className="gap-1">
+                                    <Star className="w-3 h-3" /> {repo.stars}
+                                </Badge>
+                            )}
+                            {repo.forks && repo.forks > 0 && (
+                                <Badge variant="secondary" className="gap-1">
+                                    <GitFork className="w-3 h-3" /> {repo.forks}
+                                </Badge>
+                            )}
                         </div>
                     </div>
+
+                    <p className="text-muted-foreground line-clamp-2 mb-3 text-sm">
+                        {repo.description || "No description provided."}
+                    </p>
+
+                    {/* Tech Stack (Topics + Language) */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        {repo.language && (
+                            <Badge variant="outline" className="text-xs border-primary/20">
+                                {repo.language}
+                            </Badge>
+                        )}
+                        {/* If you added topics to your interface, map them here */}
+                        {repo.topics?.slice(0, 3).map((topic) => (
+                            <Badge key={topic} variant="outline" className="text-xs border-primary/20">
+                                {topic}
+                            </Badge>
+                        ))}
+                    </div>
+                </div>
+
+                {/* ACTION BUTTONS */}
+                <div className="flex gap-2 pt-2 md:pt-0">
+                    <a href={repo.url} target="_blank" rel="noreferrer">
+                        <Button size="sm" variant="outline" className="gap-2">
+                            <svg role="img" className="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" /></svg>
+                            Repo
+                        </Button>
+                    </a>
+                    {repo.homepage && (
+                        <a href={repo.homepage} target="_blank" rel="noreferrer">
+                            <Button size="sm" className="gap-2">
+                                <ExternalLink className="w-4 h-4" /> Demo
+                            </Button>
+                        </a>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default function ProjectsSection({ repos }: ProjectsSectionProps) {
+    return (
+        <div className="w-full flex flex-col gap-6">
+            <div className="p-4 border-y border-gray-200 dark:border-gray-800">
+                <h2 className="text-2xl font-semibold">Projects</h2>
+                <p className="text-muted-foreground">
+                    Open source work and experiments from GitHub.
+                </p>
+            </div>
+
+            <div className="flex flex-col">
+                {repos.map((repo) => (
+                    <ProjectCard key={repo.name} repo={repo} />
                 ))}
             </div>
         </div>

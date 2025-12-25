@@ -27,14 +27,14 @@ export async function getGroqChatCompletion(profile: UserProfile, repos: Repo[])
                         about: z.string().max(500).describe("A professional but engaging short bio"),
                         projects: z.array(
                             z.object({
-                                title: z.string().describe("The exact name of the repo this project belongs to"),
-                                description: z.string().max(200).describe("Benefit-driven marketing copy for this project"),
+                                title: z.string().describe("The exact name of the repo this project belongs to. DO NOT CHANGE ANYTHING OR FORMAT ANYTHING."),
+                                description: z.string().max(200).describe("Benefit-driven marketing copy for this project, in the spirit of the original description"),
                                 techStack: z.array(z.string()).describe("3 or more key technologies, frameworks and libraries used in the project. Use the project description and repo data to infer this"),
                             })
                         ),
                         skills: z.array(z.string()).describe("top 4-10 specific programming languages and tools that the person is skilled at"),
                         }.
-                    Ensure the JSON is properly formatted.`
+                    Ensure the JSON is properly formatted YOU MUST ADHERE TO THE PROVIDED SCHEMA.`
                 },
             ],
             response_format: { type: "json_object" },
