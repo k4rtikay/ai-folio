@@ -1,3 +1,14 @@
+/**
+ * AI generation layer for portfolio copy.
+ *
+ * - Uses Groq chat completions
+ * - Enforces strict JSON output via Zod
+ * - Throws on malformed or non-conforming responses
+ * - Assumes input data is already sanitized
+ */
+
+
+
 import { aifolioSchema } from "@/schemas/aifolio.schema";
 import Groq from "groq-sdk";
 import z from "zod";
@@ -5,12 +16,11 @@ import { UserProfile, Repo } from "./github";
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-export async function generatePortfolio(profile: UserProfile, repos: Repo[]) {
-    const portfolio = await getGroqChatCompletion(profile, repos);
-    return portfolio;
+export async function generatePortfolio(profile: UserProfile, repos: Repo[]) : Promise<z.infer<typeof aifolioSchema>>{
+    return getGroqChatCompletion(profile, repos);
 }
 
-export async function getGroqChatCompletion(profile: UserProfile, repos: Repo[]) {
+async function getGroqChatCompletion(profile: UserProfile, repos: Repo[]) : Promise<z.infer<typeof aifolioSchema>> {
     try {
         const chatCompletion = await groq.chat.completions.create({
             messages: [
@@ -22,12 +32,12 @@ export async function getGroqChatCompletion(profile: UserProfile, repos: Repo[])
                     role: "user",
                     content: `Here is the Github data: ${JSON.stringify({ profile, repos })}. Generate portfolio content in JSON format matching this schema:
                         {
-                        heroText: z.string().describe("A punchy header in a a few words to grab attention"),
-                        heroSubText: z.string().optional().describe("A short subtext to provide additional context to the hero text"),
-                        about: z.string().max(500).describe("A professional but engaging short bio"),
-                        skills: z.array(z.string()).describe("top 4-10 specific programming languages and tools that the person is skilled at"),
-                        }.
-                    Ensure the JSON is properly formatted YOU MUST ADHERE TO THE PROVIDED SCHEMA.`
+                        heroText: "string(A punchy header in a a few words to grab attention)",
+                        heroSubText: "string(A short subtext to provide additional context to the hero text)",
+                        about: "string(A professional but engaging short bio)",
+                        skills: "array<string>(top 4-10 specific programming languages and tools that the person is skilled at)",
+                        }
+                    Do not include explanations, markdown, or text outside the JSON object.`
                 },
             ],
             response_format: { type: "json_object" },
@@ -35,6 +45,10 @@ export async function getGroqChatCompletion(profile: UserProfile, repos: Repo[])
         });
 
         const message = chatCompletion.choices[0]?.message?.content;
+
+        if (!message) {
+            throw new Error("Groq returned an empty response");
+        }
 
         const parsedMessage = aifolioSchema.parse(JSON.parse(message as string));
 

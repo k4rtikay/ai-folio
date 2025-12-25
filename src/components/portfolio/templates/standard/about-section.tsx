@@ -24,7 +24,7 @@ export default function AboutSection({ about, name, location, username, avatar, 
                     className="w-[160px] h-[160px] rounded-full overflow-hidden border-2 border-gray-200"
                 >
                     <Image src={avatar}
-                        alt="Profile"
+                        alt={`${name}'s profile picture`}
                         width={160}
                         height={160}
                     />
