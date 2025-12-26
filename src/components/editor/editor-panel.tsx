@@ -3,22 +3,25 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Sidebar } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface EditorPanelProps {
     username: string;
-    className?: string;
     open: boolean;
     onToggle: () => void;
 }
 
-export default function EditorPanel({ username, className, open, onToggle }: EditorPanelProps) {
+export default function EditorPanel({ username, open, onToggle }: EditorPanelProps) {
         return (
-        <div className={cn("", className)}>
+        <div className="h-full w-full bg-[#26262B] text-white px-2 py-3 flex flex-col items-center">
             <div className="w-full flex justify-between items-center">
                 { open && <h1>Editor Panel</h1> }
-                <Button variant={"outline"} size={"icon-sm"} onClick={() => onToggle()}>
-                    <Sidebar />
+                <Button 
+                variant={"outline"}     
+                size={"icon-sm"} 
+                onClick={() => onToggle()}
+                className="bg-[#26262B] hover:bg-gray-800 border-none"
+                >
+                    <Sidebar className="w-4 h-4 text-white" />
                 </Button>
             </div>
         </div >
