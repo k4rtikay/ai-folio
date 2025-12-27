@@ -18,7 +18,7 @@ interface StandardTemplateProps {
 
 export default function StandardTemplate({ portfolio, profile, repos, username }: StandardTemplateProps) {
     return (
-        <div className="bg-[#F5F7FA] w-full min-h-full px-16 md:px-32 dark:bg-[#16181D]">
+        <div className="bg-[#F5F7FA] w-full min-h-full px-16 md:px-32 dark:bg-[#16181D] dark:text-[#ECEFF4]">
             <div className="flex flex-col border-r border-l border-gray-200 dark:border-[#27282D]">
                 <Header name={profile.name ?? username}/>
 

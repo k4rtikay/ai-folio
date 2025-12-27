@@ -13,17 +13,17 @@ export default function GitStatsSection({ followers, following, repos, username 
             <h2 className="px-4 py-2 text-2xl font-semibold">Contributions</h2>
 
             <div className="w-full flex justify-center gap-8 md:gap-64 pb-2 border-b border-gray-200 dark:border-[#27282D]"> 
-                <div className="flex flex-col items-center">
-                    <h3 className="text-lg font-semibold">Followers</h3>
-                    <p className="text-lg">{followers ?? "N/A"}</p>
+                <div className="flex flex-col gap-1 items-center">
+                    <h3 className="text-sm opacity-80">Followers</h3>
+                    <p className="text-2xl font-semibold">{followers ?? "N/A"}</p>
                 </div>
-                <div className="flex flex-col items-center">
-                    <h3 className="text-lg font-semibold">Following</h3>    
-                    <p className="text-lg">{following ?? "N/A"}</p>
+                <div className="flex flex-col gap-1 items-center">
+                    <h3 className="text-sm opacity-80">Following</h3>    
+                    <p className="text-2xl font-semibold">{following ?? "N/A"}</p>
                 </div>
-                <div className="flex flex-col items-center">    
-                    <h3 className="text-lg font-semibold">Repos</h3>
-                    <p className="text-lg">{repos ?? "N/A"}</p>
+                <div className="flex flex-col gap-1 items-center">    
+                    <h3 className="text-sm opacity-80">Repos</h3>
+                    <p className="text-2xl font-semibold">{repos ?? "N/A"}</p>
                 </div>
             </div>
 

@@ -30,12 +30,12 @@ export default function HeroSection({ heroText, heroSubText }: HeroSectionProps)
                 {bars.map((bar, index) => (
                     <div
                         key={index}
-                        className="w-full rounded-t-sm bg-gradient-to-t from-blue-500/80 via-cyan-400/60 dark:from-cyan-600 dark:via-cyan-600/60 to-transparent"
+                        className="w-full rounded-t-sm bg-gradient-to-t from-blue-500/80 via-cyan-400/60 dark:from-indigo-500 dark:via-indigo-500/60 to-transparent"
                         style={{ height: bar.height, opacity: bar.opacity }}
                     />
                 ))}
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-[#F5F7FA] via-transparent to-[#F5F7FA]/60 dark:from-zinc-950 dark:via-transparent dark:to-zinc-950/30 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#F5F7FA] via-transparent to-[#F5F7FA]/60 dark:from-[#101010D] dark:via-transparent dark:to-zinc-950/30 pointer-events-none" />
         </div>
     )
 }
