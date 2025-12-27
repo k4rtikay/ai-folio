@@ -19,7 +19,7 @@ export default function Header({ name }: HeaderProps) {
     };
 
     return (
-        <header className="w-full flex justify-between items-center px-4 py-2 border-b border-gray-200 dark:border-gray-800">
+        <header className="w-full flex justify-between items-center px-4 py-2 border-b border-gray-200 dark:border-[#27282D]">
             <p className="text-lg font-semibold">{name}</p>
             <div>
                 <Button
