@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ActivityCalendar } from "react-activity-calendar";
+import { useTheme } from "next-themes";
 
 interface HeatmapProps {
     username: string;
@@ -10,6 +11,7 @@ interface HeatmapProps {
 export default function Heatmap({ username }: HeatmapProps) {
     const [data, setData] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const { resolvedTheme } = useTheme();
 
     useEffect(() => {
         const fetchHeatmapData = async () => {
@@ -51,9 +53,10 @@ export default function Heatmap({ username }: HeatmapProps) {
                 fontSize={12}
                 blockSize={12}
                 blockMargin={4}
+                colorScheme={resolvedTheme === 'dark' ? 'dark' : 'light'}
                 theme={{
-                    dark: ['#f1f5f9', '#cbd5e1', '#94a3b8', '#64748b', '#334155'],
-                    light: ['#1e293b', '#334155', '#475569', '#64748b', '#cbd5e1'],
+                    light: ['#f1f5f9', '#cbd5e1', '#94a3b8', '#64748b', '#334155'],
+                    dark: ['#1e293b', '#334155', '#475569', '#64748b', '#cbd5e1'],
                 }}
                 labels={{
                     totalCount: "{{count}} contributions in the last year",
