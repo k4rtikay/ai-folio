@@ -11,6 +11,7 @@ interface PortfolioState {
     setRepos: (repos: Repo[]) => void;
     setProfile: (profile: UserProfile) => void;
     updatePortfolioField: (field: keyof AIFolio, value: AIFolio[keyof AIFolio]) => void;
+    updateProfileField: (field: keyof UserProfile, value: UserProfile[keyof UserProfile]) => void;
 }
 
 export const usePortfolioStore = create<PortfolioState>((set) => ({
@@ -25,6 +26,14 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
             if(!state.portfolio) return {};
             return {
                 portfolio: {...state.portfolio, [field]: value}
+            }
+        })
+    },
+    updateProfileField: (field, value) => {
+        set((state)=>{
+            if(!state.profile) return {};
+            return {
+                profile: {...state.profile, [field]: value}
             }
         })
     },
