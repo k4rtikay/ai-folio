@@ -16,6 +16,7 @@ interface PortfolioWrapperProps {
 
 export default function PortfolioWrapper({ username, portfolio, profile, repos }: PortfolioWrapperProps) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [ viewMode, setViewMode ] = useState<"desktop" | "mobile">("desktop");
 
     return (
         <div className="flex h-screen w-full bg-black overflow-hidden">
@@ -24,6 +25,7 @@ export default function PortfolioWrapper({ username, portfolio, profile, repos }
                     username={username}
                     open={isSidebarOpen}
                     onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+                    toggleView={ () => setViewMode(viewMode === "desktop" ? "mobile" : "desktop") }
                 />
             </aside>
             <main className="flex-1">
@@ -32,6 +34,7 @@ export default function PortfolioWrapper({ username, portfolio, profile, repos }
                     portfolio={portfolio}
                     profile={profile}
                     repos={repos}
+                    viewMode={viewMode}
                 />
             </main>
         </div>

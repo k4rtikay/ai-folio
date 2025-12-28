@@ -10,9 +10,10 @@ interface EditorPanelProps {
     username: string;
     open: boolean;
     onToggle: () => void;
+    toggleView?: () => void;
 }
 
-export default function EditorPanel({ username, open, onToggle }: EditorPanelProps) {
+export default function EditorPanel({ username, open, onToggle, toggleView }: EditorPanelProps) {
     return (
         <div className="h-full w-full bg-[#26262B] text-[#F2F4F7] px-2 py-3 flex flex-col items-center">
             <div className="w-full flex justify-between items-center">
@@ -29,7 +30,12 @@ export default function EditorPanel({ username, open, onToggle }: EditorPanelPro
                         <Forward className="w-4 h-4 text-[#F2F4F7]"></Forward>
                     </Button>
 
-                    <Button variant={"outline"} size={"icon-sm"} className="bg-[#313136] hover:bg-gray-800 hover:text-[#F2F4F7] border-none">
+                    <Button 
+                    variant={"outline"} 
+                    size={"icon-sm"} 
+                    className="bg-[#313136] hover:bg-gray-800 hover:text-[#F2F4F7] border-none"
+                    onClick={toggleView}
+                    >
                         <MonitorSmartphone className="w-4 h-4 text-[#F2F4F7]"></MonitorSmartphone>
                     </Button>
 
