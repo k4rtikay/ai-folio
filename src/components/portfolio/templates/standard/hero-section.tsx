@@ -22,9 +22,9 @@ export default function HeroSection({ heroText, heroSubText }: HeroSectionProps)
     ];
 
     return (
-        <div className="relative flex flex-col gap-2 w-full h-[200px] @md:h-[400px] items-center justify-center border-t border-b border-gray-200 dark:border-[#27282D]">
-            <h1 className="text-2xl @md:text-4xl font-bold text-shadow-sm">{heroText}</h1>
-            <p className="text-sm @md:text-base tracking-wide opacity-70 text-shadow-xs text-center">{heroSubText}</p>
+        <div className="relative p-4 flex flex-col gap-2 w-full h-[200px] @md:h-[400px] items-center justify-center border-t border-b border-gray-200 dark:border-[#27282D]">
+            <h1 className="z-10 text-xl @md:text-4xl font-bold text-shadow-sm text-center">{heroText}</h1>
+            <p className="z-10 text-sm @md:text-base tracking-wide opacity-70 text-shadow-xs text-center">{heroSubText}</p>
 
             <div className="absolute inset-0 flex items-end w-full h-full gap-0 justify-between pb-0 pointer-events-none">
                 {bars.map((bar, index) => (
