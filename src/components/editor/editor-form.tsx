@@ -1,12 +1,14 @@
-import { MapPin } from "lucide-react"
+import { MapPin } from "lucide-react";
+import { usePortfolioStore } from "@/store/use-portfolio-state";
+
 
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Label } from "../ui/label"
+} from "@/components/ui/accordion";
+import { Label } from "../ui/label";
 import {
     InputGroup,
     InputGroupAddon,
@@ -14,9 +16,13 @@ import {
     InputGroupInput,
     InputGroupText,
     InputGroupTextarea,
-} from "@/components/ui/input-group"
+} from "@/components/ui/input-group";
 
 export function EditorForm() {
+    const { portfolio, profile, updatePortfolioField, updateProfileField } = usePortfolioStore();
+
+    if (!portfolio || !profile) return <div className="p-4 text-sm text-gray-500">Loading editor...</div>;
+
     return (
         <>
             <Accordion
@@ -36,7 +42,10 @@ export function EditorForm() {
                                 <InputGroupAddon align={"inline-end"}>
                                     <InputGroupText className="text-xs text-muted-foreground"> 40 characters left </InputGroupText>
                                 </InputGroupAddon>
-                                <InputGroupInput placeholder="Headline" />
+                                <InputGroupInput
+                                    placeholder="Headline"
+                                    value={portfolio.heroText || ""}
+                                    onChange={(e) => updatePortfolioField("heroText", e.target.value)} />
                             </InputGroup>
                         </div>
 
@@ -46,7 +55,10 @@ export function EditorForm() {
                                 <InputGroupAddon align={"inline-end"}>
                                     <InputGroupText className="text-xs text-muted-foreground"> 60 characters left </InputGroupText>
                                 </InputGroupAddon>
-                                <InputGroupInput placeholder="Sub-Headline" />
+                                <InputGroupInput
+                                    placeholder="Sub-Headline"
+                                    value={portfolio.heroSubText || ""}
+                                    onChange={(e) => updatePortfolioField("heroSubText", e.target.value)} />
                             </InputGroup>
                         </div>
                     </AccordionContent>
@@ -62,7 +74,10 @@ export function EditorForm() {
                                 <InputGroupAddon align={"block-end"}>
                                     <InputGroupText className="text-xs text-muted-foreground"> 150 characters left </InputGroupText>
                                 </InputGroupAddon>
-                                <InputGroupTextarea placeholder="Your Bio" />
+                                <InputGroupTextarea
+                                    placeholder="Your Bio"
+                                    value={portfolio.about || ""}
+                                    onChange={(e) => updatePortfolioField("about", e.target.value)} />
                             </InputGroup>
                         </div>
 
@@ -72,7 +87,10 @@ export function EditorForm() {
                                 <InputGroupAddon align={"inline-start"}>
                                     <MapPin className="w-4 h-4 text-muted-foreground" />
                                 </InputGroupAddon>
-                                <InputGroupInput placeholder="Location" />
+                                <InputGroupInput
+                                    placeholder="Location"
+                                    value={profile.location || ""}
+                                    onChange={(e) => updateProfileField("location", e.target.value)} />
                             </InputGroup>
                         </div>
 
@@ -87,7 +105,10 @@ export function EditorForm() {
                                 <InputGroupAddon align={"inline-start"}>
                                     <InputGroupText className="text-xs text-muted-foreground"> @ </InputGroupText>
                                 </InputGroupAddon>
-                                <InputGroupInput placeholder="Twitter Username" />
+                                <InputGroupInput
+                                placeholder="Twitter Username"
+                                value={profile.twitterUsername || ""}
+                                onChange={(e) => updateProfileField("twitterUsername", e.target.value)} />
                             </InputGroup>
                         </div>
 
@@ -97,9 +118,13 @@ export function EditorForm() {
                                 <InputGroupAddon align={"inline-start"}>
                                     <InputGroupText className="text-xs text-muted-foreground"></InputGroupText>
                                 </InputGroupAddon>
-                                <InputGroupInput placeholder="https://example.com"/>
+                                <InputGroupInput
+                                placeholder="https://example.com"
+                                value={profile.blog || ""}
+                                onChange={(e) => updateProfileField("blog", e.target.value)} />
                             </InputGroup>
                         </div>
+
                     </AccordionContent>
                 </AccordionItem>
             </Accordion>
