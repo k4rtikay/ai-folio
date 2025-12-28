@@ -22,19 +22,20 @@ export default function AboutSection({ about, name, location, username, avatar, 
         <div className="flex flex-col w-full items-center justify-center border-t border-b border-gray-200 dark:border-[#27282D]">
             <div className="flex gap-4 w-full p-4 items-center border-b border-gray-200 dark:border-[#27282D]">
                 <div
-                    className="w-[160px] h-[160px] rounded-full overflow-hidden border-2 border-gray-200 dark:border-[#27282D]"
+                    className="w-[100px] h-[100px] @md:w-[160px] @md:h-[160px] rounded-full overflow-hidden border-2 border-gray-200 dark:border-[#27282D]"
                 >
                     <Image src={avatar}
                         alt={`${name}'s profile picture`}
                         width={160}
                         height={160}
+                        className="w-full h-full object-cover"
                     />
                 </div>
 
                 <div className="h-full flex flex-col gap-4 px-4">
                     <div className="flex flex-col gap-2">
                         <div>
-                            <h1 className="text-2xl font-bold">{name}</h1>
+                            <h1 className="text-lg @md:text-2xl font-bold">{name}</h1>
                             <p className="text-sm tracking-wide opacity-70">@{username}</p>
                         </div>
                         <div className="flex items-center gap-1">
