@@ -35,7 +35,7 @@ export default function AboutSection({ about, name, location, username, avatar, 
                 <div className="h-full flex flex-col gap-4 px-4">
                     <div className="flex flex-col gap-2">
                         <div>
-                            <h1 className="text-lg @md:text-2xl font-bold">{name}</h1>
+                            <h1 className="text-lg @md:text-2xl">{name}</h1>
                             <p className="text-sm tracking-wide opacity-70">@{username}</p>
                         </div>
                         <div className="flex items-center gap-1">
@@ -78,7 +78,7 @@ export default function AboutSection({ about, name, location, username, avatar, 
             </div>
 
             <div className="flex flex-col gap-2 p-4 border-b border-gray-200 dark:border-[#27282D]">
-                <h2 className="text-2xl font-semibold">About Me</h2>
+                <h2 className="text-xl @md:text-2xl font-semibold">About Me</h2>
                 <p className="text-base tracking-wide opacity-70">{about}</p>
             </div>
 
@@ -89,7 +89,7 @@ export default function AboutSection({ about, name, location, username, avatar, 
                             <Briefcase className="w-6 h-6" />
                         </div>
                         <div>
-                            <h2 className="text-xl font-semibold">Currently</h2>
+                            <h2 className="text-lg @md:text-xl font-semibold">Currently</h2>
                             <p className="text-base tracking-wide opacity-70">{company}</p>
                         </div>
                     </div>
