@@ -8,12 +8,9 @@ import { Repo, UserProfile } from "@/lib/github";
 interface PortfolioPreviewProps {
     viewMode: "desktop" | "mobile"; 
     username: string;
-    portfolio: AIFolio;
-    profile: UserProfile;
-    repos: Repo[];
 }
 
-export default function PortfolioPreview({ viewMode, username, portfolio, profile, repos }: PortfolioPreviewProps) {
+export default function PortfolioPreview({ viewMode, username }: PortfolioPreviewProps) {
     return (
         <div className="flex items-center justify-center h-full w-full bg-[#121212] overflow-hidden p-4 md:p-8 transition-all">
             
@@ -48,10 +45,7 @@ export default function PortfolioPreview({ viewMode, username, portfolio, profil
                     viewMode === "mobile" ? "h-full" : "h-[calc(100%-2rem)]"
                 )}>
                     <StandardTemplate 
-                        username={username} 
-                        portfolio={portfolio} 
-                        profile={profile} 
-                        repos={repos} 
+                        username={username}  
                     />
                 </div>
             </div>

@@ -5,18 +5,22 @@ import ProjectsSection from "./projects-section";
 import SkillsSection from "./skills-section";
 import StandardFooter from "./standard-footer";
 import Header from "./header";
-import { AIFolio } from "@/schemas/aifolio.schema";
-import { Repo, UserProfile } from "@/lib/github";
 import GitStatsSection from "./git-stats-section";
+import { usePortfolioStore } from "@/store/use-portfolio-state";
 
 interface StandardTemplateProps {
-    username: string;
-    portfolio: AIFolio;
-    profile: UserProfile;
-    repos: Repo[];      
+    username: string;    
 }
 
-export default function StandardTemplate({ portfolio, profile, repos, username }: StandardTemplateProps) {
+export default function StandardTemplate({ username }: StandardTemplateProps) {
+    const portfolio = usePortfolioStore((state) => state.portfolio);
+    const profile = usePortfolioStore((state) => state.profile);
+    const repos = usePortfolioStore((state)=>state.repos);
+
+    if(!profile || !portfolio ){
+        return <div>Loading....</div>
+    }
+
     return (
         <div className="bg-[#F5F7FA] w-full min-h-full @md:px-16 @lg:px-32 dark:bg-[#16181D] dark:text-[#ECEFF4]">
             <div className="flex flex-col border-r border-l border-gray-200 dark:border-[#27282D]">

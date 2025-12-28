@@ -6,6 +6,8 @@ import PortfolioPreview from "./portfolio-preview";
 import { cn } from "@/lib/utils";
 import { AIFolio } from "@/schemas/aifolio.schema";
 import { UserProfile, Repo } from "@/lib/github";
+import { useEffect } from "react";
+import { usePortfolioStore } from "@/store/use-portfolio-state";
 
 interface PortfolioWrapperProps {
     username: string;
@@ -17,6 +19,13 @@ interface PortfolioWrapperProps {
 export default function PortfolioWrapper({ username, portfolio, profile, repos }: PortfolioWrapperProps) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [ viewMode, setViewMode ] = useState<"desktop" | "mobile">("desktop");
+    const { setPortfolio, setProfile, setRepos } = usePortfolioStore();
+
+    useEffect(() => {
+        setPortfolio(portfolio);
+        setProfile(profile);
+        setRepos(repos);
+    }, [portfolio, profile, repos, setPortfolio, setProfile, setRepos]);
 
     return (
         <div className="flex h-screen w-full bg-black overflow-hidden">
@@ -31,9 +40,6 @@ export default function PortfolioWrapper({ username, portfolio, profile, repos }
             <main className="flex-1">
                 <PortfolioPreview
                     username={username}
-                    portfolio={portfolio}
-                    profile={profile}
-                    repos={repos}
                     viewMode={viewMode}
                 />
             </main>
