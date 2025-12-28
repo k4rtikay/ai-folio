@@ -44,7 +44,7 @@ export default function PortfolioPreview({ viewMode, username, portfolio, profil
                 </div>
 
                 <div className={cn(
-                    "w-full overflow-y-auto scrollbar-hide bg-white dark:bg-black",
+                    "@container w-full overflow-y-auto scrollbar-hide bg-white dark:bg-black",
                     viewMode === "mobile" ? "h-full" : "h-[calc(100%-2rem)]"
                 )}>
                     <StandardTemplate 
