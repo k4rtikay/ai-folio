@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { Sidebar } from "lucide-react";
 import { Forward, MonitorSmartphone } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { EditorForm } from "./editor-form";
 
 interface EditorPanelProps {
     username: string;
@@ -48,6 +49,10 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
                         <Sidebar className="w-4 h-4 text-[#F2F4F7]" />
                     </Button>
                 </div>
+            </div>
+
+            <div>
+                <EditorForm />
             </div>
 
         </div >
