@@ -182,6 +182,11 @@ export function EditorForm() {
                         <div className="space-y-4 px-2 py-2">
 
                             <InputGroup>
+                                <InputGroupAddon align={"inline-start"}>
+                                    <span className={cn("text-[10px]", (newSkill.length || 0) >= 25 ? "text-red-500" : "text-foreground-muted")}>
+                                        {newSkill.length || 0}/25
+                                    </span>
+                                </InputGroupAddon>
                                 <InputGroupAddon align={"inline-end"}>
                                     <Button
                                         variant={"ghost"}
@@ -195,6 +200,7 @@ export function EditorForm() {
                                 <InputGroupInput
                                     placeholder="Skill"
                                     value={newSkill}
+                                    maxLength={25}
                                     className="rounded-full"
                                     onKeyDown={handleKeyDown}
                                     onChange={(e) => setNewSkill(e.target.value)}
