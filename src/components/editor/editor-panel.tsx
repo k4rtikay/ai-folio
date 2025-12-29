@@ -51,9 +51,12 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
                 </div>
             </div>
 
-            <div className="w-full">
-                <EditorForm />
-            </div>
+            {
+                open &&
+                <div className="w-full">
+                    <EditorForm />
+                </div>  
+            }
 
         </div >
     );
