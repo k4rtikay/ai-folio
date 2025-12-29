@@ -19,10 +19,10 @@ interface AboutSectionProps {
 
 export default function AboutSection({ about, name, location, username, avatar, links, company }: AboutSectionProps) {
     return (
-        <div className="flex flex-col w-full items-center justify-center border-t border-b border-gray-200 dark:border-[#27282D]">
-            <div className="flex gap-4 w-full p-4 items-center border-b border-gray-200 dark:border-[#27282D]">
+        <div className="flex flex-col w-full items-center justify-center border-t border-b border-gray-200 dark:border-[#27282D] overflow-hidden">
+            <div className="flex gap-4 w-full p-4 items-center border-b border-gray-200 dark:border-[#27282D] overflow-hidden">
                 <div
-                    className="w-[100px] h-[100px] @md:w-[160px] @md:h-[160px] rounded-full overflow-hidden border-2 border-gray-200 dark:border-[#27282D]"
+                    className="shrink-0 w-[100px] h-[100px] @md:w-[160px] @md:h-[160px] rounded-full overflow-hidden border-2 border-gray-200 dark:border-[#27282D]"
                 >
                     <Image src={avatar}
                         alt={`${name}'s profile picture`}
@@ -32,15 +32,15 @@ export default function AboutSection({ about, name, location, username, avatar, 
                     />
                 </div>
 
-                <div className="h-full flex flex-col gap-4 px-4">
-                    <div className="flex flex-col gap-2">
+                <div className="h-full flex flex-col gap-4 px-4 min-w-0 overflow-hidden">
+                    <div className="w-full flex flex-col gap-2">
                         <div>
-                            <h1 className="text-lg @md:text-2xl">{name}</h1>
-                            <p className="text-sm tracking-wide opacity-70">@{username}</p>
+                            <h1 className="text-lg @md:text-2xl break-words">{name}</h1>
+                            <p className="text-sm tracking-wide opacity-70 break-words">@{username}</p>
                         </div>
                         <div className="flex items-center gap-1">
                             <MapPinIcon className="w-4 h-4" />
-                            <p className="text-sm tracking-wide opacity-70">{location}</p>
+                            <p className="text-sm tracking-wide opacity-70 break-words">{location}</p>
                         </div>
                     </div>
 
@@ -75,11 +75,12 @@ export default function AboutSection({ about, name, location, username, avatar, 
 
                     </div>
                 </div>
+
             </div>
 
-            <div className="flex flex-col gap-2 p-4 border-b border-gray-200 dark:border-[#27282D]">
-                <h2 className="text-xl @md:text-2xl font-semibold">About Me</h2>
-                <p className="text-base tracking-wide opacity-70">{about}</p>
+            <div className="flex flex-col gap-2 p-4 w-full border-b border-gray-200 dark:border-[#27282D] overflow-hidden">
+                <h2 className="text-xl @md:text-2xl font-semibold break-words">About Me</h2>
+                <p className="text-base tracking-wide opacity-70 break-words whitespace-pre-wrap">{about}</p>
             </div>
 
             {
@@ -89,8 +90,8 @@ export default function AboutSection({ about, name, location, username, avatar, 
                             <Briefcase className="w-6 h-6" />
                         </div>
                         <div>
-                            <h2 className="text-lg @md:text-xl font-semibold">Currently</h2>
-                            <p className="text-base tracking-wide opacity-70">{company}</p>
+                            <h2 className="text-lg @md:text-xl font-semibold break-words">Currently</h2>
+                            <p className="text-base tracking-wide opacity-70 break-words">{company}</p>
                         </div>
                     </div>
                 )
