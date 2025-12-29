@@ -1,4 +1,4 @@
-import { MapPin, X, Plus } from "lucide-react";
+import { MapPin, X, Plus, RotateCcw } from "lucide-react";
 import { usePortfolioStore } from "@/store/use-portfolio-state";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -23,7 +23,7 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 
 export function EditorForm() {
-    const { portfolio, profile, updatePortfolioField, updateProfileField } = usePortfolioStore();
+    const { portfolio, profile, updatePortfolioField, updateProfileField, resetPortfolio, resetProfile, resetPortfolioField, resetProfileField } = usePortfolioStore();
 
     const [newSkill, setNewSkill] = useState<string>("");
 
@@ -54,8 +54,24 @@ export function EditorForm() {
 
     if (!portfolio || !profile) return <div className="p-4 text-sm text-gray-500">Loading editor...</div>;
 
+    const handleResetAll = () => {
+        resetPortfolio();
+        resetProfile();
+    };
+
     return (
         <>
+            <div className="flex justify-end px-2 my-4">
+                <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleResetAll}
+                    className="text-xs gap-1.5 text-orange-400 border-orange-400/30 hover:bg-orange-500/10 hover:text-orange-300"
+                >
+                    <RotateCcw className="w-3 h-3" />
+                    Reset All
+                </Button>
+            </div>
             <Accordion
                 type="single"
                 collapsible
@@ -70,6 +86,17 @@ export function EditorForm() {
                         <div className="space-y-4 px-2">
                             <Label className="text-gray-200">Headline</Label>
                             <InputGroup>
+                                <InputGroupAddon align={"inline-start"}>
+                                    <InputGroupButton
+                                        variant="ghost"
+                                        size="icon-sm"
+                                        className="h-6 w-6 rounded-full text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+                                        onClick={() => resetPortfolioField("heroText")}
+                                        title="Reset to original"
+                                    >
+                                        <RotateCcw className="w-3 h-3" />
+                                    </InputGroupButton>
+                                </InputGroupAddon>
                                 <InputGroupAddon align={"inline-end"}>
                                     <span className={cn("text-[10px]", (portfolio.heroText?.length || 0) >= 40 ? "text-red-500" : "text-foreground-muted")}>
                                         {portfolio.heroText?.length || 0}/40
@@ -86,6 +113,17 @@ export function EditorForm() {
                         <div className="space-y-4 px-2">
                             <Label className="text-gray-200">Sub-Headline</Label>
                             <InputGroup>
+                                <InputGroupAddon align={"inline-start"}>
+                                    <InputGroupButton
+                                        variant="ghost"
+                                        size="icon-sm"
+                                        className="h-6 w-6 rounded-full text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+                                        onClick={() => resetPortfolioField("heroSubText")}
+                                        title="Reset to original"
+                                    >
+                                        <RotateCcw className="w-3 h-3" />
+                                    </InputGroupButton>
+                                </InputGroupAddon>
                                 <InputGroupAddon align={"inline-end"}>
                                     <span className={cn("text-[10px]", (portfolio.heroSubText?.length || 0) >= 70 ? "text-red-500" : "text-foreground-muted")}>
                                         {portfolio.heroSubText?.length || 0}/70
@@ -109,6 +147,17 @@ export function EditorForm() {
                         <div className="space-y-4 px-2">
                             <Label className="text-gray-200">Your Bio</Label>
                             <InputGroup>
+                                <InputGroupAddon align={"block-start"}>
+                                    <InputGroupButton
+                                        variant="ghost"
+                                        size="icon-sm"
+                                        className="h-6 w-6 rounded-full text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+                                        onClick={() => resetPortfolioField("about")}
+                                        title="Reset to original"
+                                    >
+                                        <RotateCcw className="w-3 h-3" />
+                                    </InputGroupButton>
+                                </InputGroupAddon>
                                 <InputGroupAddon align={"block-end"}>
                                     <InputGroupText className={cn("text-xs",
                                         (portfolio.about.length >= 400) ? "text-red-500" : "text-foreground-muted"
@@ -126,6 +175,15 @@ export function EditorForm() {
                             <Label className="text-gray-200">Location</Label>
                             <InputGroup>
                                 <InputGroupAddon align={"inline-start"}>
+                                    <InputGroupButton
+                                        variant="ghost"
+                                        size="icon-sm"
+                                        className="h-6 w-6 rounded-full text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+                                        onClick={() => resetProfileField("location")}
+                                        title="Reset to original"
+                                    >
+                                        <RotateCcw className="w-3 h-3" />
+                                    </InputGroupButton>
                                     <MapPin className="w-4 h-4 text-muted-foreground" />
                                 </InputGroupAddon>
                                 <InputGroupAddon align={"inline-end"}>
@@ -151,6 +209,15 @@ export function EditorForm() {
                             <Label className="text-gray-200">Twitter Username</Label>
                             <InputGroup>
                                 <InputGroupAddon align={"inline-start"}>
+                                    <InputGroupButton
+                                        variant="ghost"
+                                        size="icon-sm"
+                                        className="h-6 w-6 rounded-full text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+                                        onClick={() => resetProfileField("twitterUsername")}
+                                        title="Reset to original"
+                                    >
+                                        <RotateCcw className="w-3 h-3" />
+                                    </InputGroupButton>
                                     <InputGroupText className="text-xs text-muted-foreground"> @ </InputGroupText>
                                 </InputGroupAddon>
                                 <InputGroupInput
@@ -164,7 +231,15 @@ export function EditorForm() {
                             <Label className="text-gray-200">Website</Label>
                             <InputGroup>
                                 <InputGroupAddon align={"inline-start"}>
-                                    <InputGroupText className="text-xs text-muted-foreground"></InputGroupText>
+                                    <InputGroupButton
+                                        variant="ghost"
+                                        size="icon-sm"
+                                        className="h-6 w-6 rounded-full text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+                                        onClick={() => resetProfileField("blog")}
+                                        title="Reset to original"
+                                    >
+                                        <RotateCcw className="w-3 h-3" />
+                                    </InputGroupButton>
                                 </InputGroupAddon>
                                 <InputGroupInput
                                     placeholder="https://example.com"
@@ -183,19 +258,28 @@ export function EditorForm() {
 
                             <InputGroup>
                                 <InputGroupAddon align={"inline-start"}>
+                                    <InputGroupButton
+                                        variant="ghost"
+                                        size="icon-sm"
+                                        className="h-6 w-6 rounded-full text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+                                        onClick={() => resetPortfolioField("skills")}
+                                        title="Reset skills to original"
+                                    >
+                                        <RotateCcw className="w-3 h-3" />
+                                    </InputGroupButton>
                                     <span className={cn("text-[10px]", (newSkill.length || 0) >= 25 ? "text-red-500" : "text-foreground-muted")}>
                                         {newSkill.length || 0}/25
                                     </span>
                                 </InputGroupAddon>
                                 <InputGroupAddon align={"inline-end"}>
-                                    <Button
+                                    <InputGroupButton
                                         variant={"ghost"}
                                         size={"icon-sm"}
                                         className="h-6 w-6 rounded-full text-blue-200 bg-blue-500/20"
                                         onClick={() => handleAddSkill(newSkill)}
                                     >
                                         <Plus className="w-4 h-4" />
-                                    </Button>
+                                    </InputGroupButton>
                                 </InputGroupAddon>
                                 <InputGroupInput
                                     placeholder="Skill"
