@@ -1,4 +1,4 @@
-import { MapPin } from "lucide-react";
+import { MapPin, X } from "lucide-react";
 import { usePortfolioStore } from "@/store/use-portfolio-state";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +18,8 @@ import {
     InputGroupText,
     InputGroupTextarea,
 } from "@/components/ui/input-group";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
 
 export function EditorForm() {
     const { portfolio, profile, updatePortfolioField, updateProfileField } = usePortfolioStore();
@@ -143,6 +145,34 @@ export function EditorForm() {
                             </InputGroup>
                         </div>
 
+                    </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="skills">
+                    <AccordionTrigger className="font-semibold hover:no-underline text-sm py-4">Skills</AccordionTrigger>
+                    <AccordionContent className="flex flex-col gap-4 text-balance">
+                        <div className="space-y-4 px-2">
+                            <div className="flex flex-wrap gap-2">
+                                {
+                                    portfolio.skills.map((skill, index) => (
+                                        <Badge
+                                            key={index}
+                                            variant={"outline"}
+                                            className="py-1 px-1 text-sm text-[#F2F4F7]"
+                                        >
+                                            {skill}
+                                            <Button
+                                                variant={"ghost"}
+                                                size={"icon-sm"}
+                                                className="ml-2 h-6 w-6 rounded-full bg-red-500/20 hover:bg-red-500/20 text-red-400 hover:text-red-200 border-none"
+                                            >
+                                                <X className="w-4 h-4" />
+                                            </Button>
+                                        </Badge>
+                                    ))
+                                }
+                            </div>
+                        </div>
                     </AccordionContent>
                 </AccordionItem>
             </Accordion>
