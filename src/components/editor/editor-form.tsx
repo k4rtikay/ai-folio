@@ -1,5 +1,6 @@
 import { MapPin } from "lucide-react";
 import { usePortfolioStore } from "@/store/use-portfolio-state";
+import { cn } from "@/lib/utils";
 
 
 import {
@@ -40,11 +41,14 @@ export function EditorForm() {
                             <Label className="text-gray-200">Headline</Label>
                             <InputGroup>
                                 <InputGroupAddon align={"inline-end"}>
-                                    <InputGroupText className="text-xs text-muted-foreground"> 40 characters left </InputGroupText>
+                                    <span className={cn("text-[10px]", (portfolio.heroText?.length || 0) >= 40 ? "text-red-500" : "text-foreground-muted")}>
+                                        {portfolio.heroText?.length || 0}/40
+                                    </span>
                                 </InputGroupAddon>
                                 <InputGroupInput
                                     placeholder="Headline"
                                     value={portfolio.heroText || ""}
+                                    maxLength={40}
                                     onChange={(e) => updatePortfolioField("heroText", e.target.value)} />
                             </InputGroup>
                         </div>
@@ -53,15 +57,19 @@ export function EditorForm() {
                             <Label className="text-gray-200">Sub-Headline</Label>
                             <InputGroup>
                                 <InputGroupAddon align={"inline-end"}>
-                                    <InputGroupText className="text-xs text-muted-foreground"> 60 characters left </InputGroupText>
+                                    <span className={cn("text-[10px]", (portfolio.heroSubText?.length || 0) >= 70 ? "text-red-500" : "text-foreground-muted")}>
+                                        {portfolio.heroSubText?.length || 0}/70
+                                    </span>
                                 </InputGroupAddon>
                                 <InputGroupInput
                                     placeholder="Sub-Headline"
+                                    maxLength={70}
                                     value={portfolio.heroSubText || ""}
                                     onChange={(e) => updatePortfolioField("heroSubText", e.target.value)} />
                             </InputGroup>
                         </div>
                     </AccordionContent>
+
                 </AccordionItem>
                 <AccordionItem value="about">
                     <AccordionTrigger
@@ -72,11 +80,14 @@ export function EditorForm() {
                             <Label className="text-gray-200">Your Bio</Label>
                             <InputGroup>
                                 <InputGroupAddon align={"block-end"}>
-                                    <InputGroupText className="text-xs text-muted-foreground"> 150 characters left </InputGroupText>
+                                    <InputGroupText className={cn("text-xs",
+                                        (portfolio.about.length >= 400) ? "text-red-500" : "text-foreground-muted"
+                                    )}> {400 - portfolio.about.length} characters left </InputGroupText>
                                 </InputGroupAddon>
                                 <InputGroupTextarea
                                     placeholder="Your Bio"
                                     value={portfolio.about || ""}
+                                    maxLength={400}
                                     onChange={(e) => updatePortfolioField("about", e.target.value)} />
                             </InputGroup>
                         </div>
@@ -87,10 +98,17 @@ export function EditorForm() {
                                 <InputGroupAddon align={"inline-start"}>
                                     <MapPin className="w-4 h-4 text-muted-foreground" />
                                 </InputGroupAddon>
+                                <InputGroupAddon align={"inline-end"}>
+                                    <span className={cn("text-[10px]", (profile.location?.length || 0) > 30 ? "text-red-500" : "text-foreground-muted")}>
+                                        {profile.location?.length || 0}/30
+                                    </span>
+                                </InputGroupAddon>
                                 <InputGroupInput
                                     placeholder="Location"
                                     value={profile.location || ""}
-                                    onChange={(e) => updateProfileField("location", e.target.value)} />
+                                    maxLength={30}
+                                    onChange={(e) => updateProfileField("location", e.target.value)}
+                                />
                             </InputGroup>
                         </div>
 
@@ -106,9 +124,9 @@ export function EditorForm() {
                                     <InputGroupText className="text-xs text-muted-foreground"> @ </InputGroupText>
                                 </InputGroupAddon>
                                 <InputGroupInput
-                                placeholder="Twitter Username"
-                                value={profile.twitterUsername || ""}
-                                onChange={(e) => updateProfileField("twitterUsername", e.target.value)} />
+                                    placeholder="Twitter Username"
+                                    value={profile.twitterUsername || ""}
+                                    onChange={(e) => updateProfileField("twitterUsername", e.target.value)} />
                             </InputGroup>
                         </div>
 
@@ -119,9 +137,9 @@ export function EditorForm() {
                                     <InputGroupText className="text-xs text-muted-foreground"></InputGroupText>
                                 </InputGroupAddon>
                                 <InputGroupInput
-                                placeholder="https://example.com"
-                                value={profile.blog || ""}
-                                onChange={(e) => updateProfileField("blog", e.target.value)} />
+                                    placeholder="https://example.com"
+                                    value={profile.blog || ""}
+                                    onChange={(e) => updateProfileField("blog", e.target.value)} />
                             </InputGroup>
                         </div>
 
