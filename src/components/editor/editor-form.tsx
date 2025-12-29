@@ -1,6 +1,7 @@
 import { MapPin, X, Plus } from "lucide-react";
 import { usePortfolioStore } from "@/store/use-portfolio-state";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 
 import {
@@ -24,20 +25,30 @@ import { Badge } from "../ui/badge";
 export function EditorForm() {
     const { portfolio, profile, updatePortfolioField, updateProfileField } = usePortfolioStore();
 
+    const [newSkill, setNewSkill] = useState<string>("");
+
     const removeSkill = (skillToRemove: string) => {
         const currentSkills = portfolio?.skills || [];
         updatePortfolioField("skills", currentSkills.filter(s => s !== skillToRemove));
     };
 
-    const handleAddSkill = (skill:string) => {
+    const handleAddSkill = (skill: string) => {
         const newSkill = skill.trim();
 
         const currentSkills = portfolio?.skills || [];
-        
-        if(currentSkills.includes(newSkill)) return;
+
+        if (currentSkills.includes(newSkill)) return;
 
         if (newSkill.length > 0) {
             updatePortfolioField("skills", [...currentSkills, newSkill]);
+            setNewSkill("");
+        }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            handleAddSkill(newSkill);
         }
     };
 
@@ -176,14 +187,17 @@ export function EditorForm() {
                                         variant={"ghost"}
                                         size={"icon-sm"}
                                         className="h-6 w-6 rounded-full text-blue-200 bg-blue-500/20"
-                                        //WIP: onClick={() => handleAddSkill("")}
+                                        onClick={() => handleAddSkill(newSkill)}
                                     >
                                         <Plus className="w-4 h-4" />
                                     </Button>
                                 </InputGroupAddon>
                                 <InputGroupInput
                                     placeholder="Skill"
+                                    value={newSkill}
                                     className="rounded-full"
+                                    onKeyDown={handleKeyDown}
+                                    onChange={(e) => setNewSkill(e.target.value)}
                                 />
                             </InputGroup>
 
