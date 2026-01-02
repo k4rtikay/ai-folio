@@ -3,6 +3,10 @@ import { usePortfolioStore } from "@/store/use-portfolio-state";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
+interface EditorFormProps {
+    className?: string;
+}
+
 
 import {
     Accordion,
@@ -22,7 +26,7 @@ import {
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 
-export function EditorForm() {
+export function EditorForm({ className }: EditorFormProps) {
     const { portfolio, profile, updatePortfolioField, updateProfileField, resetPortfolio, resetProfile, resetPortfolioField, resetProfileField } = usePortfolioStore();
 
     const [newSkill, setNewSkill] = useState<string>("");
@@ -54,29 +58,11 @@ export function EditorForm() {
 
     if (!portfolio || !profile) return <div className="p-4 text-sm text-gray-500">Loading editor...</div>;
 
-    const handleResetAll = () => {
-        resetPortfolio();
-        resetProfile();
-    };
-
     return (
-        <>
-            <div className="flex justify-end px-2 my-4">
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handleResetAll}
-                    className="text-xs gap-1.5 text-orange-400 border-orange-400/30 hover:bg-orange-500/10 hover:text-orange-300"
-                >
-                    <RotateCcw className="w-3 h-3" />
-                    Reset All
-                </Button>
-            </div>
+        <div className={cn("", className)}>
             <Accordion
-                type="single"
-                collapsible
+                type="multiple"
                 className="w-full"
-                defaultValue="hero"
             >
                 <AccordionItem value="hero">
                     <AccordionTrigger
@@ -316,6 +302,6 @@ export function EditorForm() {
                     </AccordionContent>
                 </AccordionItem>
             </Accordion>
-        </>
+        </div>
     )
 }

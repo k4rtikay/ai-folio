@@ -6,6 +6,8 @@ import { Sidebar } from "lucide-react";
 import { Forward, MonitorSmartphone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { EditorForm } from "./editor-form";
+import { usePortfolioStore } from "@/store/use-portfolio-state";
+import { RotateCcw } from "lucide-react";
 
 interface EditorPanelProps {
     username: string;
@@ -15,6 +17,14 @@ interface EditorPanelProps {
 }
 
 export default function EditorPanel({ username, open, onToggle, toggleView }: EditorPanelProps) {
+
+    const { resetPortfolio, resetProfile } = usePortfolioStore();
+
+    const handleResetAll = () => {
+        resetPortfolio();
+        resetProfile();
+    };
+
     return (
         <div className="h-full w-full bg-[#26262B] text-[#F2F4F7] px-2 py-3 flex flex-col items-center">
             <div className="w-full flex justify-between items-center">
@@ -31,11 +41,11 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
                         <Forward className="w-4 h-4 text-[#F2F4F7]"></Forward>
                     </Button>
 
-                    <Button 
-                    variant={"outline"} 
-                    size={"icon-sm"} 
-                    className="bg-[#313136] hover:bg-gray-800 hover:text-[#F2F4F7] border-none"
-                    onClick={toggleView}
+                    <Button
+                        variant={"outline"}
+                        size={"icon-sm"}
+                        className="bg-[#313136] hover:bg-gray-800 hover:text-[#F2F4F7] border-none"
+                        onClick={toggleView}
                     >
                         <MonitorSmartphone className="w-4 h-4 text-[#F2F4F7]"></MonitorSmartphone>
                     </Button>
@@ -53,9 +63,21 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
 
             {
                 open &&
-                <div className="w-full">
-                    <EditorForm />
-                </div>  
+                <div className="w-full h-full mt-2 overflow-y-auto">
+                    <div className="w-full flex justify-between py-2 items-end">
+                        <h2 className="font-semibold">Content</h2>
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={handleResetAll}
+                            className="text-xs gap-1.5 text-orange-400 border-orange-400/30 hover:bg-orange-500/10 hover:text-orange-300"
+                        >
+                            <RotateCcw className="w-1 h-1" />
+                            All
+                        </Button>
+                    </div>
+                    <EditorForm className="ml-1 px-2"/>
+                </div>
             }
 
         </div >
