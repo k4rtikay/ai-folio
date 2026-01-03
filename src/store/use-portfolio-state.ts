@@ -16,8 +16,14 @@ interface PortfolioState {
     updateProfileField: (field: keyof UserProfile, value: UserProfile[keyof UserProfile]) => void;
     resetPortfolio: () => void;
     resetProfile: () => void;
-    resetPortfolioField: (field: keyof AIFolio ) => void;
+    resetPortfolioField: (field: keyof AIFolio) => void;
     resetProfileField: (field: keyof UserProfile) => void;
+    customization: {
+        accentColor: string;
+        font: string;
+    }; 
+    updateCustomization: (field: 'accentColor' | 'font', value: string) => void;
+    resetCustomization: () => void;
 }
 
 export const usePortfolioStore = create<PortfolioState>((set) => ({
@@ -30,18 +36,18 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
     setRepos: (repos) => set({ repos }),
     setProfile: (profile) => set({ profile, originalProfile: profile }),
     updatePortfolioField: (field, value) => {
-        set((state)=>{
-            if(!state.portfolio) return {};
+        set((state) => {
+            if (!state.portfolio) return {};
             return {
-                portfolio: {...state.portfolio, [field]: value}
+                portfolio: { ...state.portfolio, [field]: value }
             }
         })
     },
     updateProfileField: (field, value) => {
-        set((state)=>{
-            if(!state.profile) return {};
+        set((state) => {
+            if (!state.profile) return {};
             return {
-                profile: {...state.profile, [field]: value}
+                profile: { ...state.profile, [field]: value }
             }
         })
     },
@@ -62,6 +68,17 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
                 profile: { ...state.profile, [field]: state.originalProfile?.[field] }
             }
         })
-    }
+    },
+    customization: {
+        accentColor: "#000000",
+        font: "Inter",
+    },
+    updateCustomization: (field, value) => {
+        set((state) => {
+            return {
+                customization: { ...state.customization, [field]: value }
+            }
+        })
+    },
+    resetCustomization: () => set((state) => ({ customization: { accentColor: '#000000', font: 'Inter' } })),
 }));
- 

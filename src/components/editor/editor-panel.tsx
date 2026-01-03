@@ -8,6 +8,17 @@ import { cn } from "@/lib/utils";
 import { EditorForm } from "./editor-form";
 import { usePortfolioStore } from "@/store/use-portfolio-state";
 import { RotateCcw } from "lucide-react";
+import { fontOptions } from "@/lib/fonts";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 interface EditorPanelProps {
     username: string;
@@ -18,12 +29,15 @@ interface EditorPanelProps {
 
 export default function EditorPanel({ username, open, onToggle, toggleView }: EditorPanelProps) {
 
-    const { resetPortfolio, resetProfile } = usePortfolioStore();
+    const { resetPortfolio, resetProfile, resetCustomization, updateCustomization, customization } = usePortfolioStore();
 
     const handleResetAll = () => {
         resetPortfolio();
         resetProfile();
+        resetCustomization();
     };
+
+    const selectedFont = customization?.font || fontOptions[0].value;
 
     return (
         <div className="h-full w-full bg-[#26262B] text-[#F2F4F7] px-2 py-3 flex flex-col items-center">
@@ -63,31 +77,55 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
 
             {
                 open &&
-                <div className="w-full h-full mt-2 overflow-y-auto">
+                <div className="w-full h-full flex flex-col gap-2 mt-2 overflow-y-auto">
 
-                    <div className="w-full">
-                        <div className="w-full flex justify-between py-2 items-end">
-                            <h2 className="font-semibold">Appearance</h2>
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                // onClick={handleResetAll}
-                                className="text-xs gap-1.5 text-orange-400 border-orange-400/30 hover:bg-orange-500/10 hover:text-orange-300"
-                            >
-                                <RotateCcw className="w-2 h-2" />
-                                All
-                            </Button>
+                        <div className="w-full flex flex-col gap-2"> 
+                            <div className="w-full flex justify-between py-2 items-end">
+                                <h2 className="font-semibold">Appearance</h2>
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    // onClick={handleResetAll}
+                                    className="text-xs gap-1.5 text-orange-400 border-orange-400/30 hover:bg-orange-500/10 hover:text-orange-300"
+                                >
+                                    <RotateCcw className="w-2 h-2" />
+                                    All
+                                </Button>
+                            </div>
+                            <div className="w-full">
+                                <input type="color" />
+                            </div>
+                            <div className="w-full">
+                                <Select
+                                    value={selectedFont}
+                                    onValueChange={(value) => updateCustomization('font', value)}
+                                >
+                                    <SelectTrigger className="w-full bg-[#121212] border-[#313136]">
+                                        <SelectValue
+                                        placeholder="Select a font"/>
+                                    </SelectTrigger>
+                                    <SelectContent className="w-full bg-[#121212] border-[#313136">
+                                        <SelectGroup>
+                                            <SelectLabel>Fonts</SelectLabel>
+                                            {fontOptions.map((font) => (
+                                                <SelectItem
+                                                    key={font.value}
+                                                    value={font.value}
+                                                    className={`cursor-pointer focus:bg-[#313136] focus:text-white ${font.class}`}
+                                                >
+                                                    {font.label}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>
+                            </div>
                         </div>
 
-                        <div>
-                            <input type="color" />
-                        </div>
-                    </div>
-
-                    <div className="w-full">
-                        <div className="w-full flex justify-between py-2 items-end">
-                            <h2 className="font-semibold">Content</h2>
-                            <Button
+                        <div className="w-full">
+                            <div className="w-full flex justify-between py-2 items-end">
+                                <h2 className="font-semibold">Content</h2>
+                                <Button
                                 variant="outline"
                                 size="sm"
                                 onClick={handleResetAll}
