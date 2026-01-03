@@ -64,21 +64,45 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
             {
                 open &&
                 <div className="w-full h-full mt-2 overflow-y-auto">
-                    <div className="w-full flex justify-between py-2 items-end">
-                        <h2 className="font-semibold">Content</h2>
-                        <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={handleResetAll}
-                            className="text-xs gap-1.5 text-orange-400 border-orange-400/30 hover:bg-orange-500/10 hover:text-orange-300"
-                        >
-                            <RotateCcw className="w-1 h-1" />
-                            All
-                        </Button>
+
+                    <div className="w-full">
+                        <div className="w-full flex justify-between py-2 items-end">
+                            <h2 className="font-semibold">Appearance</h2>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                // onClick={handleResetAll}
+                                className="text-xs gap-1.5 text-orange-400 border-orange-400/30 hover:bg-orange-500/10 hover:text-orange-300"
+                            >
+                                <RotateCcw className="w-2 h-2" />
+                                All
+                            </Button>
+                        </div>
+
+                        <div>
+                            <input type="color" />
+                        </div>
                     </div>
-                    <EditorForm className="ml-1 px-2"/>
+
+                    <div className="w-full">
+                        <div className="w-full flex justify-between py-2 items-end">
+                            <h2 className="font-semibold">Content</h2>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={handleResetAll}
+                                className="text-xs gap-1.5 text-orange-400 border-orange-400/30 hover:bg-orange-500/10 hover:text-orange-300"
+                            >
+                                <RotateCcw className="w-2 h-2" />
+                                All
+                            </Button>
+                        </div>
+                        <EditorForm className="ml-1 px-2"/>
+                    </div>
                 </div>
             }
+
+            
 
         </div >
     );
