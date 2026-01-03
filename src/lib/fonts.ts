@@ -9,7 +9,7 @@ const fontSyne = Syne({ subsets: ['latin'], variable: '--font-syne' });
 export const fontOptions = [
   { label: "Inter (Default)", value: "inter", class: fontInter.className, variable: fontInter.variable },
   { label: "Bricolage", value: "bricolage", class: fontBricolage.className, variable: fontBricolage.variable },
-  { label: "Space Mono", value: "space", class: fontSpace.className, variable: fontSpace.variable },
+  { label: "Space Mono", value: "space-mono", class: fontSpace.className, variable: fontSpace.variable },
   { label: "Playfair", value: "playfair", class: fontPlayfair.className, variable: fontPlayfair.variable },
   { label: "Syne", value: "syne", class: fontSyne.className, variable: fontSyne.variable },
 ];

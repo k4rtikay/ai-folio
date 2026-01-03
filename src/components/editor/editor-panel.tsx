@@ -39,6 +39,8 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
 
     const selectedFont = customization?.font || fontOptions[0].value;
 
+    console.log(selectedFont);
+
     return (
         <div className="h-full w-full bg-[#26262B] text-[#F2F4F7] px-2 py-3 flex flex-col items-center">
             <div className="w-full flex justify-between items-center">
