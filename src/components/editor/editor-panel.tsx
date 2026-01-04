@@ -9,6 +9,7 @@ import { EditorForm } from "./editor-form";
 import { usePortfolioStore } from "@/store/use-portfolio-state";
 import { RotateCcw } from "lucide-react";
 import { fontOptions } from "@/lib/fonts";
+import { ColorPicker } from "./color-picker";
 
 import {
   Select,
@@ -95,7 +96,7 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
                                 </Button>
                             </div>
                             <div className="w-full">
-                                <input type="color" />
+                                <ColorPicker />
                             </div>
                             <div className="w-full">
                                 <Select
