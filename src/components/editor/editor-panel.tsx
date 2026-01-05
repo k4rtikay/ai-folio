@@ -30,7 +30,7 @@ interface EditorPanelProps {
 
 export default function EditorPanel({ username, open, onToggle, toggleView }: EditorPanelProps) {
 
-    const { resetPortfolio, resetProfile, resetCustomization, updateCustomization, customization } = usePortfolioStore();
+    const { resetPortfolio, resetProfile, resetCustomization, font, setFont, updateColor } = usePortfolioStore();
 
     const handleResetAll = () => {
         resetPortfolio();
@@ -38,7 +38,7 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
         resetCustomization();
     };
 
-    const selectedFont = customization?.font || fontOptions[0].value;
+    const selectedFont = font;
 
     console.log(selectedFont);
 
@@ -101,7 +101,7 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
                             <div className="w-full">
                                 <Select
                                     value={selectedFont}
-                                    onValueChange={(value) => updateCustomization('font', value)}
+                                    onValueChange={(value) => setFont(value)}
                                 >
                                     <SelectTrigger className="w-full bg-[#121212] border-[#313136]">
                                         <SelectValue

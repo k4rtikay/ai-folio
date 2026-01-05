@@ -18,8 +18,9 @@ export default function StandardTemplate({ username }: StandardTemplateProps) {
     const portfolio = usePortfolioStore((state) => state.portfolio);
     const profile = usePortfolioStore((state) => state.profile);
     const repos = usePortfolioStore((state)=>state.repos);
-    const customization = usePortfolioStore((state)=>state.customization);
-    const selectedFont = fontOptions.find((font) => font.value === customization?.font) || fontOptions[0];
+    const colors = usePortfolioStore((state)=>state.colors);
+    const font = usePortfolioStore((state)=>state.font);
+    const selectedFont = fontOptions.find((fontOption) => fontOption.value === font) || fontOptions[0];
 
     console.log(selectedFont);
 
