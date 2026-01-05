@@ -3,12 +3,27 @@ import { AIFolio } from "@/schemas/aifolio.schema";
 import { Repo } from "@/lib/github";
 import { UserProfile } from "@/lib/github";
 
+export interface PortfolioColors {
+    accent: string;
+    light: { bg: string; text: string };
+    dark: { bg: string; text: string };
+}
+
+const DEFAULT_COLORS: PortfolioColors = {
+    accent: "#A855F7",
+    light: { bg: "#FFFFFF", text: "#121212" },
+    dark: { bg: "#1D1D21", text: "#F2F4F7" },
+};
+
 interface PortfolioState {
     portfolio: AIFolio | null;
     originalPortfolio: AIFolio | null;
     repos: Repo[];
     profile: UserProfile | null;
     originalProfile: UserProfile | null;
+    colors: PortfolioColors;
+    font: string;
+
     setPortfolio: (portfolio: AIFolio) => void;
     setRepos: (repos: Repo[]) => void;
     setProfile: (profile: UserProfile) => void;
@@ -18,11 +33,9 @@ interface PortfolioState {
     resetProfile: () => void;
     resetPortfolioField: (field: keyof AIFolio) => void;
     resetProfileField: (field: keyof UserProfile) => void;
-    customization: {
-        accentColor: string;
-        font: string;
-    }; 
-    updateCustomization: (field: 'accentColor' | 'font', value: string) => void;
+    setFont: (font: string) => void;
+    setColors: (colors: PortfolioColors) => void;
+    updateColor: (path: 'accent' | 'light.bg' | 'light.text' | 'dark.bg' | 'dark.text', value: string) => void;
     resetCustomization: () => void;
 }
 
@@ -69,16 +82,26 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
             }
         })
     },
-    customization: {
-        accentColor: "#000000",
-        font: "Inter",
-    },
-    updateCustomization: (field, value) => {
-        set((state) => {
-            return {
-                customization: { ...state.customization, [field]: value }
-            }
-        })
-    },
-    resetCustomization: () => set((state) => ({ customization: { accentColor: '#000000', font: 'Inter' } })),
+    font: "Inter",
+    colors: DEFAULT_COLORS,
+    setFont: (font) => set((state) => ({ font })),
+    setColors: (colors) => set((state) => ({ colors })),
+    updateColor: (path, value) => set((state) => {
+        const newColors = { ...state.colors }; // Shallow copy is enough for top level
+        
+        // Manual deep update (safest/fastest without external libs)
+        if (path === 'accent') newColors.accent = value;
+        else if (path.startsWith('light.')) {
+            newColors.light = { ...state.colors.light, [path.split('.')[1]]: value };
+        }
+        else if (path.startsWith('dark.')) {
+             newColors.dark = { ...state.colors.dark, [path.split('.')[1]]: value };
+        }
+        
+        return { colors: newColors };
+    }),
+    resetCustomization: () => set({ 
+        colors: DEFAULT_COLORS, 
+        font: "Inter" 
+    }),
 }));
