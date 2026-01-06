@@ -9,12 +9,18 @@ interface ProjectsSectionProps {
 }
 
 function ProjectCard({ repo }: { repo: Repo }) {
+    const borderStyle = { borderColor: "color-mix(in srgb, var(--text-color) 15%, transparent)" };
+
     return (
         <div
-            className="flex flex-col @md:flex-row gap-4 p-4 border-b border-gray-200 dark:border-[#27282D]"
+            className="flex flex-col @md:flex-row gap-4 p-4 border-b"
+            style={borderStyle}
         >
-            
-            <div className="shrink-0 w-full @md:w-[320px] h-[180px] @md:h-[160px] relative rounded-md overflow-hidden border dark:border-[#27282D] bg-muted">
+
+            <div
+                className="shrink-0 w-full @md:w-[320px] h-[180px] @md:h-[160px] relative rounded-md overflow-hidden border bg-muted"
+                style={borderStyle}
+            >
                 {repo.open_graph_image_url ? (
                     <Image
                         src={repo.open_graph_image_url}
@@ -29,7 +35,7 @@ function ProjectCard({ repo }: { repo: Repo }) {
                 )}
             </div>
 
-            
+
             <div className="flex flex-1 flex-col justify-between min-h-[160px]">
                 <div>
                     <div className="flex justify-between items-start mb-2">
@@ -55,14 +61,14 @@ function ProjectCard({ repo }: { repo: Repo }) {
                         {repo.description || "No description provided."}
                     </p>
 
-                    
+
                     <div className="flex flex-wrap gap-2 my-4">
                         {repo.language && (
                             <Badge variant="outline" className="text-xs border-primary/20">
                                 {repo.language}
                             </Badge>
                         )}
-                        
+
                         {repo.topics?.slice(0, 3).map((topic) => (
                             <Badge key={topic} variant="outline" className="text-xs border-primary/20">
                                 {topic}
@@ -71,7 +77,7 @@ function ProjectCard({ repo }: { repo: Repo }) {
                     </div>
                 </div>
 
-                
+
                 <div className="flex gap-2 pt-2 md:pt-0">
                     <a href={repo.url} target="_blank" rel="noopener noreferrer">
                         <Button size="sm" variant="outline" className="gap-2">
@@ -93,9 +99,14 @@ function ProjectCard({ repo }: { repo: Repo }) {
 }
 
 export default function ProjectsSection({ repos }: ProjectsSectionProps) {
+    const borderStyle = { borderColor: "color-mix(in srgb, var(--text-color) 15%, transparent)" };
+
     return (
         <div className="w-full flex flex-col gap-0">
-            <div className="p-4 border-y border-gray-200 dark:border-[#27282D]">
+            <div
+                className="p-4 border-y"
+                style={borderStyle}
+            >
                 <h2 className="text-xl @md:text-2xl font-semibold">Projects</h2>
                 <p className="text-muted-foreground">
                     Open source work and experiments from GitHub.

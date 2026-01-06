@@ -22,7 +22,10 @@ export default function HeroSection({ heroText, heroSubText }: HeroSectionProps)
     ];
 
     return (
-        <div className="relative p-4 flex flex-col gap-2 w-full h-[200px] @md:h-[400px] items-center justify-center border-t border-b border-gray-200 dark:border-[#27282D]">
+        <div
+            className="relative p-4 flex flex-col gap-2 w-full h-[200px] @md:h-[400px] items-center justify-center border-t border-b"
+            style={{ borderColor: "color-mix(in srgb, var(--text-color) 15%, transparent)" }}
+        >
             <h1 className="z-10 text-xl @md:text-4xl font-bold text-shadow-sm text-center">{heroText}</h1>
             <p className="z-10 text-sm @md:text-base tracking-wide opacity-70 text-shadow-xs text-center">{heroSubText}</p>
 
@@ -30,12 +33,21 @@ export default function HeroSection({ heroText, heroSubText }: HeroSectionProps)
                 {bars.map((bar, index) => (
                     <div
                         key={index}
-                        className="w-full rounded-t-sm bg-gradient-to-t from-blue-500/80 via-cyan-400/60 dark:from-indigo-500 dark:via-indigo-500/60 to-transparent"
-                        style={{ height: bar.height, opacity: bar.opacity }}
+                        className="w-full rounded-t-sm"
+                        style={{
+                            height: bar.height,
+                            opacity: bar.opacity,
+                            background: `linear-gradient(to top, color-mix(in srgb, var(--accent-color) 80%, transparent), color-mix(in srgb, var(--accent-color) 60%, transparent), transparent)`
+                        }}
                     />
                 ))}
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-[#F5F7FA] via-transparent to-[#F5F7FA]/60 dark:from-[#101010D] dark:via-transparent dark:to-zinc-950/30 pointer-events-none" />
+            <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                    background: `linear-gradient(to bottom, var(--bg-color), transparent, color-mix(in srgb, var(--bg-color) 60%, transparent))`
+                }}
+            />
         </div>
     )
 }

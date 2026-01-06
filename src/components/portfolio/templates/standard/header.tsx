@@ -19,9 +19,12 @@ export default function Header({ name }: HeaderProps) {
     };
 
     return (
-        <header className="w-full flex justify-between items-center px-4 py-2 border-b border-gray-200 dark:border-[#27282D]">
+        <header
+            className="w-full flex justify-between items-center px-4 py-2 border-b"
+            style={{ borderColor: "color-mix(in srgb, var(--text-color) 15%, transparent)" }}
+        >
             <p className="text-sm @md:text-base font-semibold">{name}</p>
-            <div>   
+            <div>
                 <Button
                     variant="ghost"
                     size="icon-sm"

@@ -4,7 +4,10 @@ interface StandardFooterProps {
 
 export default function StandardFooter({ name }: StandardFooterProps) {
     return (
-        <footer className="w-full text-center text-xs @md:text-sm tracking-wide opacity-70 p-4 border-t border-gray-200 dark:border-[#27282D]">
+        <footer
+            className="w-full text-center text-xs @md:text-sm tracking-wide opacity-70 p-4 border-t"
+            style={{ borderColor: "color-mix(in srgb, var(--text-color) 15%, transparent)" }}
+        >
             <p>© {new Date().getFullYear()} {name}. All rights reserved.</p>
             <p>Built with <a
                 href="https://github.com/k4rtikay/ai-folio"
