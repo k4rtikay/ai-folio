@@ -4,7 +4,9 @@ import { PORTFOLIO_THEMES } from "@/lib/themes";
 import { usePortfolioStore } from "@/store/use-portfolio-state";
 
 export const ColorPicker = () => {
-    const { setColors, colors } = usePortfolioStore();
+
+    const colors = usePortfolioStore((state) => state.colors);
+    const setColors = usePortfolioStore((state) => state.setColors);
 
     return (
         <div className="space-y-4">

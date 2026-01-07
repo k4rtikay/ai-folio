@@ -19,7 +19,10 @@ interface PortfolioWrapperProps {
 export default function PortfolioWrapper({ username, portfolio, profile, repos }: PortfolioWrapperProps) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [ viewMode, setViewMode ] = useState<"desktop" | "mobile">("desktop");
-    const { setPortfolio, setProfile, setRepos } = usePortfolioStore();
+
+    const setPortfolio = usePortfolioStore((state) => state.setPortfolio);
+    const setProfile = usePortfolioStore((state) => state.setProfile);
+    const setRepos = usePortfolioStore((state) => state.setRepos);
 
     useEffect(() => {
         setPortfolio(portfolio);

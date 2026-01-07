@@ -30,7 +30,17 @@ interface EditorPanelProps {
 
 export default function EditorPanel({ username, open, onToggle, toggleView }: EditorPanelProps) {
 
-    const { resetPortfolio, resetProfile, resetCustomization, font, setFont, updateColor } = usePortfolioStore();
+    const portfolio = usePortfolioStore((state) => state.portfolio);
+    const profile = usePortfolioStore((state) => state.profile);
+    const repos = usePortfolioStore((state) => state.repos);
+    const colors = usePortfolioStore((state) => state.colors);
+    const font = usePortfolioStore((state) => state.font);
+    const setFont = usePortfolioStore((state) => state.setFont);
+
+    const resetPortfolio = usePortfolioStore((state) => state.resetPortfolio);
+    const resetProfile = usePortfolioStore((state) => state.resetProfile);
+    const resetCustomization = usePortfolioStore((state) => state.resetCustomization);
+
 
     const handleResetAll = () => {
         resetPortfolio();
