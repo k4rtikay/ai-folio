@@ -46,7 +46,7 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
         resetPortfolio();
         resetProfile();
         resetCustomization();
-    };
+    };  
 
     const selectedFont = font;
 
