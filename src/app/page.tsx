@@ -1,4 +1,5 @@
 import { UsernameForm } from "@/components/shared/username-form";
+import LoginButton from "@/components/shared/login-button";
 
 export default async function HomePage() {
 
@@ -8,7 +9,7 @@ export default async function HomePage() {
         <h1>GitExhibit</h1>
         <span className="flex gap-2">
           <button>Github</button>
-          <button>Login</button>
+          <LoginButton/>
         </span>
       </header>
 
