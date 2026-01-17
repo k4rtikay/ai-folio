@@ -11,7 +11,7 @@ export const auth = betterAuth({
     providers: [
         {
             provider: "github",
-            clientId: process.env.GITHUB_CLIENT_ID!,
+            clientId: process.env.GITHUB_CLIENT_ID!,    
             clientSecret: process.env.GITHUB_CLIENT_SECRET!,
         },
     ],
