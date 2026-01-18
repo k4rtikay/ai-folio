@@ -28,7 +28,7 @@ export default function StandardTemplate({ username }: StandardTemplateProps) {
     const isDark = resolvedTheme === "dark";
     const activeColors = isDark ? colors.dark : colors.light;
 
-    console.log(colors);
+    console.log(font);
 
 
     if (!profile || !portfolio) {
