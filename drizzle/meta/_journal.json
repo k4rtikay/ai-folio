@@ -15,6 +15,13 @@
       "when": 1768741007239,
       "tag": "0001_warm_unus",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1769443977565,
+      "tag": "0002_light_satana",
+      "breakpoints": true
     }
   ]
 }

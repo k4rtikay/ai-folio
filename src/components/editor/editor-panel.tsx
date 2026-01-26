@@ -12,13 +12,13 @@ import { fontOptions } from "@/lib/fonts";
 import { ColorPicker } from "./color-picker";
 
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
 } from "@/components/ui/select"
 
 interface EditorPanelProps {
@@ -46,7 +46,7 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
         resetPortfolio();
         resetProfile();
         resetCustomization();
-    };  
+    };
 
     const selectedFont = font;
 
@@ -92,53 +92,53 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
                 open &&
                 <div className="w-full h-full flex flex-col gap-2 mt-2 overflow-y-auto">
 
-                        <div className="w-full flex flex-col gap-2"> 
-                            <div className="w-full flex justify-between py-2 items-end">
-                                <h2 className="font-semibold">Appearance</h2>
-                                <Button
-                                    variant="outline"
-                                    size="sm"
-                                    // onClick={handleResetAll}
-                                    className="text-xs gap-1.5 text-orange-400 border-orange-400/30 hover:bg-orange-500/10 hover:text-orange-300"
-                                >
-                                    <RotateCcw className="w-2 h-2" />
-                                    All
-                                </Button>
-                            </div>
-                            <div className="w-full">
-                                <ColorPicker />
-                            </div>
-                            <div className="w-full">
-                                <Select
-                                    value={selectedFont}
-                                    onValueChange={(value) => setFont(value)}
-                                >
-                                    <SelectTrigger className="w-full bg-[#121212] border-[#313136]">
-                                        <SelectValue
-                                        placeholder="Select a font"/>
-                                    </SelectTrigger>
-                                    <SelectContent className="w-full bg-[#121212] border-[#313136">
-                                        <SelectGroup>
-                                            <SelectLabel>Fonts</SelectLabel>
-                                            {fontOptions.map((font) => (
-                                                <SelectItem
-                                                    key={font.value}
-                                                    value={font.value}
-                                                    className={`cursor-pointer focus:bg-[#313136] focus:text-white ${font.class}`}
-                                                >
-                                                    {font.label}
-                                                </SelectItem>
-                                            ))}
-                                        </SelectGroup>
-                                    </SelectContent>
-                                </Select>
-                            </div>
+                    <div className="w-full flex flex-col gap-2">
+                        <div className="w-full flex justify-between py-2 items-end">
+                            <h2 className="font-semibold">Appearance</h2>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                // onClick={handleResetAll}
+                                className="text-xs gap-1.5 text-orange-400 border-orange-400/30 hover:bg-orange-500/10 hover:text-orange-300"
+                            >
+                                <RotateCcw className="w-2 h-2" />
+                                All
+                            </Button>
                         </div>
-
                         <div className="w-full">
-                            <div className="w-full flex justify-between py-2 items-end">
-                                <h2 className="font-semibold">Content</h2>
-                                <Button
+                            <ColorPicker />
+                        </div>
+                        <div className="w-full">
+                            <Select
+                                value={selectedFont}
+                                onValueChange={(value) => setFont(value)}
+                            >
+                                <SelectTrigger className="w-full bg-[#121212] border-[#313136]">
+                                    <SelectValue
+                                        placeholder="Select a font" />
+                                </SelectTrigger>
+                                <SelectContent className="w-full bg-[#121212] border-[#313136">
+                                    <SelectGroup>
+                                        <SelectLabel>Fonts</SelectLabel>
+                                        {fontOptions.map((font) => (
+                                            <SelectItem
+                                                key={font.value}
+                                                value={font.value}
+                                                className={`cursor-pointer focus:bg-[#313136] focus:text-white ${font.class}`}
+                                            >
+                                                {font.label}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                    </div>
+
+                    <div className="w-full">
+                        <div className="w-full flex justify-between py-2 items-end">
+                            <h2 className="font-semibold">Content</h2>
+                            <Button
                                 variant="outline"
                                 size="sm"
                                 onClick={handleResetAll}
@@ -148,12 +148,19 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
                                 All
                             </Button>
                         </div>
-                        <EditorForm className="ml-1 px-2"/>
+                        <EditorForm className="ml-1 px-2" />
                     </div>
                 </div>
             }
 
-            
+            <div className="w-full flex flex-col gap-2">
+                <Button>
+                    Save Changes
+                </Button>
+                <Button>
+                    Live Preview
+                </Button>
+            </div>
 
         </div >
     );

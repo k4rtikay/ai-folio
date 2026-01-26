@@ -14,7 +14,7 @@ export interface PortfolioRecord {
   heroText: string | null;
   heroSubText: string | null;
   about: string | null;
-  skills: string[];
+  skills: string[] | null;
   location: string | null;
   username: string;
   avatar: string;
