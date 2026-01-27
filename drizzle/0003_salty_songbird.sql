@@ -1,0 +1,1 @@
+ALTER TABLE "portfolios" ALTER COLUMN "colors" SET DEFAULT '{"accent":"#A855F7","light":{"bg":"#FFFFFF","text":"#121212"},"dark":{"bg":"#1D1D21","text":"#F2F4F7"}}'::jsonb;

@@ -22,6 +22,13 @@
       "when": 1769443977565,
       "tag": "0002_light_satana",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1769499869051,
+      "tag": "0003_salty_songbird",
+      "breakpoints": true
     }
   ]
 }

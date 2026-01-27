@@ -9,6 +9,7 @@ import { portfolios, projects } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { portfolioToRender } from "@/lib/mappers";
 import { generatePortfolio } from "@/lib/groq";
+import { PortfolioColors } from "@/store/use-portfolio-state";
 
 export default async function PortfolioPage({ params }: { params: Promise<{ username: string }> }) {
     const { username } = await params;
@@ -21,6 +22,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
 
     let renderData: RenderData | null = null;
     let savedPortfolioId: string | null = null;
+    let savedColors: PortfolioColors | undefined;
+    let savedFont: string | undefined;   
 
     if(isOwnPortfolio && session?.user){
         const [savedPortfolio] = await db
@@ -38,8 +41,10 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
 
             renderData = portfolioToRender(savedPortfolio, savedProjects);
             savedPortfolioId = savedPortfolio.id
+            savedColors = savedPortfolio.colors as PortfolioColors;
+            savedFont = savedPortfolio.font;
 
-            console.log("📦 Loaded saved portfolio from DB");
+            console.log("Loaded saved portfolio from DB");
         }
     }
 
@@ -56,7 +61,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
             portfolio: aiPortfolio
         };
         
-        console.log("🔄 Generated fresh portfolio from GitHub");
+        console.log("Generated fresh portfolio from GitHub");
     }
 
     return (
@@ -70,6 +75,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
                 currentUserId={session?.user?.id}
                 currentUserName={session?.user?.name}
                 savedPortfolioId={savedPortfolioId}
+                colors={savedColors}
+                font={savedFont}
             />
         </div>
     );
