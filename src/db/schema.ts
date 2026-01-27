@@ -1,5 +1,6 @@
 import { pgTable, text, timestamp, boolean, integer, jsonb } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
+import { PortfolioColors } from "@/store/use-portfolio-state";
 
 // =========================================
 //  BETTER-AUTH REQUIRED TABLES
@@ -76,7 +77,11 @@ export const portfolios = pgTable("portfolios", {
   following: integer("following").default(0).notNull(),
   repos: integer("repos").default(0).notNull(),
   font: text("font").default("inter").notNull(),
-  colors: jsonb("colors").$type<Record<string, string>>().notNull().default({}),
+  colors: jsonb("colors").$type<PortfolioColors>().notNull().default({
+    accent: "#A855F7",
+    light: { bg: "#FFFFFF", text: "#121212" },
+    dark: { bg: "#1D1D21", text: "#F2F4F7" },
+  }),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
