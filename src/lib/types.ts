@@ -1,5 +1,6 @@
 import type { Repo, UserProfile } from "./github";
 import type { AIFolio } from "@/schemas/aifolio.schema";
+import type { PortfolioColors } from "@/store/use-portfolio-state";
 
 export interface RenderData {
   profile: UserProfile;
@@ -24,7 +25,7 @@ export interface PortfolioRecord {
   following: number;
   repos: number;
   font: string;
-  colors: Record<string, string>;
+  colors: PortfolioColors;
   createdAt: Date;
   updatedAt: Date;
 }
