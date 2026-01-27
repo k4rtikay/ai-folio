@@ -38,7 +38,11 @@ export function githubToPortfolio(
         following: profile.following || 0,
         repos: profile.repos || 0,
         font: "inter",
-        colors: {},
+        colors: {
+            accent: "#A855F7",
+            light: { bg: "#FFFFFF", text: "#121212" },
+            dark: { bg: "#1D1D21", text: "#F2F4F7" },
+        },
     }
 
     const projects = repos.map((repo) => ({
