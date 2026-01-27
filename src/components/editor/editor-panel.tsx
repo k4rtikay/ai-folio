@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { Sidebar } from "lucide-react";
+import { Sidebar, Loader2, Check, Save } from "lucide-react";
 import { Forward, MonitorSmartphone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { EditorForm } from "./editor-form";
@@ -24,11 +24,13 @@ import {
 interface EditorPanelProps {
     username: string;
     open: boolean;
+    isOwnPortfolio: boolean;
+    currentUserName?: string;
     onToggle: () => void;
     toggleView?: () => void;
 }
 
-export default function EditorPanel({ username, open, onToggle, toggleView }: EditorPanelProps) {
+export default function EditorPanel({ username, open, onToggle, toggleView, isOwnPortfolio, currentUserName }: EditorPanelProps) {
 
     const portfolio = usePortfolioStore((state) => state.portfolio);
     const profile = usePortfolioStore((state) => state.profile);
@@ -41,12 +43,21 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
     const resetProfile = usePortfolioStore((state) => state.resetProfile);
     const resetCustomization = usePortfolioStore((state) => state.resetCustomization);
 
+    const savePortfolio = usePortfolioStore((state) => state.savePortfolio);
+    const isSaving = usePortfolioStore((state) => state.isSaving);
+    const saveError = usePortfolioStore((state) => state.saveError);
+    const lastSaved = usePortfolioStore((state) => state.lastSaved);
+
 
     const handleResetAll = () => {
         resetPortfolio();
         resetProfile();
         resetCustomization();
     };
+
+    const handleSave = async () => {
+        await savePortfolio(username);
+    }
 
     const selectedFont = font;
 
@@ -58,7 +69,7 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
                 {open &&
                     <Button variant={"outline"} size={"sm"} className="bg-[#313136] hover:bg-gray-800 hover:text-[#F2F4F7] border-none">
                         <span className="flex gap-2 items-center w-full">
-                            <p className="text-xs">@{username}</p>
+                            {currentUserName ? <p className="text-xs">@{currentUserName}</p> : <p className="text-xs">Sign In</p>}
                         </span>
                     </Button>
                 }
@@ -154,12 +165,57 @@ export default function EditorPanel({ username, open, onToggle, toggleView }: Ed
             }
 
             <div className="w-full flex flex-col gap-2">
-                <Button>
-                    Save Changes
-                </Button>
-                <Button>
-                    Live Preview
-                </Button>
+                {isOwnPortfolio ? (
+                    <div className="space-y-2">
+                        <button
+                            onClick={handleSave}
+                            disabled={isSaving}
+                            className="w-full px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        >
+                            {isSaving ? (
+                                <>
+                                    <Loader2 className="w-4 h-4 animate-spin" />
+                                    Saving...
+                                </>
+                            ) : lastSaved ? (
+                                <>
+                                    <Check className="w-4 h-4" />
+                                    Saved
+                                </>
+                            ) : (
+                                <>
+                                    <Save className="w-4 h-4" />
+                                    Save Portfolio
+                                </>
+                            )}
+                        </button>
+
+                        {saveError && (
+                            <p className="text-red-500 text-sm">{saveError}</p>
+                        )}
+
+                        {lastSaved && !saveError && (
+                            <p className="text-green-600 text-sm">
+                                Last saved: {lastSaved.toLocaleTimeString()}
+                            </p>
+                        )}
+
+                        {/* Other owner features */}
+                        <button className="w-full px-4 py-2 border rounded">
+                            Get Shareable Link
+                        </button>
+                    </div>
+                ) : (
+                    <div className="border rounded p-4 text-center">
+                        <p className="text-sm mb-2">Like this portfolio?</p>
+                        <button
+                            onClick={() => window.location.href = '/'}
+                            className="px-4 py-2 bg-purple-600 text-white rounded"
+                        >
+                            Create Your Own
+                        </button>
+                    </div>
+                )}
             </div>
 
         </div >

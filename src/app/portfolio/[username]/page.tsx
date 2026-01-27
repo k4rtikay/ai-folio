@@ -8,6 +8,7 @@ import { db } from "@/db";
 import { portfolios, projects } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { portfolioToRender } from "@/lib/mappers";
+import { generatePortfolio } from "@/lib/groq";
 
 export default async function PortfolioPage({ params }: { params: Promise<{ username: string }> }) {
     const { username } = await params;
@@ -46,8 +47,8 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
         const { profile, repos } = await getGithubData(username);
         
         //mock or generate with AI
-        const aiPortfolio = MOCK_PORTFOLIO;
-        // const aiPortfolio = await generatePortfolio(profile, repos);
+        // const aiPortfolio = MOCK_PORTFOLIO;
+        const aiPortfolio = await generatePortfolio(profile, repos);
         
         renderData = {
             profile,
@@ -60,7 +61,16 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
 
     return (
         <div className="flex min-h-screen">
-            <PortfolioWrapper username={username} portfolio={renderData.portfolio} profile={renderData.profile} repos={renderData.repos} />
+            <PortfolioWrapper 
+                username={username} 
+                portfolio={renderData.portfolio} 
+                profile={renderData.profile} 
+                repos={renderData.repos}
+                isOwnPortfolio={isOwnPortfolio}
+                currentUserId={session?.user?.id}
+                currentUserName={session?.user?.name}
+                savedPortfolioId={savedPortfolioId}
+            />
         </div>
     );
 };

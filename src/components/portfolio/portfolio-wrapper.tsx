@@ -14,11 +14,15 @@ interface PortfolioWrapperProps {
     portfolio: AIFolio;
     repos: Repo[];
     profile: UserProfile;
+    isOwnPortfolio: boolean;
+    currentUserId?: string;
+    currentUserName?: string;
+    savedPortfolioId: string | null;
 }
 
-export default function PortfolioWrapper({ username, portfolio, profile, repos }: PortfolioWrapperProps) {
+export default function PortfolioWrapper({ username, portfolio, profile, repos, isOwnPortfolio, currentUserId, currentUserName, savedPortfolioId }: PortfolioWrapperProps) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-    const [ viewMode, setViewMode ] = useState<"desktop" | "mobile">("desktop");
+    const [viewMode, setViewMode] = useState<"desktop" | "mobile">("desktop");
 
     const setPortfolio = usePortfolioStore((state) => state.setPortfolio);
     const setProfile = usePortfolioStore((state) => state.setProfile);
@@ -36,8 +40,10 @@ export default function PortfolioWrapper({ username, portfolio, profile, repos }
                 <EditorPanel
                     username={username}
                     open={isSidebarOpen}
+                    isOwnPortfolio={isOwnPortfolio}
+                    currentUserName={currentUserName}
                     onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
-                    toggleView={ () => setViewMode(viewMode === "desktop" ? "mobile" : "desktop") }
+                    toggleView={() => setViewMode(viewMode === "desktop" ? "mobile" : "desktop")}
                 />
             </aside>
             <main className="flex-1">
