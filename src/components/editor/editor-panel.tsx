@@ -59,6 +59,12 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
         await savePortfolio(username);
     }
 
+    const handleCopyLink = () => {
+        const shareableUrl = `${window.location.origin}/${username}`;
+        navigator.clipboard.writeText(shareableUrl);
+        // Show toast: "Link copied!"
+    };
+
     const selectedFont = font;
 
     console.log(selectedFont);
@@ -201,7 +207,10 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
                         )}
 
                         {/* Other owner features */}
-                        <button className="w-full px-4 py-2 border rounded">
+                        <button
+                            onClick={handleCopyLink}
+                            className="w-full px-4 py-2 border rounded"
+                        >
                             Get Shareable Link
                         </button>
                     </div>
@@ -209,7 +218,7 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
                     <div className="border rounded p-4 text-center">
                         <p className="text-sm mb-2">Like this portfolio?</p>
                         <button
-                            onClick={() => window.location.href = '/'}
+                            onClick={handleCopyLink}
                             className="px-4 py-2 bg-purple-600 text-white rounded"
                         >
                             Create Your Own
