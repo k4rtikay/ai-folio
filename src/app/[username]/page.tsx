@@ -5,9 +5,10 @@ import { portfolios, projects } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import { portfolioToRender } from "@/lib/mappers";
-import StandardTemplate from "@/components/portfolio/templates/standard/standard-layout";
+import ShareableWrapper from "@/components/portfolio/shareable-wrapper";
 import { Pencil } from "lucide-react";
 import Link from "next/link";
+import { PortfolioColors } from "@/store/use-portfolio-state";
 
 export default async function ShareablePage({
     params,
@@ -51,7 +52,14 @@ export default async function ShareablePage({
                 </Link>
             )}
 
-            <StandardTemplate username={username} />
+            <ShareableWrapper
+                username={username}
+                portfolio={renderData.portfolio}
+                profile={renderData.profile}
+                repos={renderData.repos}
+                colors={savedPortfolio.colors as PortfolioColors}
+                font={savedPortfolio.font ?? undefined}
+            />
         </div>
     );
 }
