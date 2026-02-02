@@ -1,6 +1,7 @@
 import { UsernameForm } from "@/components/shared/username-form";
 import LoginButton from "@/components/shared/login-button";
 import LandingFooter from "@/components/shared/landing-footer";
+import LandingHero from "@/components/shared/landing-hero";
 
 export default async function HomePage() {
 
@@ -24,6 +25,7 @@ export default async function HomePage() {
           </p>
         </div>
         <UsernameForm />
+        <LandingHero/>
       </main>
       <LandingFooter />
     </div>
