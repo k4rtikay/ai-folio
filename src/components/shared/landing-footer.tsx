@@ -31,8 +31,8 @@ export default function LandingFooter() {
           </div>
         </div>
         <h1
-        className="text-center text-[80px] md:text-[200px] font-bold text-black/50 text-shadow-lg text-shadow-neutral-600/12 select-none">GitExhibit</h1>
-        <p className="text-center text-sm tracking-wide text-neutral-600">© 2026 GitExhibit. All rights reserved.</p>
+        className="text-center text-[80px] md:text-[200px] font-bold text-black/50 text-shadow-lg text-shadow-neutral-600/12 select-none">GitXhibit</h1>
+        <p className="text-center text-sm tracking-wide text-neutral-600">© 2026 GitXhibit. All rights reserved.</p>
       </footer>
     );
 }
