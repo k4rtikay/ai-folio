@@ -2,7 +2,7 @@ import { UsernameForm } from "./username-form";
 
 export default function LandingFooter() {
     return (
-        <footer className="flex flex-col gap-2 w-full bg-neutral-900 py-2">
+        <footer className="flex flex-col gap-2 w-full bg-neutral-900 py-4">
         <div className="flex justify-between px-4 py-2">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4 w-full">
             <div className="flex flex-col gap-2">
@@ -32,7 +32,7 @@ export default function LandingFooter() {
         </div>
         <h1
         className="text-center text-[80px] md:text-[200px] font-bold text-black/50 text-shadow-lg text-shadow-neutral-600/12 select-none">GitExhibit</h1>
-        <p className="text-center text-neutral-600">© 2026 GitExhibit. All rights reserved.</p>
+        <p className="text-center text-sm tracking-wide text-neutral-600">© 2026 GitExhibit. All rights reserved.</p>
       </footer>
     );
 }
