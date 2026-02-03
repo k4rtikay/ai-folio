@@ -47,7 +47,7 @@ export default function StandardTemplate({ username }: StandardTemplateProps) {
             } as React.CSSProperties}
         >
             <div
-                className="flex flex-col border-r border-l"
+                className="flex flex-col border-r border-l max-w-5xl mx-auto"
                 style={{
                     borderColor: "color-mix(in srgb, var(--text-color) 15%, transparent)",
                 }}
