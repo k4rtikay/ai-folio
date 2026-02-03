@@ -23,9 +23,9 @@ export default function HeroIllustration() {
             </div>
 
             {/* Window container with perspective */}
-            <div className="relative">
+            <div className="relative perspective-[2500px]">
                 {/* Window frame */}
-                <div className="relative rounded-xl overflow-hidden border border-white/10 bg-gradient-to-b from-neutral-900/95 to-neutral-950/95 shadow-2xl shadow-black/50 backdrop-blur-xl">
+                <div className="relative rounded-xl overflow-hidden border border-white/10 bg-gradient-to-b from-neutral-900/95 to-neutral-950/95 shadow-2xl shadow-black/50 backdrop-blur-xl rotate-x-[20deg] rotate-y-[10deg] rotate-z-[-8deg]">
 
                     {/* macOS-style title bar */}
                     <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-neutral-900/80">
@@ -57,7 +57,12 @@ export default function HeroIllustration() {
                                 color: textColor,
                             } as React.CSSProperties}
                         >
-                            <div className="flex flex-col border-l border-r border-white/10 transform scale-[0.85] origin-top">
+                            <div
+                                className="flex flex-col border-r border-l max-w-5xl mx-auto transform scale-[0.85] origin-top"
+                                style={{
+                                    borderColor: "color-mix(in srgb, var(--text-color) 15%, transparent)",
+                                }}
+                            >
                                 {/* Actual Header Component */}
                                 <Header name={profile.name} />
 
