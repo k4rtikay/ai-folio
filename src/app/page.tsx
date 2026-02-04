@@ -11,7 +11,7 @@ export default async function HomePage() {
       <header className="flex justify-between px-4 pt-2 items-center">
         <h1 className="font-semibold">GitXhibit</h1>
         <span className="flex gap-8 items-center">
-          <a href="https://github.com/k4rtikay/gitxhibit" className="hover:text-primary transition-colors"><Github/></a> 
+          <a href="https://github.com/k4rtikay/gitxhibit" className="hover:text-primary transition-colors"><Github className="size-5"/></a> 
           <LoginButton/>
         </span>
       </header>
