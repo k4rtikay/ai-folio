@@ -10,25 +10,24 @@ export default function HeroIllustration() {
     const profile = EVAN_PROFILE;
     const portfolio = EVAN_PORTFOLIO;
 
-    // Fixed colors for the illustration (dark theme)
     const bgColor = "#0a0a0a";
     const textColor = "#fafafa";
-    const accentColor = "#8b5cf6";
+    const accentColor = "#5cf661ff";
 
     return (
-        <div className="relative w-full px-4 py-8">
+        <div className="relative w-3/4 mx-auto px-4 py-8">
             {/* Ambient glow background */}
             <div className="absolute inset-0 -z-10">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-to-br from-violet-500/20 via-indigo-500/10 to-cyan-500/20 blur-3xl rounded-full" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[200px] bg-gradient-to-br from-green-500/20 via-green-500/10 to-green-500/20 blur-3xl rounded-full" />
             </div>
 
             {/* Window container with perspective */}
             <div className="relative perspective-[2500px]">
                 {/* Window frame */}
-                <div className="relative rounded-xl overflow-hidden border border-white/10 bg-gradient-to-b from-neutral-900/95 to-neutral-950/95 shadow-2xl shadow-black/50 backdrop-blur-xl rotate-x-[20deg] rotate-y-[10deg] rotate-z-[-8deg]">
+                <div className="relative rounded-xl overflow-hidden border border-white/10 [mask-image:linear-gradient(to_bottom,black,transparent)] shadow-2xl shadow-black/50 backdrop-blur-xl rotate-x-[50deg] rotate-y-[20deg] rotate-z-[-30deg]">
 
                     {/* macOS-style title bar */}
-                    <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-neutral-900/80">
+                    <div className="flex items-center gap-2 px-4 py-2 border-b border-white/5 bg-neutral-900/80">
                         <div className="flex gap-2">
                             <div className="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-500 transition-colors" />
                             <div className="w-3 h-3 rounded-full bg-yellow-500/80 hover:bg-yellow-500 transition-colors" />
@@ -84,14 +83,6 @@ export default function HeroIllustration() {
                                 />
                             </div>
                         </div>
-
-                        {/* Bottom fade mask - uses the same background color */}
-                        <div
-                            className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-                            style={{
-                                background: `linear-gradient(to top, ${bgColor} 0%, ${bgColor} 20%, transparent 100%)`
-                            }}
-                        />
                     </div>
                 </div>
 
