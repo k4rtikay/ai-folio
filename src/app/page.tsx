@@ -15,16 +15,17 @@ export default async function HomePage() {
         </span>
       </header>
 
-      <main className="flex flex-col items-center p-24">
+      <main className="flex flex-col gap-4 items-center p-24">
         <div className="text-center">
-          <h1 className="text-5xl font-extrabold tracking-tight">
-            Build Your Vision.
+          <h1 className="text-4xl font-bold tracking-tight">
+            From GitHub to Portfolio. Instantly.
           </h1>
-          <p className="mt-2 text-lg leading-8">
-            Turn your github into your brand. Choose from many fun templates.
+          <p className="mt-2 text-muted-foreground leading-8">
+            Showcase your work with stunning, developer-focused templates and let AI handle the copy.
           </p>
         </div>
         <UsernameForm />
+        {/* <p className="mt-4 tracking-wide text-muted-foreground opacity-60 text-xs">Uses public GitHub data only.</p> */}
         <LandingHero/>
       </main>
       <LandingFooter />
