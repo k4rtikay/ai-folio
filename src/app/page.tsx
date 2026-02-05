@@ -11,11 +11,11 @@ export default async function HomePage() {
       <header className="flex justify-between px-4 pt-2 items-center">
         <h1 className="font-semibold">GitXhibit</h1>
         <span className="flex gap-8 items-center">
-          <a href="https://github.com/k4rtikay/gitxhibit" className="hover:text-primary transition-colors"><Github className="size-5"/></a> 
-          <LoginButton/>
+          <a href="https://github.com/k4rtikay/gitxhibit" className="hover:text-primary transition-colors"><Github className="size-5" /></a>
+          <LoginButton />
         </span>
       </header>
-
+  
       <main className="flex flex-col gap-4 items-center p-24">
         <div className="text-center">
           <h1 className="text-4xl font-bold tracking-tight">
@@ -27,7 +27,7 @@ export default async function HomePage() {
         </div>
         <UsernameForm />
         {/* <p className="mt-4 tracking-wide text-muted-foreground opacity-60 text-xs">Uses public GitHub data only.</p> */}
-        <LandingHero/>
+        <LandingHero />
       </main>
       <LandingFooter />
     </div>
