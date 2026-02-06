@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { ActivityCalendar } from "react-activity-calendar";
 import { useTheme } from "next-themes";
+import { usePortfolioStore } from "@/store/use-portfolio-state";
+import { PORTFOLIO_THEMES, DEFAULT_THEME } from "@/lib/themes";
 
 interface HeatmapProps {
     username: string;
@@ -12,6 +14,12 @@ export default function Heatmap({ username }: HeatmapProps) {
     const [data, setData] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const { resolvedTheme } = useTheme();
+    const colors = usePortfolioStore((state) => state.colors);
+
+    // Find the current theme based on accent color
+    const currentTheme = PORTFOLIO_THEMES.find(
+        (theme) => theme.colors.accent === colors.accent
+    ) ?? DEFAULT_THEME;
 
     useEffect(() => {
         const fetchHeatmapData = async () => {
@@ -55,8 +63,8 @@ export default function Heatmap({ username }: HeatmapProps) {
                 blockMargin={4}
                 colorScheme={resolvedTheme === 'dark' ? 'dark' : 'light'}
                 theme={{
-                    light: ['#f1f5f9', '#cbd5e1', '#94a3b8', '#64748b', '#334155'],
-                    dark: ['#1e293b', '#334155', '#475569', '#64748b', '#cbd5e1'],
+                    light: currentTheme.heatmap.light,
+                    dark: currentTheme.heatmap.dark,
                 }}
                 labels={{
                     totalCount: "{{count}} contributions in the last year",
