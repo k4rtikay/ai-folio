@@ -36,13 +36,13 @@ export default function PortfolioWrapper({ username, portfolio, profile, repos, 
         setPortfolio(portfolio);
         setProfile(profile);
         setRepos(repos);
-        if(colors) setColors(colors);
-        if(font) setFont(font);
+        if (colors) setColors(colors);
+        if (font) setFont(font);
     }, [portfolio, profile, repos, setPortfolio, setProfile, setRepos, colors, font, setColors, setFont]);
 
     return (
         <div className="flex h-screen w-full bg-black overflow-hidden">
-            <aside className={cn("transition-all", isSidebarOpen ? "w-1/4" : "w-fit")}>
+            <aside className={cn("dark transition-all", isSidebarOpen ? "w-1/4" : "w-fit")}>
                 <EditorPanel
                     username={username}
                     open={isSidebarOpen}

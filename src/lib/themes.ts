@@ -1,4 +1,4 @@
-import { PortfolioColors } from "@/store/use-portfolio-state"; 
+import { PortfolioColors } from "@/store/use-portfolio-state";
 
 export interface ThemePreset {
   id: string;
@@ -8,12 +8,12 @@ export interface ThemePreset {
 
 export const PORTFOLIO_THEMES: ThemePreset[] = [
   {
-    id: "default-purple",
-    name: "Modern Purple",
+    id: "monochrome",
+    name: "Monochrome",
     colors: {
-      accent: "#A855F7",
-      light: { bg: "#FFFFFF", text: "#121212" },
-      dark: { bg: "#1D1D21", text: "#F2F4F7" },
+      accent: "#888888",
+      light: { bg: "#FFFFFF", text: "#000000" },
+      dark: { bg: "#000000", text: "#EDEDED" },
     },
   },
   {
@@ -31,7 +31,7 @@ export const PORTFOLIO_THEMES: ThemePreset[] = [
     colors: {
       accent: "#10B981",
       light: { bg: "#ECFDF5", text: "#064E3B" },
-      dark: { bg: "#064E3B", text: "#D1FAE5" },
+      dark: { bg: "#0D1F17", text: "#A7F3D0" },
     },
   },
   {
@@ -40,7 +40,7 @@ export const PORTFOLIO_THEMES: ThemePreset[] = [
     colors: {
       accent: "#D4AF37",
       light: { bg: "#FAFAFA", text: "#171717" },
-      dark: { bg: "#000000", text: "#F5F5F5" }, 
+      dark: { bg: "#000000", text: "#F5F5F5" },
     },
   },
   {
@@ -49,7 +49,16 @@ export const PORTFOLIO_THEMES: ThemePreset[] = [
     colors: {
       accent: "#D97706",
       light: { bg: "#FFFBEB", text: "#451A03" },
-      dark: { bg: "#291505", text: "#FEF3C7" }, 
+      dark: { bg: "#2f1a07ff", text: "#e0d3a6ff" },
+    },
+  },
+  {
+    id: "rose-blush",
+    name: "Rosé",
+    colors: {
+      accent: "#E879A9",
+      light: { bg: "#FDF2F8", text: "#831843" },
+      dark: { bg: "#1F0A14", text: "#FCE7F3" },
     },
   },
 ];

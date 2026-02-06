@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "../ui/button";
 import { Sidebar, Loader2, Check, Save } from "lucide-react";
 import { Forward, MonitorSmartphone } from "lucide-react";
@@ -8,18 +7,9 @@ import { cn } from "@/lib/utils";
 import { EditorForm } from "./editor-form";
 import { usePortfolioStore } from "@/store/use-portfolio-state";
 import { RotateCcw } from "lucide-react";
-import { fontOptions } from "@/lib/fonts";
 import { ColorPicker } from "./color-picker";
+import { FontsDropdown } from "./fonts-dropdown";
 
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
 
 interface EditorPanelProps {
     username: string;
@@ -70,7 +60,7 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
     console.log(selectedFont);
 
     return (
-        <div className="h-full w-full bg-[#26262B] text-[#F2F4F7] px-2 py-3 flex flex-col items-center">
+        <div className="h-full w-full bg-neutral-900 text-neutral-100 px-2 py-3 flex flex-col items-center">
             <div className="w-full flex justify-between items-center">
                 {open &&
                     <Button variant={"outline"} size={"sm"} className="bg-[#313136] hover:bg-gray-800 hover:text-[#F2F4F7] border-none">
@@ -112,43 +102,12 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
                     <div className="w-full flex flex-col gap-2">
                         <div className="w-full flex justify-between py-2 items-end">
                             <h2 className="font-semibold">Appearance</h2>
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                // onClick={handleResetAll}
-                                className="text-xs gap-1.5 text-orange-400 border-orange-400/30 hover:bg-orange-500/10 hover:text-orange-300"
-                            >
-                                <RotateCcw className="w-2 h-2" />
-                                All
-                            </Button>
                         </div>
-                        <div className="w-full">
+                        <div className="w-full p-2">
                             <ColorPicker />
                         </div>
-                        <div className="w-full">
-                            <Select
-                                value={selectedFont}
-                                onValueChange={(value) => setFont(value)}
-                            >
-                                <SelectTrigger className="w-full bg-[#121212] border-[#313136]">
-                                    <SelectValue
-                                        placeholder="Select a font" />
-                                </SelectTrigger>
-                                <SelectContent className="w-full bg-[#121212] border-[#313136">
-                                    <SelectGroup>
-                                        <SelectLabel>Fonts</SelectLabel>
-                                        {fontOptions.map((font) => (
-                                            <SelectItem
-                                                key={font.value}
-                                                value={font.value}
-                                                className={`cursor-pointer focus:bg-[#313136] focus:text-white ${font.class}`}
-                                            >
-                                                {font.label}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
+                        <div className="w-full p-2">
+                            <FontsDropdown />
                         </div>
                     </div>
 
