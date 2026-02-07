@@ -44,12 +44,12 @@ function ProjectCard({ repo }: { repo: Repo }) {
                         </h3>
 
                         <div className="flex gap-2 shrink-0 ml-2">
-                            {repo.stars && (
+                            {typeof repo.stars === 'number' && (
                                 <Badge variant="secondary" className="gap-1">
                                     <Star className="w-3 h-3" /> {repo.stars}
                                 </Badge>
                             )}
-                            {repo.forks && (
+                            {typeof repo.forks === 'number' && (
                                 <Badge variant="secondary" className="gap-1">
                                     <GitFork className="w-3 h-3" /> {repo.forks}
                                 </Badge>

@@ -148,7 +148,7 @@ export const usePortfolioStore = create<PortfolioState>((set, get) => ({
                 saveError: null
             });
 
-            console.log("✅ Portfolio saved successfully:", data.message);
+            console.log("Portfolio saved successfully:", data.message);
 
 
         } catch (error) {
