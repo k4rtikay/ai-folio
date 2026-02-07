@@ -132,7 +132,7 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
                         <button
                             onClick={handleSave}
                             disabled={isSaving}
-                            className="w-full px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            className="w-full rounded-md border border-neutral-700/40 bg-linear-to-b from-green-500/30 to-green-700/30 px-3 py-2 text-[#F2F4F7] h-fit hover:opacity-80 transition-opacity duration-125 flex items-center justify-center gap-2"
                         >
                             {isSaving ? (
                                 <>
@@ -165,7 +165,7 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
                         {/* Other owner features */}
                         <button
                             onClick={handleCopyLink}
-                            className="w-full px-4 py-2 border rounded"
+                            className="w-full rounded-md shadow-md bg-transparent border border-neutral-700/40 px-3 py-2 text-[#F2F4F7] h-fit hover:opacity-80 transition-opacity duration-125 flex items-center justify-center gap-2"
                         >
                             Get Shareable Link
                         </button>
@@ -174,8 +174,7 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
                     <div className="border rounded p-4 text-center">
                         <p className="text-sm mb-2">Like this portfolio?</p>
                         <button
-                            onClick={handleCopyLink}
-                            className="px-4 py-2 bg-purple-600 text-white rounded"
+                            className="w-full rounded-md shadow-md border border-neutral-700/40 bg-linear-to-b from-neutral-800/70 to-neutral-950/70 px-3 py-2 text-[#F2F4F7] h-fit hover:opacity-80 transition-opacity duration-125 flex items-center justify-center gap-2"
                         >
                             Create Your Own
                         </button>
