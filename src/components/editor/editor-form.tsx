@@ -66,7 +66,7 @@ export function EditorForm({ className }: EditorFormProps) {
             >
                 <AccordionItem value="hero">
                     <AccordionTrigger
-                        className="font-semibold hover:no-underline text-sm py-4"
+                        className="font-medium hover:no-underline text-sm py-4"
                     >Hero Section</AccordionTrigger>
                     <AccordionContent className="flex flex-col gap-4 text-balance">
                         <div className="space-y-4 px-2">
@@ -76,7 +76,7 @@ export function EditorForm({ className }: EditorFormProps) {
                                     <InputGroupButton
                                         variant="ghost"
                                         size="icon-sm"
-                                        className="h-6 w-6 rounded-full text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+                                        className="h-6 w-6 rounded-full text-foreground-muted hover:bg-foreground hover:text-foreground"
                                         onClick={() => resetPortfolioField("heroText")}
                                         title="Reset to original"
                                     >
@@ -103,7 +103,7 @@ export function EditorForm({ className }: EditorFormProps) {
                                     <InputGroupButton
                                         variant="ghost"
                                         size="icon-sm"
-                                        className="h-6 w-6 rounded-full text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+                                        className="h-6 w-6 rounded-full text-foreground-muted hover:bg-foreground/10 hover:text-foreground"
                                         onClick={() => resetPortfolioField("heroSubText")}
                                         title="Reset to original"
                                     >
@@ -127,7 +127,7 @@ export function EditorForm({ className }: EditorFormProps) {
                 </AccordionItem>
                 <AccordionItem value="about">
                     <AccordionTrigger
-                        className="font-semibold hover:no-underline text-sm py-4"
+                        className="font-medium hover:no-underline text-sm py-4"
                     >About Section</AccordionTrigger>
                     <AccordionContent className="flex flex-col gap-4 text-balance">
                         <div className="space-y-4 px-2">
@@ -137,7 +137,7 @@ export function EditorForm({ className }: EditorFormProps) {
                                     <InputGroupButton
                                         variant="ghost"
                                         size="icon-sm"
-                                        className="h-6 w-6 rounded-full text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+                                        className="h-6 w-6 rounded-full text-foreground-muted hover:bg-foreground/10 hover:text-foreground"
                                         onClick={() => resetPortfolioField("about")}
                                         title="Reset to original"
                                     >
@@ -164,7 +164,7 @@ export function EditorForm({ className }: EditorFormProps) {
                                     <InputGroupButton
                                         variant="ghost"
                                         size="icon-sm"
-                                        className="h-6 w-6 rounded-full text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+                                        className="h-6 w-6 rounded-full text-foreground-muted hover:bg-foreground/10 hover:text-foreground"
                                         onClick={() => resetProfileField("location")}
                                         title="Reset to original"
                                     >
@@ -189,7 +189,7 @@ export function EditorForm({ className }: EditorFormProps) {
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="links">
-                    <AccordionTrigger className="font-semibold hover:no-underline text-sm py-4">Links and Socials</AccordionTrigger>
+                    <AccordionTrigger className="font-medium hover:no-underline text-sm py-4">Links and Socials</AccordionTrigger>
                     <AccordionContent className="flex flex-col gap-4 text-balance">
                         <div className="space-y-4 px-2">
                             <Label className="text-gray-200">Twitter Username</Label>
@@ -198,7 +198,7 @@ export function EditorForm({ className }: EditorFormProps) {
                                     <InputGroupButton
                                         variant="ghost"
                                         size="icon-sm"
-                                        className="h-6 w-6 rounded-full text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+                                        className="h-6 w-6 rounded-full text-foreground-muted hover:bg-foreground/10 hover:text-foreground"
                                         onClick={() => resetProfileField("twitterUsername")}
                                         title="Reset to original"
                                     >
@@ -220,7 +220,7 @@ export function EditorForm({ className }: EditorFormProps) {
                                     <InputGroupButton
                                         variant="ghost"
                                         size="icon-sm"
-                                        className="h-6 w-6 rounded-full text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+                                        className="h-6 w-6 rounded-full text-foreground-muted hover:bg-foreground/10 hover:text-foreground"
                                         onClick={() => resetProfileField("blog")}
                                         title="Reset to original"
                                     >
@@ -238,7 +238,7 @@ export function EditorForm({ className }: EditorFormProps) {
                 </AccordionItem>
 
                 <AccordionItem value="skills">
-                    <AccordionTrigger className="font-semibold hover:no-underline text-sm py-4">Skills</AccordionTrigger>
+                    <AccordionTrigger className="font-medium hover:no-underline text-sm py-4">Skills</AccordionTrigger>
                     <AccordionContent className="flex flex-col gap-4 text-balance">
                         <div className="space-y-4 px-2 py-2">
 
@@ -247,7 +247,7 @@ export function EditorForm({ className }: EditorFormProps) {
                                     <InputGroupButton
                                         variant="ghost"
                                         size="icon-sm"
-                                        className="h-6 w-6 rounded-full text-orange-400 hover:bg-orange-500/10 hover:text-orange-300"
+                                        className="h-6 w-6 rounded-full text-foreground-muted hover:bg-foreground/10 hover:text-foreground"
                                         onClick={() => resetPortfolioField("skills")}
                                         title="Reset skills to original"
                                     >
@@ -290,7 +290,7 @@ export function EditorForm({ className }: EditorFormProps) {
                                                 variant={"ghost"}
                                                 size={"icon-sm"}
                                                 onClick={() => removeSkill(skill)}
-                                                className="ml-2 h-6 w-6 rounded-full bg-red-500/20 hover:bg-red-500/20 text-red-400 hover:text-red-200 border-none"
+                                                className="ml-2 h-6 w-6 rounded-full bg-red-500/20 dark:hover:bg-red-500/20 hover:bg-red-500/20 text-red-400 hover:text-red-200 border-none"
                                             >
                                                 <X className="w-4 h-4" />
                                             </Button>

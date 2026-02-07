@@ -71,8 +71,14 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
                 }
 
                 <div className={cn("items-center", open ? "flex gap-2" : "flex flex-col-reverse gap-2")}>
-                    <Button variant={"outline"} size={"icon-sm"} className="bg-[#313136] hover:bg-gray-800 hover:text-[#F2F4F7] border-none">
-                        <Forward className="w-4 h-4 text-[#F2F4F7]"></Forward>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleResetAll}
+                        className="text-xs gap-1.5 dark:bg-red-500/20 hover:bg-red-500/20 text-red-400 hover:text-red-200 dark:hover:bg-red-500/20 border-none"
+                    >
+                        <RotateCcw className="w-2 h-2" />
+                        {open && "All"}
                     </Button>
 
                     <Button
@@ -114,15 +120,6 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
                     <div className="w-full">
                         <div className="w-full flex justify-between py-2 items-end">
                             <h2 className="font-semibold">Content</h2>
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={handleResetAll}
-                                className="text-xs gap-1.5 text-orange-400 border-orange-400/30 hover:bg-orange-500/10 hover:text-orange-300"
-                            >
-                                <RotateCcw className="w-2 h-2" />
-                                All
-                            </Button>
                         </div>
                         <EditorForm className="ml-1 px-2" />
                     </div>
