@@ -8,7 +8,7 @@ export default function Error({error, reset,}:{
         <div className="flex items-center justify-center h-screen">
             <div className="flex flex-col p-10 bg-card rounded-lg shadow-lg border border-foreground/5 items-center gap-2">
                 <h1 className="text-2xl font-semibold text-red-500/80">Something went wrong!</h1>
-                <p className="text-muted-foreground text-sm">Failed to generate portfolio. Please try again.</p>
+                <p className="text-muted-foreground text-sm">Failed to load page. Please try again.</p>
                 {error.digest && (
                     <p className="text-muted-foreground text-xs">Error ID: {error.digest}</p>
                 )}
