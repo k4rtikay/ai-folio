@@ -37,7 +37,7 @@ export default function StandardTemplate({ username }: StandardTemplateProps) {
 
     return (
         <div
-            className={cn("w-full min-h-full @md:px-16 @lg:px-32", selectedFont.class)}
+            className={cn("@container w-full min-h-full @md:px-16 @lg:px-32", selectedFont.class)}
             style={{
                 "--accent-color": colors.accent,
                 "--bg-color": activeColors.bg,
@@ -47,7 +47,7 @@ export default function StandardTemplate({ username }: StandardTemplateProps) {
             } as React.CSSProperties}
         >
             <div
-                className="flex flex-col border-r border-l max-w-5xl mx-auto"
+                className="flex flex-col border-r border-l max-w-4xl mx-auto"
                 style={{
                     borderColor: "color-mix(in srgb, var(--text-color) 15%, transparent)",
                 }}
