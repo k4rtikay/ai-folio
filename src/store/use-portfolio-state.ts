@@ -92,38 +92,38 @@ export const usePortfolioStore = create<PortfolioState>((set, get) => ({
             }
         })
     },
-    font: "Inter",
+    font: "inter",
     colors: DEFAULT_COLORS,
     setFont: (font) => set((state) => ({ font })),
     setColors: (colors) => set((state) => ({ colors })),
     updateColor: (path, value) => set((state) => {
         const newColors = { ...state.colors };
-        
+
         if (path === 'accent') newColors.accent = value;
         else if (path.startsWith('light.')) {
             newColors.light = { ...state.colors.light, [path.split('.')[1]]: value };
         }
         else if (path.startsWith('dark.')) {
-             newColors.dark = { ...state.colors.dark, [path.split('.')[1]]: value };
+            newColors.dark = { ...state.colors.dark, [path.split('.')[1]]: value };
         }
-        
+
         return { colors: newColors };
     }),
-    resetCustomization: () => set({ 
-        colors: DEFAULT_COLORS, 
-        font: "Inter" 
+    resetCustomization: () => set({
+        colors: DEFAULT_COLORS,
+        font: "inter"
     }),
 
     savePortfolio: async (username: string) => {
         const state = get();
-        
+
         if (!state.portfolio || !state.profile) {
             set({ saveError: "No portfolio data to save" });
             return;
         }
-        
+
         set({ isSaving: true, saveError: null });
-        
+
         try {
             const response = await fetch('/api/portfolio/save', {
                 method: 'POST',
@@ -139,32 +139,32 @@ export const usePortfolioStore = create<PortfolioState>((set, get) => ({
                     username: username,
                 }),
             });
-            
+
             if (!response.ok) {
                 const error = await response.json();
                 throw new Error(error.error || 'Failed to save');
             }
-            
+
             const data = await response.json();
-            
-            set({ 
-                isSaving: false, 
+
+            set({
+                isSaving: false,
                 lastSaved: new Date(),
-                saveError: null 
+                saveError: null
             });
-            
+
             console.log("✅ Portfolio saved successfully:", data.message);
-            
-            
+
+
         } catch (error) {
             const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-            set({ 
-                isSaving: false, 
-                saveError: errorMessage 
+            set({
+                isSaving: false,
+                saveError: errorMessage
             });
-            
+
             console.error("Save failed:", errorMessage);
-            
+
         }
     },
 }));

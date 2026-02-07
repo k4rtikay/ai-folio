@@ -16,12 +16,12 @@ export const FontsDropdown = () => {
                 value={selectedFont}
                 onValueChange={(value) => setFont(value)}
             >
-                <SelectTrigger className="w-full bg-[#121212] border-[#313136]">
+                <SelectTrigger className="w-full">
                     <SelectValue
                         placeholder="Select a font"
                     />
                 </SelectTrigger>
-                <SelectContent className="w-full bg-[#121212] border-[#313136">
+                <SelectContent className="w-full dark">
                     <SelectGroup>
                         <SelectLabel>Fonts</SelectLabel>
                         {fontOptions.map((font) => (
