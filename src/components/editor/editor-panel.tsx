@@ -126,61 +126,56 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
                 </div>
             }
 
-            <div className="w-full flex flex-col gap-2">
-                {isOwnPortfolio ? (
-                    <div className="space-y-2">
-                        <button
-                            onClick={handleSave}
-                            disabled={isSaving}
-                            className="w-full rounded-md border border-neutral-700/40 bg-linear-to-b from-green-500/30 to-green-700/30 px-3 py-2 text-[#F2F4F7] h-fit hover:opacity-80 transition-opacity duration-125 flex items-center justify-center gap-2"
-                        >
-                            {isSaving ? (
-                                <>
-                                    <Loader2 className="w-4 h-4 animate-spin" />
-                                    Saving...
-                                </>
-                            ) : lastSaved ? (
-                                <>
-                                    <Check className="w-4 h-4" />
-                                    Saved
-                                </>
-                            ) : (
-                                <>
-                                    <Save className="w-4 h-4" />
-                                    Save Portfolio
-                                </>
+            {open && (
+                <div className="w-full flex flex-col gap-2">
+                    {isOwnPortfolio ? (
+                        <div className="space-y-2">
+                            <button
+                                onClick={handleSave}
+                                disabled={isSaving}
+                                className="w-full rounded-md border border-neutral-700/40 text-blue-200 bg-blue-500/20 px-3 py-2 text-[#F2F4F7] h-fit hover:opacity-80 transition-opacity duration-125 flex items-center justify-center gap-2"
+                            >
+                                {isSaving ? (
+                                    <>
+                                        <Loader2 className="w-4 h-4 animate-spin" />
+                                        Saving...
+                                    </>
+                                ) : lastSaved ? (
+                                    <>
+                                        <Check className="w-4 h-4" />
+                                        Saved
+                                    </>
+                                ) : (
+                                    <>
+                                        <Save className="w-4 h-4" />
+                                        Save and Publish
+                                    </>
+                                )}
+                            </button>
+
+                            {saveError && (
+                                <p className="text-red-500 text-sm">{saveError}</p>
                             )}
-                        </button>
 
-                        {saveError && (
-                            <p className="text-red-500 text-sm">{saveError}</p>
-                        )}
+                            {lastSaved && !saveError && (
+                                <p className="text-green-600 text-sm">
+                                    Last saved: {lastSaved.toLocaleTimeString()}
+                                </p>
+                            )}
+                        </div>
+                    ) : (
+                        <div className="border rounded p-4 text-center">
+                            <p className="text-sm mb-2">Like this portfolio?</p>
+                            <button
+                                className="w-full rounded-md shadow-md border border-neutral-700/40 text-blue-200 bg-blue-500/20 px-3 py-2 text-[#F2F4F7] h-fit hover:opacity-80 transition-opacity duration-125 flex items-center justify-center gap-2"
+                            >
+                                Create Your Own
+                            </button>
+                        </div>
+                    )}
+                </div>
+            )}
 
-                        {lastSaved && !saveError && (
-                            <p className="text-green-600 text-sm">
-                                Last saved: {lastSaved.toLocaleTimeString()}
-                            </p>
-                        )}
-
-                        {/* Other owner features */}
-                        <button
-                            onClick={handleCopyLink}
-                            className="w-full rounded-md shadow-md bg-transparent border border-neutral-700/40 px-3 py-2 text-[#F2F4F7] h-fit hover:opacity-80 transition-opacity duration-125 flex items-center justify-center gap-2"
-                        >
-                            Get Shareable Link
-                        </button>
-                    </div>
-                ) : (
-                    <div className="border rounded p-4 text-center">
-                        <p className="text-sm mb-2">Like this portfolio?</p>
-                        <button
-                            className="w-full rounded-md shadow-md border border-neutral-700/40 bg-linear-to-b from-neutral-800/70 to-neutral-950/70 px-3 py-2 text-[#F2F4F7] h-fit hover:opacity-80 transition-opacity duration-125 flex items-center justify-center gap-2"
-                        >
-                            Create Your Own
-                        </button>
-                    </div>
-                )}
-            </div>
 
         </div >
     );
