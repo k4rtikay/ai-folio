@@ -2,18 +2,13 @@ import { create } from "zustand";
 import { AIFolio } from "@/schemas/aifolio.schema";
 import { Repo } from "@/lib/github";
 import { UserProfile } from "@/lib/github";
+import { DEFAULT_THEME } from "@/lib/themes";
 
 export interface PortfolioColors {
     accent: string;
     light: { bg: string; text: string };
     dark: { bg: string; text: string };
 }
-
-const DEFAULT_COLORS: PortfolioColors = {
-    accent: "#A855F7",
-    light: { bg: "#FFFFFF", text: "#121212" },
-    dark: { bg: "#1D1D21", text: "#F2F4F7" },
-};
 
 interface PortfolioState {
     portfolio: AIFolio | null;
@@ -93,7 +88,7 @@ export const usePortfolioStore = create<PortfolioState>((set, get) => ({
         })
     },
     font: "inter",
-    colors: DEFAULT_COLORS,
+    colors: DEFAULT_THEME.colors,
     setFont: (font) => set((state) => ({ font })),
     setColors: (colors) => set((state) => ({ colors })),
     updateColor: (path, value) => set((state) => {
@@ -110,7 +105,7 @@ export const usePortfolioStore = create<PortfolioState>((set, get) => ({
         return { colors: newColors };
     }),
     resetCustomization: () => set({
-        colors: DEFAULT_COLORS,
+        colors: DEFAULT_THEME.colors,
         font: "inter"
     }),
 
