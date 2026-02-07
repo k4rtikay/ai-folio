@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "../ui/button";
-import { Sidebar, Loader2, Check, Save } from "lucide-react";
+import { Sidebar, Loader2, Save, CircleCheck, CircleX } from "lucide-react";
 import { Forward, MonitorSmartphone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { EditorForm } from "./editor-form";
@@ -9,6 +9,7 @@ import { usePortfolioStore } from "@/store/use-portfolio-state";
 import { RotateCcw } from "lucide-react";
 import { ColorPicker } from "./color-picker";
 import { FontsDropdown } from "./fonts-dropdown";
+import { toast } from "sonner";
 
 
 interface EditorPanelProps {
@@ -35,8 +36,6 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
 
     const savePortfolio = usePortfolioStore((state) => state.savePortfolio);
     const isSaving = usePortfolioStore((state) => state.isSaving);
-    const saveError = usePortfolioStore((state) => state.saveError);
-    const lastSaved = usePortfolioStore((state) => state.lastSaved);
 
 
     const handleResetAll = () => {
@@ -46,7 +45,21 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
     };
 
     const handleSave = async () => {
-        await savePortfolio(username);
+        const result = await savePortfolio(username);
+        if (result.success) {
+            toast.success("Saved", {
+                icon: <CircleCheck className="w-4 h-4 text-green-500" />,
+            });
+        } else {
+            toast.error(result.error || "Failed to save portfolio", {
+                icon: <CircleX className="w-4 h-4" />,
+                style: {
+                    backgroundColor: "rgba(239, 68, 68, 0.25)",
+                    color: "#fca5a5",
+                    border: "1px solid rgba(239, 68, 68, 0.3)",
+                },
+            });
+        }
     }
 
     const handleCopyLink = () => {
@@ -129,40 +142,23 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
             {open && (
                 <div className="w-full flex flex-col gap-2">
                     {isOwnPortfolio ? (
-                        <div className="space-y-2">
-                            <button
-                                onClick={handleSave}
-                                disabled={isSaving}
-                                className="w-full rounded-md border border-neutral-700/40 text-blue-200 bg-blue-500/20 px-3 py-2 text-[#F2F4F7] h-fit hover:opacity-80 transition-opacity duration-125 flex items-center justify-center gap-2"
-                            >
-                                {isSaving ? (
-                                    <>
-                                        <Loader2 className="w-4 h-4 animate-spin" />
-                                        Saving...
-                                    </>
-                                ) : lastSaved ? (
-                                    <>
-                                        <Check className="w-4 h-4" />
-                                        Saved
-                                    </>
-                                ) : (
-                                    <>
-                                        <Save className="w-4 h-4" />
-                                        Save and Publish
-                                    </>
-                                )}
-                            </button>
-
-                            {saveError && (
-                                <p className="text-red-500 text-sm">{saveError}</p>
+                        <button
+                            onClick={handleSave}
+                            disabled={isSaving}
+                            className="w-full rounded-md border border-neutral-700/40 text-blue-200 bg-blue-500/20 px-3 py-2 text-[#F2F4F7] h-fit hover:opacity-80 transition-opacity duration-125 flex items-center justify-center gap-2"
+                        >
+                            {isSaving ? (
+                                <>
+                                    <Loader2 className="w-4 h-4 animate-spin" />
+                                    Saving...
+                                </>
+                            ) : (
+                                <>
+                                    <Save className="w-4 h-4" />
+                                    Save and Publish
+                                </>
                             )}
-
-                            {lastSaved && !saveError && (
-                                <p className="text-green-600 text-sm">
-                                    Last saved: {lastSaved.toLocaleTimeString()}
-                                </p>
-                            )}
-                        </div>
+                        </button>
                     ) : (
                         <div className="border rounded p-4 text-center">
                             <p className="text-sm mb-2">Like this portfolio?</p>

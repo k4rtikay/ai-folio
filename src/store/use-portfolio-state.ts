@@ -36,7 +36,7 @@ interface PortfolioState {
     setColors: (colors: PortfolioColors) => void;
     updateColor: (path: 'accent' | 'light.bg' | 'light.text' | 'dark.bg' | 'dark.text', value: string) => void;
     resetCustomization: () => void;
-    savePortfolio: (username: string) => Promise<void>;
+    savePortfolio: (username: string) => Promise<{ success: boolean; error?: string }>;
 }
 
 export const usePortfolioStore = create<PortfolioState>((set, get) => ({
@@ -114,7 +114,7 @@ export const usePortfolioStore = create<PortfolioState>((set, get) => ({
 
         if (!state.portfolio || !state.profile) {
             set({ saveError: "No portfolio data to save" });
-            return;
+            return { success: false, error: "No portfolio data to save" };
         }
 
         set({ isSaving: true, saveError: null });
@@ -149,7 +149,7 @@ export const usePortfolioStore = create<PortfolioState>((set, get) => ({
             });
 
             console.log("Portfolio saved successfully:", data.message);
-
+            return { success: true };
 
         } catch (error) {
             const errorMessage = error instanceof Error ? error.message : 'Unknown error';
@@ -159,7 +159,7 @@ export const usePortfolioStore = create<PortfolioState>((set, get) => ({
             });
 
             console.error("Save failed:", errorMessage);
-
+            return { success: false, error: errorMessage };
         }
     },
 }));
