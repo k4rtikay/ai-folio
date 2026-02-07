@@ -15,32 +15,32 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
     const { username } = await params;
 
     // DEV TESTING MODE: Skip auth, database, and API calls
-    if (DEV_MODE) {
-        console.log("DEV MODE: Using mock data (no auth, no database, no API calls)");
+    // if (DEV_MODE) {
+    //     console.log("DEV MODE: Using mock data (no auth, no database, no API calls)");
 
-        const mockRenderData: RenderData = {
-            profile: MOCK_PROFILE,
-            repos: MOCK_REPOS,
-            portfolio: MOCK_PORTFOLIO,
-        };
+    //     const mockRenderData: RenderData = {
+    //         profile: MOCK_PROFILE,
+    //         repos: MOCK_REPOS,
+    //         portfolio: MOCK_PORTFOLIO,
+    //     };
 
-        return (
-            <div className="flex min-h-screen">
-                <PortfolioWrapper
-                    username={username}
-                    portfolio={mockRenderData.portfolio}
-                    profile={mockRenderData.profile}
-                    repos={mockRenderData.repos}
-                    isOwnPortfolio={true} // Allow editing in dev mode
-                    currentUserId="dev-user-id"
-                    currentUserName={username}
-                    savedPortfolioId={null}
-                    colors={undefined}
-                    font={undefined}
-                />
-            </div>
-        );
-    }
+    //     return (
+    //         <div className="flex min-h-screen">
+    //             <PortfolioWrapper
+    //                 username={username}
+    //                 portfolio={mockRenderData.portfolio}
+    //                 profile={mockRenderData.profile}
+    //                 repos={mockRenderData.repos}
+    //                 isOwnPortfolio={true} // Allow editing in dev mode
+    //                 currentUserId="dev-user-id"
+    //                 currentUserName={username}
+    //                 savedPortfolioId={null}
+    //                 colors={undefined}
+    //                 font={undefined}
+    //             />
+    //         </div>
+    //     );
+    // }
 
     // PRODUCTION MODE: Normal flow with auth, database, and API calls
     const session = await auth.api.getSession({
