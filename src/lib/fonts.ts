@@ -1,15 +1,15 @@
-import { Inter, Bricolage_Grotesque, Space_Mono, Playfair_Display, Syne } from 'next/font/google';
+import { Inter, Work_Sans, JetBrains_Mono, Lora, Archivo } from 'next/font/google';
 
 const fontInter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const fontBricolage = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-bricolage' });
-const fontSpace = Space_Mono({ weight: ["400", "700"], subsets: ['latin'], variable: '--font-space' });
-const fontPlayfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
-const fontSyne = Syne({ subsets: ['latin'], variable: '--font-syne' });
+const fontWorkSans = Work_Sans({ subsets: ['latin'], variable: '--font-work-sans' });
+const fontJetBrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains' });
+const fontLora = Lora({ subsets: ['latin'], variable: '--font-lora' });
+const fontArchivo = Archivo({ subsets: ['latin'], variable: '--font-archivo' });
 
 export const fontOptions = [
-  { label: "Inter (Default)", value: "inter", class: fontInter.className, variable: fontInter.variable },
-  { label: "Bricolage", value: "bricolage", class: fontBricolage.className, variable: fontBricolage.variable },
-  { label: "Space Mono", value: "space-mono", class: fontSpace.className, variable: fontSpace.variable },
-  { label: "Playfair", value: "playfair", class: fontPlayfair.className, variable: fontPlayfair.variable },
-  { label: "Syne", value: "syne", class: fontSyne.className, variable: fontSyne.variable },
+  { label: "Inter", value: "inter", class: fontInter.className, variable: fontInter.variable },
+  { label: "Work Sans", value: "work-sans", class: fontWorkSans.className, variable: fontWorkSans.variable },
+  { label: "JetBrains Mono", value: "jetbrains-mono", class: fontJetBrains.className, variable: fontJetBrains.variable },
+  { label: "Lora", value: "lora", class: fontLora.className, variable: fontLora.variable },
+  { label: "Archivo", value: "archivo", class: fontArchivo.className, variable: fontArchivo.variable },
 ];

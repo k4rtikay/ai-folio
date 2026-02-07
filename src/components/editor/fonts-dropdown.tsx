@@ -19,6 +19,7 @@ export const FontsDropdown = () => {
                 <SelectTrigger className="w-full">
                     <SelectValue
                         placeholder="Select a font"
+                        className="text-sm"
                     />
                 </SelectTrigger>
                 <SelectContent className="w-full dark">
@@ -28,7 +29,7 @@ export const FontsDropdown = () => {
                             <SelectItem
                                 key={font.value}
                                 value={font.value}
-                                className={`cursor-pointer focus:bg-[#313136] focus:text-white ${font.class}`}
+                                className={`cursor-pointer text-sm focus:bg-[#313136] focus:text-white ${font.class}`}
                             >
                                 {font.label}
                             </SelectItem>
