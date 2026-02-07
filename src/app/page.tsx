@@ -7,7 +7,7 @@ import { Github } from "lucide-react";
 export default async function HomePage() {
 
   return (
-    <div className="flex flex-col justify-between">
+    <div className="dark bg-background text-foreground flex flex-col justify-between">
       <header className="flex justify-between px-4 pt-2 items-center">
         <h1 className="font-semibold">GitXhibit</h1>
         <span className="flex gap-8 items-center">
