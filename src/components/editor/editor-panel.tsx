@@ -163,12 +163,13 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
                             </button>
                         ) : (
                             <div className="border rounded p-4 text-center">
-                                <p className="text-sm mb-2">Like this portfolio?</p>
-                                <button
+                                <p className="text-sm mb-2">Like this portfolio? Login and..</p>
+                                <a
+                                    href="/"
                                     className="w-full rounded-md shadow-md border border-neutral-700/40 text-blue-200 bg-blue-500/20 px-3 py-2 text-[#F2F4F7] h-fit hover:opacity-80 transition-opacity duration-125 flex items-center justify-center gap-2"
                                 >
-                                    Create Your Own
-                                </button>
+                                    Create Your Own!
+                                </a>
                             </div>
                         )}
                     </div>
