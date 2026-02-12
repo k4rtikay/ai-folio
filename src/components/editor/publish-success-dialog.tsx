@@ -20,7 +20,7 @@ interface PublishSuccessDialogProps {
 
 export function PublishSuccessDialog({ open, onOpenChange, username }: PublishSuccessDialogProps) {
     const [copied, setCopied] = useState(false);
-    const portfolioUrl = `https://gitxhiibit.vercel.app/${username}`;
+    const portfolioUrl = `https://gitxhibit.vercel.app/${username}`;
 
     const handleCopyLink = () => {
         navigator.clipboard.writeText(portfolioUrl);
