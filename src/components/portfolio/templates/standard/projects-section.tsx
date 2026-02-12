@@ -18,7 +18,7 @@ function ProjectCard({ repo }: { repo: Repo }) {
         >
 
             <div
-                className="shrink-0 w-full @md:w-[320px] h-[180px] @md:h-[160px] relative rounded-md overflow-hidden border bg-muted"
+                className="shrink-0 w-full @md:w-[320px] h-[180px] @md:h-[160px] relative rounded-md overflow-hidden border"
                 style={borderStyle}
             >
                 {repo.open_graph_image_url ? (  

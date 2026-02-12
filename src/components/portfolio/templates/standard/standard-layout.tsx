@@ -32,7 +32,7 @@ export default function StandardTemplate({ username }: StandardTemplateProps) {
 
 
     if (!profile || !portfolio) {
-        return <div>Loading....</div>
+        return <div className="flex items-center bg-(--bg-color) text-(--text-color) justify-center h-screen">Loading...</div>
     }
 
     return (
