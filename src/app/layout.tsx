@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="overscroll-y-none">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-(--bg-color) overscroll-y-none`}
       >
