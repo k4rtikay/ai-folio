@@ -20,8 +20,8 @@ export default function HeroIllustration() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] md:w-[300px] h-[150px] md:h-[200px] bg-gradient-to-br from-green-500/20 via-green-500/10 to-green-500/20 blur-3xl rounded-full" />
             </div>
 
-            <div className="relative md:perspective-[2500px]">
-                <div className="relative rounded-xl overflow-hidden border border-white/10 [mask-image:linear-gradient(to_bottom,black,transparent)] shadow-2xl shadow-black/50 backdrop-blur-xl md:rotate-x-[50deg] md:rotate-y-[20deg] md:rotate-z-[-30deg]">
+            <div className="relative md:perspective-[2500px] w-full overflow-hidden md:overflow-visible">
+                <div className="relative rounded-xl overflow-hidden border border-white/10 [mask-image:linear-gradient(to_bottom,black,transparent)] shadow-2xl shadow-black/50 backdrop-blur-xl md:rotate-x-[50deg] md:rotate-y-[20deg] md:rotate-z-[-30deg] min-w-[600px] md:min-w-0">
 
                     <div className="flex items-center gap-2 px-3 md:px-4 py-2 border-b border-white/5 bg-neutral-900/80">
                         <div className="flex gap-1.5 md:gap-2">
@@ -76,6 +76,7 @@ export default function HeroIllustration() {
                 </div>
 
                 <div className="hidden md:block absolute -bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-gradient-to-b from-white/5 to-transparent blur-xl rounded-full" />
+                <div className="absolute top-0 right-0 h-full w-4 bg-gradient-to-l from-background to-transparent z-10 md:hidden pointer-events-none" />
             </div>
         </div>
     );
