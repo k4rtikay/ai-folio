@@ -18,12 +18,12 @@ export default async function HomePage() {
         </header>
 
         <main className="flex flex-col gap-4 items-center p-6 md:p-24 flex-1">
-          <div className="text-center max-w-2xl">
+          <div className="text-center max-w-2xl mt-8">
             <h1 className="text-2xl md:text-4xl font-bold tracking-tight">
               From GitHub to Portfolio. Instantly.
             </h1>
             <p className="mt-2 text-sm md:text-base text-muted-foreground leading-6 md:leading-8 px-4 md:px-0">
-              Showcase your work with stunning, developer-focused templates and let AI handle the copy.
+              Showcase your work with stunning, customizable dev portfolio templates and let AI handle the copy.
             </p>
           </div>
           <UsernameForm />
