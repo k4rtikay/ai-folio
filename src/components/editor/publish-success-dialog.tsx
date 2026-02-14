@@ -66,13 +66,7 @@ export function PublishSuccessDialog({ open, onOpenChange, username }: PublishSu
                 </div>
 
                 <DialogFooter className="mt-4">
-                    <Button
-                        variant="outline"
-                        onClick={() => onOpenChange(false)}
-                        className="w-full bg-blue-500/20 border-neutral-700 hover:bg-blue-500/30 text-blue-200"
-                    >
-                        Done
-                    </Button>
+                    <a href={portfolioUrl} target="_blank" rel="noopener noreferrer" className="w-full rounded-md text-blue-200 bg-blue-500/20 px-2 py-1 text-[#F2F4F7] h-fit hover:opacity-80 transition-opacity duration-125 flex items-center justify-center gap-2 border-t border-white/10 shadow-[0_4px_10px_-4px_rgba(37,99,235,0.32)]">Visit Portfolio</a>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
