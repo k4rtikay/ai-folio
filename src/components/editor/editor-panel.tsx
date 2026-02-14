@@ -147,7 +147,7 @@ export default function EditorPanel({ username, open, onToggle, toggleView, isOw
                             <button
                                 onClick={handleSave}
                                 disabled={isSaving}
-                                className="w-full rounded-md border border-neutral-700/40 text-blue-200 bg-blue-500/20 px-3 py-2 text-[#F2F4F7] h-fit hover:opacity-80 transition-opacity duration-125 flex items-center justify-center gap-2"
+                                className="w-full rounded-md text-blue-200 bg-blue-500/20 px-3 py-2 text-[#F2F4F7] h-fit hover:opacity-80 transition-opacity duration-125 flex items-center justify-center gap-2 border-t border-white/10 shadow-[0_4px_10px_-4px_rgba(37,99,235,0.32)]"
                             >
                                 {isSaving ? (
                                     <>
