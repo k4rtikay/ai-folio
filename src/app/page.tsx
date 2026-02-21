@@ -17,7 +17,7 @@ export default async function HomePage() {
           </span>
         </header>
 
-        <main className="flex flex-col gap-4 items-center p-6 md:p-24 flex-1">
+        <main className="flex flex-col gap-2 items-center p-6 md:px-24 md:pt-16 md:pb-0 flex-1">
           <div className="text-center max-w-2xl mt-8">
             <h1 className="text-2xl md:text-4xl font-bold tracking-tight">
               From GitHub to Portfolio. Instantly.

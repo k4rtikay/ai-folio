@@ -1,83 +1,95 @@
 "use client";
+import React, { useRef } from "react";
+import { useScroll, useTransform, motion, MotionValue } from "motion/react";
 
-import { EVAN_PORTFOLIO, EVAN_PROFILE } from "@/lib/famous-devs-data";
-import Header from "@/components/portfolio/templates/standard/header";
-import HeroSection from "@/components/portfolio/templates/standard/hero-section";
-import AboutSection from "@/components/portfolio/templates/standard/about-section";
-import React from "react";
+export const ContainerScroll = ({
+  titleComponent,
+  children,
+}: {
+  titleComponent: string | React.ReactNode;
+  children: React.ReactNode;
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+  });
+  const [isMobile, setIsMobile] = React.useState(false);
 
-export default function HeroIllustration() {
-    const profile = EVAN_PROFILE;
-    const portfolio = EVAN_PORTFOLIO;
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
 
-    const bgColor = "#0a0a0a";
-    const textColor = "#fafafa";
-    const accentColor = "#5cf661ff";
+  const scaleDimensions = () => {
+    return isMobile ? [0.7, 0.9] : [1.05, 1];
+  };
 
-    return (
-        <div className="relative w-full md:w-3/4 mx-auto px-2 md:px-4 py-4 md:py-8">
-            <div className="absolute inset-0 -z-10">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] md:w-[300px] h-[150px] md:h-[200px] bg-gradient-to-br from-green-500/20 via-green-500/10 to-green-500/20 blur-3xl rounded-full" />
-            </div>
+  const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
+  const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
-            <div className="relative md:perspective-[2500px] w-full overflow-hidden md:overflow-visible">
-                <div className="relative rounded-xl overflow-hidden border border-white/10 [mask-image:linear-gradient(to_bottom,black,transparent)] shadow-2xl shadow-black/50 backdrop-blur-xl md:rotate-x-[50deg] md:rotate-y-[20deg] md:rotate-z-[-30deg] min-w-[600px] md:min-w-0">
+  return (
+    <div
+      className="h-[60rem] md:h-[80rem] flex items-center justify-center relative p-2 md:p-20"
+      ref={containerRef}
+    >
+      <div
+        className="py-10 md:py-40 w-full relative"
+        style={{
+          perspective: "1000px",
+        }}
+      >
+        <Header translate={translate} titleComponent={titleComponent} />
+        <Card rotate={rotate} translate={translate} scale={scale}>
+          {children}
+        </Card>
+      </div>
+    </div>
+  );
+};
 
-                    <div className="flex items-center gap-2 px-3 md:px-4 py-2 border-b border-white/5 bg-neutral-900/80">
-                        <div className="flex gap-1.5 md:gap-2">
-                            <div className="w-2.5 md:w-3 h-2.5 md:h-3 rounded-full bg-red-500/80" />
-                            <div className="w-2.5 md:w-3 h-2.5 md:h-3 rounded-full bg-yellow-500/80" />
-                            <div className="w-2.5 md:w-3 h-2.5 md:h-3 rounded-full bg-green-500/80" />
-                        </div>
-                        <div className="flex-1 flex justify-center">
-                            <div className="flex items-center gap-2 px-2 md:px-3 py-1 rounded-md bg-white/5 text-[10px] md:text-xs text-neutral-400">
-                                <svg className="w-2.5 md:w-3 h-2.5 md:h-3 hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                </svg>
-                                <span>gitexhibit.com/evan</span>
-                            </div>
-                        </div>
-                    </div>
+export const Header = ({ translate, titleComponent }: any) => {
+  return (
+    <motion.div
+      style={{
+        translateY: translate,
+      }}
+      className="div max-w-5xl mx-auto text-center"
+    >
+      {titleComponent}
+    </motion.div>
+  );
+};
 
-                    <div className="relative h-[280px] sm:h-[350px] md:h-[480px] overflow-hidden">
-                        <div
-                            className="absolute inset-0 overflow-hidden pointer-events-none"
-                            style={{
-                                "--accent-color": accentColor,
-                                "--bg-color": bgColor,
-                                "--text-color": textColor,
-                                backgroundColor: bgColor,
-                                color: textColor,
-                            } as React.CSSProperties}
-                        >
-                            <div
-                                className="flex flex-col border-r border-l max-w-5xl mx-auto transform scale-[0.65] sm:scale-[0.75] md:scale-[0.85] origin-top"
-                                style={{
-                                    borderColor: "color-mix(in srgb, var(--text-color) 15%, transparent)",
-                                }}
-                            >
-                                <Header name={profile.name} />
-                                <HeroSection
-                                    heroText={portfolio.heroText ?? ""}
-                                    heroSubText={portfolio.heroSubText ?? ""}
-                                />
-                                <AboutSection
-                                    about={portfolio.about ?? ""}
-                                    name={profile.name ?? ""}
-                                    location={profile.location ?? ""}
-                                    username="evanyou"
-                                    avatar={profile.avatarUrl ?? ""}
-                                    links={{ blog: profile.blog, twitterUsername: profile.twitterUsername }}
-                                    company={profile.company}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="hidden md:block absolute -bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-gradient-to-b from-white/5 to-transparent blur-xl rounded-full" />
-                <div className="absolute top-0 right-0 h-full w-4 bg-gradient-to-l from-background to-transparent z-10 md:hidden pointer-events-none" />
-            </div>
-        </div>
-    );
-}
+export const Card = ({
+  rotate,
+  scale,
+  children,
+}: {
+  rotate: MotionValue<number>;
+  scale: MotionValue<number>;
+  translate: MotionValue<number>;
+  children: React.ReactNode;
+}) => {
+  return (
+    <motion.div
+      style={{
+        rotateX: rotate,
+        scale,
+        boxShadow:
+          "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
+      }}
+      className="max-w-5xl -mt-12 mx-auto h-[30rem] md:h-[40rem] w-full border-4 border-[#6C6C6C] p-2 md:p-6 bg-[#222222] rounded-[30px] shadow-2xl"
+    >
+      <div className=" h-full w-full  overflow-hidden rounded-2xl bg-gray-100 dark:bg-zinc-900 md:rounded-2xl md:p-4 ">
+        {children}
+      </div>
+    </motion.div>
+  );
+};
