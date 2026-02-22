@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 const siteUrl = "https://gitxhibit.vercel.app";
-const siteName = "GitXhibit";
+const siteName = "GitXhibit | GitHub to Portfolio in Seconds";
 const siteDescription =
   "From GitHub to Portfolio. Instantly. Showcase your work with stunning, customizable dev portfolio templates powered by AI.";
 const ogImage = `${siteUrl}/gitxhibit-demo-1.png`;
