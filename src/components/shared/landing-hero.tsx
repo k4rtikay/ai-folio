@@ -56,7 +56,7 @@ export default function LandingHero() {
 
             <div
                 className="w-full max-w-5xl flex justify-center items-center p-16 md:p-24 rounded-4xl bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: "url('/landing-hero-bg.png')" }}
+                style={{ backgroundImage: "url('/bg-grid-two.png')" }}
             >
                 <Image
                     src="/Safari Dark.png"
