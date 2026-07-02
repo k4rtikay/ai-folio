@@ -5,7 +5,7 @@ import { Sparkles } from "lucide-react";
 
 export default function LandingHero() {
     return (
-        <div className="relative w-full flex justify-center my-24">
+        <div className="relative w-full flex justify-center my-12">
             {/*<div className="flex justify-center mt-8 -mb-24 md:-mb-16">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neutral-700/60 bg-neutral-800/50 backdrop-blur-sm">
                     <Sparkles className="size-3.5 text-amber-400" />

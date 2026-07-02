@@ -27,7 +27,7 @@ export function UsernameForm() {
             />
             <button
                 type="submit"
-                className="rounded-full bg-primary px-4 py-2 text-sm sm:text-base tracking-wide font-semibold text-primary-foreground transition-opacity hover:opacity-80 whitespace-nowrap dark:shadow-[inset_0px_2px_4px_1px_rgba(47,160,69,0.65)]"
+                className="rounded-full bg-primary px-4 py-2 text-sm sm:text-base tracking-wide font-semibold text-primary-foreground transition-opacity hover:opacity-80 whitespace-nowrap"
             >
                 Generate
             </button>
