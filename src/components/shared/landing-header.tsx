@@ -10,9 +10,9 @@ const NAV_LINKS = [
 
 export default function LandingHeader() {
     return (
-        <header className="fixed top-0 left-0 w-full flex items-center justify-between pt-6 px-8 z-50 pointer-events-none">
-            <div className="w-40 hidden md:block" aria-hidden="true"></div>
-            <nav className="pointer-events-auto flex items-center gap-6 px-4 py-4 rounded-full font-semibold border border-border/80 bg-muted/40 backdrop-blur-md shadow-lg">
+        <header className="fixed top-0 left-0 w-full flex items-center justify-center pt-6 px-8 z-50 pointer-events-none">
+            {/*<div className="w-40 hidden md:block" aria-hidden="true"></div>*/}
+            <nav className="pointer-events-auto flex items-center gap-6 px-2 py-2 rounded-full font-semibold border border-border/80 bg-muted/40 backdrop-blur-md shadow-lg">
                 <Link href="/" className="flex items-center gap-2">
                     <Image
                         src="/icon.png"
@@ -37,10 +37,12 @@ export default function LandingHeader() {
                         </Link>
                     ))}
                 </div>
-            </nav>
-            <div className="pointer-events-auto flex gap-4 items-center justify-end w-40">
+
                 <LoginButton />
-            </div>
+            </nav>
+            {/*<div className="pointer-events-auto flex gap-4 items-center justify-end w-40">
+                <LoginButton />
+            </div>*/}
         </header>
     );
 }
