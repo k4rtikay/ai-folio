@@ -2,6 +2,8 @@ import { UsernameForm } from "@/components/shared/username-form";
 import LandingFooter from "@/components/shared/landing-footer";
 import LandingHero from "@/components/shared/landing-hero";
 import LandingHeader from "@/components/shared/landing-header";
+import FeaturesBento from "@/components/shared/features-bento";
+
 
 export default async function HomePage() {
     return (
@@ -27,11 +29,11 @@ export default async function HomePage() {
                         </p>
                         <LandingHero />
                     </section>
-                    <section className="flex flex-col items-center">
-                        <h2 className="mt-32 mb-4 text-center max-w-xl text-5xl font-semibold leading-[1.1] tracking-tight font-display px-4">
+                    <section className="w-full flex flex-col items-center">
+                        <h2 className="mt-32 text-center max-w-xl text-5xl font-semibold leading-[1.1] tracking-tight font-display px-4">
                             Let your work do the talking.
                         </h2>
-                        <p className="text-center text-muted-foreground text-xs leading-relaxed mt-4"></p>
+                        <FeaturesBento />
                     </section>
                 </main>
             </div>
