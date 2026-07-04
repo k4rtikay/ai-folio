@@ -3,8 +3,13 @@
 import { motion, type Variants } from "motion/react";
 
 const eyesVariants: Variants = {
+    initial: {
+        height: 3,
+        width: 16,
+    },
     hover: {
-        scale: 1.05,
+        height: [16, 3, 16],
+        width: 16,
         transition: {
             duration: 0.2,
             ease: "easeInOut",
@@ -14,10 +19,10 @@ const eyesVariants: Variants = {
 
 export default function BlobSkeleton() {
     return (
-        <div className="w-full h-full relative flex items-center justify-center">
+        <div className="mt-4 w-full h-full relative flex items-center justify-center">
             {/* Glow */}
             <motion.div
-                className="absolute h-24 w-24 rounded-full bg-emerald-400/30 blur-[70px]"
+                className="absolute h-20 w-20 rounded-full bg-green-400/30 blur-[80px]"
                 animate={{
                     scale: [1, 1.1, 1],
                     opacity: [0.35, 0.55, 0.35],
@@ -55,7 +60,7 @@ export default function BlobSkeleton() {
                         ease: "easeInOut",
                     },
                 }}
-                className="relative h-32 w-32 overflow-hidden bg-gradient-to-br from-emerald-300 via-green-400 to-emerald-700 shadow-[0_0_80px_rgba(16,185,129,0.35)]"
+                className="relative h-24 w-24 overflow-hidden bg-gradient-to-br from-lime-300 via-green-500 to-green-800 shadow-[0_0_80px_rgba(16,185,129,0.35)]"
             >
                 {/* Highlight */}
                 <div className="absolute left-6 top-5 h-16 w-16 rounded-full bg-white/25 blur-xl" />
@@ -86,7 +91,7 @@ export default function BlobSkeleton() {
                         repeat: Infinity,
                         ease: "easeInOut",
                     }}
-                    className="absolute bottom-2 right-2 h-28 w-28 rounded-full bg-emerald-500/50 blur-2xl"
+                    className="absolute bottom-2 right-2 h-28 w-28 rounded-full bg-green-500/50 blur-2xl"
                 />
 
                 {/* Noise */}
@@ -99,18 +104,23 @@ export default function BlobSkeleton() {
                 />
 
                 {/* Eyes placeholder */}
-                <div className="absolute inset-0 flex items-center justify-center gap-6">
+                <motion.div
+                    whileHover={"hover"}
+                    className="absolute inset-0 flex items-center justify-center gap-4"
+                >
                     <motion.div
-                        className="h-[3px] w-5 rounded-full bg-white"
+                        className="w-[16px] rounded-full bg-white"
                         variants={eyesVariants}
-                        whileHover="hover"
+                        initial="initial"
+                        animate="initial"
                     />
                     <motion.div
-                        className="h-[3px] w-5 rounded-full bg-white"
+                        className="w-[16px] rounded-full bg-white"
                         variants={eyesVariants}
-                        whileHover="hover"
+                        initial="initial"
+                        animate="initial"
                     />
-                </div>
+                </motion.div>
             </motion.div>
         </div>
     );
