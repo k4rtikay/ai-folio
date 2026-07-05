@@ -11,7 +11,7 @@ const eyesVariants: Variants = {
         height: [16, 3, 16],
         width: 16,
         transition: {
-            duration: 0.2,
+            duration: 0.3,
             ease: "easeInOut",
         },
     },
@@ -105,20 +105,17 @@ export default function BlobSkeleton() {
 
                 {/* Eyes placeholder */}
                 <motion.div
+                    initial="initial"
                     whileHover={"hover"}
                     className="absolute inset-0 flex items-center justify-center gap-4"
                 >
                     <motion.div
                         className="w-[16px] rounded-full bg-white"
                         variants={eyesVariants}
-                        initial="initial"
-                        animate="initial"
                     />
                     <motion.div
                         className="w-[16px] rounded-full bg-white"
                         variants={eyesVariants}
-                        initial="initial"
-                        animate="initial"
                     />
                 </motion.div>
             </motion.div>
