@@ -1,3 +1,9 @@
+// TODO:
+// - Wake animation
+// - Eye tracking
+// - Stream AI response
+// - Thinking states and tense eyes using rotate + pulse
+
 "use client";
 
 import { motion, type Variants } from "motion/react";

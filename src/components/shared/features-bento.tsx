@@ -1,7 +1,8 @@
 import { cn } from "@/lib/utils";
 import BlobSkeleton from "./blob-skeleton";
+import RadarSkeleton from "./radar-skeleton";
 
-const cell = "bg-card rounded-3xl min-h-80";
+const cell = "bg-card rounded-3xl min-h-84";
 
 export default function FeaturesBento() {
     return (
@@ -18,7 +19,18 @@ export default function FeaturesBento() {
                 </div>
                 <BlobSkeleton />
             </div>
-            <div className={cn(cell, "col-span-1")} />
+            <div className={cn(cell, "col-span-1 relative")}>
+                <div className="w-full flex flex-col gap-1 justify-start px-4 pt-4">
+                    <h3 className="font-display text-balance text-2xl font-medium leading-tight tracking-tight">
+                        Intelligent Charts
+                    </h3>
+                    <p className="text-balance text-sm leading-[1.4] md:text-base md:leading-relaxed text-muted-foreground">
+                        Go beyond commits with visualizations that reveal how
+                        you build and grow.
+                    </p>
+                </div>
+                <RadarSkeleton />
+            </div>
             <div className={cn(cell, "col-span-1")} />
             <div className={cn(cell, "col-span-1")} />
             <div className={cn(cell, "col-span-2")} />
