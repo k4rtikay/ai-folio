@@ -33,7 +33,17 @@ export default function FeaturesBento() {
             </div>
             <div className={cn(cell, "col-span-1")} />
             <div className={cn(cell, "col-span-1")} />
-            <div className={cn(cell, "col-span-2")} />
+            <div className={cn(cell, "col-span-2 relative")}>
+                <div className="absolute w-full flex flex-col gap-1 px-4 pt-4">
+                    <h3 className="font-display text-balance text-2xl font-medium leading-tight tracking-tight">
+                        Beautiful by default
+                    </h3>
+                    <p className="text-balance text-sm leading-[1.4] md:text-base md:leading-relaxed text-muted-foreground">
+                        Start with thoughtfully crafted themes and make them
+                        entirely your own.
+                    </p>
+                </div>
+            </div>
         </div>
     );
 }
