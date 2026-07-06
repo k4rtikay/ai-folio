@@ -10,7 +10,7 @@ import React, {
 } from "react";
 import { motion, Transition } from "motion/react";
  
-type CardOffset = {
+export type CardOffset = {
     scale: number;
     y: number;
     opacity?: number;

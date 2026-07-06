@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
 import BlobSkeleton from "./blob-skeleton";
 import RadarSkeleton from "./radar-skeleton";
+import ThemesSkeleton from "./themes-skeleton";
+
 
 const cell = "bg-card rounded-3xl min-h-84";
 
@@ -42,6 +44,7 @@ export default function FeaturesBento() {
                         Start with thoughtfully crafted themes and make them
                         entirely your own.
                     </p>
+                    <ThemesSkeleton />
                 </div>
             </div>
         </div>
