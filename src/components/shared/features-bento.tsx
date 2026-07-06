@@ -3,7 +3,6 @@ import BlobSkeleton from "./blob-skeleton";
 import RadarSkeleton from "./radar-skeleton";
 import ThemesSkeleton from "./themes-skeleton";
 
-
 const cell = "bg-card rounded-3xl min-h-84";
 
 export default function FeaturesBento() {
