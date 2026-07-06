@@ -66,7 +66,7 @@ export default function ThemesSkeleton() {
                     "radial-gradient(ellipse at center, black 55%, transparent 90%)",
             }}
         >
-            <div className="relative mt-6 w-72">
+            <div className="relative mt-8 w-72">
                 {/* Floating color swatch */}
                 <div
                     className={`bg-background absolute -left-1/3 -top-1/14 z-20 flex -rotate-6 items-center gap-1.5 rounded-2xl p-2.5 ${floatingShadow}`}
