@@ -3,6 +3,8 @@ import BlobSkeleton from "./blob-skeleton";
 import RadarSkeleton from "./radar-skeleton";
 import ThemesSkeleton from "./themes-skeleton";
 import UrlSkeleton from "./url-skeleton";
+import SyncSkeleton from "./sync-skeleton";
+
 
 const cell = "bg-card rounded-3xl min-h-84";
 
@@ -33,7 +35,16 @@ export default function FeaturesBento() {
                 </div>
                 <RadarSkeleton />
             </div>
-            <div className={cn(cell, "col-span-1")} />
+            <div className={cn(cell, "col-span-1 relative overflow-hidden")}>
+                <div className="w-full flex flex-col gap-1 justify-start px-4 pt-4 overflow-hidden">
+                    <h3 className="font-display text-balance text-2xl font-medium leading-tight tracking-tight">
+                      Always in sync
+                    </h3>
+                    <p className="text-balance text-sm leading-[1.4] md:text-base md:leading-relaxed text-muted-foreground">
+                      Connect GitHub once and keep your portfolio updated automatically.                    </p>
+                </div>
+                <SyncSkeleton />
+            </div>
             <div className={cn(cell, "col-span-1 relative overflow-hidden")}>
                 <div className="w-full flex flex-col gap-1 justify-start px-4 pt-4 overflow-hidden">
                     <h3 className="font-display text-balance text-2xl font-medium leading-tight tracking-tight">
