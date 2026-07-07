@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import BlobSkeleton from "./blob-skeleton";
 import RadarSkeleton from "./radar-skeleton";
 import ThemesSkeleton from "./themes-skeleton";
+import UrlSkeleton from "./url-skeleton";
 
 const cell = "bg-card rounded-3xl min-h-84";
 
@@ -33,8 +34,8 @@ export default function FeaturesBento() {
                 <RadarSkeleton />
             </div>
             <div className={cn(cell, "col-span-1")} />
-            <div className={cn(cell, "col-span-1 relative")}>
-                <div className="w-full flex flex-col gap-1 justify-start px-4 pt-4">
+            <div className={cn(cell, "col-span-1 relative overflow-hidden")}>
+                <div className="w-full flex flex-col gap-1 justify-start px-4 pt-4 overflow-hidden">
                     <h3 className="font-display text-balance text-2xl font-medium leading-tight tracking-tight">
                         Instantly Shareable
                     </h3>
@@ -42,6 +43,7 @@ export default function FeaturesBento() {
                         Claim your custom handle with one click.
                     </p>
                 </div>
+                <UrlSkeleton />
             </div>
             <div className={cn(cell, "col-span-2 relative")}>
                 <div className="absolute w-full flex flex-col gap-1 px-4 pt-4">
