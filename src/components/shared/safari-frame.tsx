@@ -24,10 +24,10 @@ export default function SafariFrame({
 }: SafariFrameProps) {
   return (
     <div 
-      className={`flex flex-col border border-white/10 rounded-xl overflow-hidden bg-[#1C1C1E] shadow-2xl transition-all ${className}`}
+      className={`flex flex-col border border-white/10 rounded-xl overflow-hidden bg-[#1C1C1E] transition-all ${className}`}
     >
       {/* Safari Title Bar */}
-      <div className="flex items-center gap-3 px-3 py-2 bg-[#2C2C2E] border-b border-white/5 select-none justify-between">
+      <div className="flex items-center gap-3 px-3 py-2 bg-card border-b border-white/5 select-none justify-between">
         
         {/* Left Actions: Shrinks dynamically, hides complex tools if compact */}
         <div className="flex items-center gap-3 min-w-0 flex-shrink-1">
@@ -70,7 +70,7 @@ export default function SafariFrame({
       </div>
 
       {/* Safari Content Area */}
-      <div className="flex-1 bg-[#151515] relative w-full h-full min-h-0">
+      <div className="flex-1 bg-background relative w-full h-full min-h-0">
         {children}
       </div>
     </div>
