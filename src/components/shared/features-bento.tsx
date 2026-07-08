@@ -5,12 +5,11 @@ import ThemesSkeleton from "./themes-skeleton";
 import UrlSkeleton from "./url-skeleton";
 import SyncSkeleton from "./sync-skeleton";
 
-
 const cell = "bg-card rounded-3xl min-h-84";
 
 export default function FeaturesBento() {
     return (
-        <div className="w-full max-w-5xl grid grid-cols-3 gap-4 mb-4">
+        <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             <div className={cn(cell, "col-span-1 relative")}>
                 <div className="absolute w-full flex flex-col gap-1 px-4 pt-4">
                     <h3 className="font-display text-balance text-2xl font-medium leading-tight tracking-tight">
@@ -38,10 +37,12 @@ export default function FeaturesBento() {
             <div className={cn(cell, "col-span-1 relative overflow-hidden")}>
                 <div className="w-full flex flex-col gap-1 justify-start px-4 pt-4 overflow-hidden">
                     <h3 className="font-display text-balance text-2xl font-medium leading-tight tracking-tight">
-                      Always in sync
+                        Always in sync
                     </h3>
                     <p className="text-balance text-sm leading-[1.4] md:text-base md:leading-relaxed text-muted-foreground">
-                      Connect GitHub once and keep your portfolio updated automatically.                    </p>
+                        Connect GitHub once and keep your portfolio updated
+                        automatically.{" "}
+                    </p>
                 </div>
                 <SyncSkeleton />
             </div>
@@ -56,7 +57,7 @@ export default function FeaturesBento() {
                 </div>
                 <UrlSkeleton />
             </div>
-            <div className={cn(cell, "col-span-2 relative")}>
+            <div className={cn(cell, "col-span-1 md:col-span-2 relative")}>
                 <div className="absolute w-full flex flex-col gap-1 px-4 pt-4">
                     <h3 className="font-display text-balance text-2xl font-medium leading-tight tracking-tight">
                         Beautiful by default
