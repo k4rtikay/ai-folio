@@ -12,16 +12,16 @@ export default function LandingHeader() {
     return (
         <header className="fixed top-0 left-0 w-full flex items-center justify-center pt-6 px-8 z-50 pointer-events-none">
             {/*<div className="w-40 hidden md:block" aria-hidden="true"></div>*/}
-            <nav className="pointer-events-auto flex items-center gap-6 px-2 py-2 rounded-full font-semibold border border-border/80 bg-muted/40 backdrop-blur-md shadow-lg">
+            <nav className="pointer-events-auto flex items-center gap-4 md:gap-6 px-2 py-2 rounded-full font-semibold border border-border/80 bg-muted/40 backdrop-blur-md shadow-lg">
                 <Link href="/" className="flex items-center gap-2">
                     <Image
                         src="/icon.png"
                         alt="GitXhibit Logo"
                         width={32}
                         height={32}
-                        className="rounded-full w-5 h-5"
+                        className="rounded-full h-6 w-6 md:w-5 md:h-5 shrink-0"
                     />
-                    <h1 className="font-display pt- text-lg leading-none text-foreground tracking-tight">
+                    <h1 className="hidden md:block font-display text-lg leading-none text-foreground tracking-tight">
                         GitXhibit
                     </h1>
                 </Link>
