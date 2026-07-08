@@ -11,7 +11,7 @@ export default function UrlSkeleton() {
                     "radial-gradient(ellipse at top right, black 45%, transparent 80%)",
             }}
         >
-            <SafariFrame className="w-full h-[250px] scale-90 sm:scale-100 translate-x-60 md:translate-x-62" />
+            <SafariFrame className="w-full h-[250px] scale-90 sm:scale-100 translate-x-60 lg:translate-x-62" />
         </div>
     );
 }
