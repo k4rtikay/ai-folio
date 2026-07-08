@@ -4,6 +4,8 @@ import LandingHero from "@/components/shared/landing-hero";
 import LandingHeader from "@/components/shared/landing-header";
 import FeaturesBento from "@/components/shared/features-bento";
 import FAQ from "@/components/shared/faq";
+import CTA from "@/components/shared/cta";
+
 
 export default async function HomePage() {
     return (
@@ -40,6 +42,9 @@ export default async function HomePage() {
                             FAQ
                         </h2>
                         <FAQ />
+                    </section>
+                    <section className="w-full flex flex-col items-center">
+                        <CTA />
                     </section>
                 </main>
             </div>
