@@ -3,17 +3,14 @@ import Image from "next/image";
 
 export default function LandingHero() {
     return (
-        // Added responsive horizontal padding (px-4) to prevent it from touching the screen edges on mobile
         <div className="relative w-full flex justify-center mb-4 mt-12 md:mb-12 px-0 md:px-8">
             
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                {/* Slightly reduced the blur radius on mobile so the glow doesn't wash out the whole screen */}
                 <div className="w-[70%] md:w-[50%] aspect-square rounded-full bg-primary/6 blur-[80px] md:blur-[150px]" />
             </div>
 
             <div
-                // Scaled padding: p-6 on mobile, p-12 on tablets, p-24 on desktop
-                // Scaled border radius: 2xl on mobile, 4xl on desktop
+
                 className="w-full max-w-5xl flex justify-center items-center p-6 sm:p-12 md:p-16 lg:p-24 rounded-2xl md:rounded-4xl bg-cover bg-center bg-no-repeat"
                 style={{ backgroundImage: "url('/bg-grid-two.png')" }}
             >
@@ -23,8 +20,6 @@ export default function LandingHero() {
                     width={0}
                     height={0}
                     sizes="100vw"
-                    // Removed 'hidden md:block'
-                    // Scaled image border radius to match the container's responsive scaling
                     className="block w-full h-auto rounded-lg md:rounded-xl shadow-2xl"
                     draggable={false}
                 />
