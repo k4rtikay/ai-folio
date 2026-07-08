@@ -40,9 +40,6 @@ export default function LandingHeader() {
 
                 <LoginButton />
             </nav>
-            {/*<div className="pointer-events-auto flex gap-4 items-center justify-end w-40">
-                <LoginButton />
-            </div>*/}
         </header>
     );
 }
