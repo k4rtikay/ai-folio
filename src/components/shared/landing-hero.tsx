@@ -1,20 +1,20 @@
 "use client";
 import Image from "next/image";
-import { motion } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import { UsernameForm } from "@/components/shared/username-form";
 
-const containerVariants = {
+const containerVariants: Variants = {
     hidden: { opacity: 0 },
     show: {
         opacity: 1, 
         transition: {
-            staggerChildren: 0.15, // The delay between each element popping in
-            delayChildren: 0.1,    // A tiny pause before the whole sequence starts
+            staggerChildren: 0.15,
+            delayChildren: 0.1,
         },
     },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     show: {
         opacity: 1,
@@ -23,19 +23,18 @@ const itemVariants = {
     },
 };
 
-const mockupVariants = {
+const mockupVariants: Variants = {
     hidden: { opacity: 0, y: 40, scale: 0.99 },
     show: {
         opacity: 1,
         y: 0,
         scale: 1,
-        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }, // A custom, incredibly smooth easing curve
+        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
     },
 };
 
 export default function LandingHero() {
     return (
-        // 4. Change section to motion.section and apply the container variants
         <motion.section 
             className="flex flex-col items-center justify-center"
             variants={containerVariants}
@@ -43,7 +42,6 @@ export default function LandingHero() {
             animate="show"
         >
             <div className="text-center max-w-xl mt-8 mb-6">
-                {/* 5. Convert h1 to motion.h1 and apply the item variant */}
                 <motion.h1 
                     variants={itemVariants}
                     className="text-4xl md:text-5xl font-semibold leading-[1.1] tracking-tight font-display px-4"
@@ -51,7 +49,6 @@ export default function LandingHero() {
                     From GitHub to Portfolio. Instantly.
                 </motion.h1>
                 
-                {/* 6. Convert p to motion.p */}
                 <motion.p 
                     variants={itemVariants}
                     className="text-balance mt-4 text-base md:text-lg text-muted-foreground md:leading-relaxed px-4 md:px-0"
@@ -61,7 +58,6 @@ export default function LandingHero() {
                 </motion.p>
             </div>
             
-            {/* 7. Wrap the form in a motion.div since we can't easily animate the custom component directly without forwardRef */}
             <motion.div variants={itemVariants} className="w-full flex justify-center">
                 <UsernameForm />
             </motion.div>
@@ -73,7 +69,6 @@ export default function LandingHero() {
                 Read-only access. We don&apos;t touch your private data.
             </motion.p>
             
-            {/* 8. Apply the grander mockup animation to the image wrapper */}
             <motion.div 
                 variants={mockupVariants}
                 className="relative w-full flex justify-center mb-4 mt-12 md:mb-12 px-0 md:px-8"
