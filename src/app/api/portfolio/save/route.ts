@@ -51,54 +51,56 @@ export async function POST(request: Request) {
             .where(eq(portfolios.userId, session.user.id))
             .limit(1);
 
-        let savedPortfolioId: string;
+        let savedPortfolioId:string = "";
 
-        if (existingPortfolio) {
-            // UPDATE existing portfolio
-            await db
-                .update(portfolios)
-                .set({
-                    ...portfolioWithCustomization,
-                    updatedAt: new Date(),
-                })
-                .where(eq(portfolios.id, existingPortfolio.id));
-
-            savedPortfolioId = existingPortfolio.id;
-
-            await db
-                .delete(projects)
-                .where(eq(projects.portfolioId, existingPortfolio.id));
-
-            if (projectsData.length > 0) {
-                await db.insert(projects).values(
-                    projectsData.map(project => ({
-                        ...project,
-                        portfolioId: existingPortfolio.id,
-                    }))
-                );
-            }
-
-            console.log("Updated existing portfolio:", existingPortfolio.id);
-        } else {
-            // INSERT new portfolio
-            const [newPortfolio] = await db
-                .insert(portfolios)
-                .values(portfolioWithCustomization)
-                .returning();
-
-            savedPortfolioId = newPortfolio.id;
-
-            if (projectsData.length > 0) {
-                await db.insert(projects).values(
-                    projectsData.map(project => ({
-                        ...project,
-                        portfolioId: newPortfolio.id,
-                    }))
-                );
-            }
-
-            console.log("Created new portfolio:", newPortfolio.id);
-        }
+        await db.transaction(async (tx) => {
+          if (existingPortfolio) {
+              // UPDATE existing portfolio
+              await tx
+                  .update(portfolios)
+                  .set({
+                      ...portfolioWithCustomization,
+                      updatedAt: new Date(),
+                  })
+                  .where(eq(portfolios.id, existingPortfolio.id));
+  
+              savedPortfolioId = existingPortfolio.id;
+  
+              await tx
+                  .delete(projects)
+                  .where(eq(projects.portfolioId, existingPortfolio.id));
+  
+              if (projectsData.length > 0) {
+                  await tx.insert(projects).values(
+                      projectsData.map(project => ({
+                          ...project,
+                          portfolioId: existingPortfolio.id,
+                      }))
+                  );
+              }
+  
+              console.log("Updated existing portfolio:", existingPortfolio.id);
+          } else {
+              // INSERT new portfolio
+              const [newPortfolio] = await tx
+                  .insert(portfolios)
+                  .values(portfolioWithCustomization)
+                  .returning();
+  
+              savedPortfolioId = newPortfolio.id;
+  
+              if (projectsData.length > 0) {
+                  await tx.insert(projects).values(
+                      projectsData.map(project => ({
+                          ...project,
+                          portfolioId: newPortfolio.id,
+                      }))
+                  );
+              }
+  
+              console.log("Created new portfolio:", newPortfolio.id);
+          }
+        });
 
         return NextResponse.json({
             portfolioId: savedPortfolioId,
