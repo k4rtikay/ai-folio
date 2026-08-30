@@ -41,7 +41,7 @@ async function getGroqChatCompletion(profile: UserProfile, repos: Repo[]) : Prom
                 },
             ],
             response_format: { type: "json_object" },
-            model: "llama-3.1-8b-instant",
+            model: "openai/gpt-oss-120b",
         });
 
         const message = chatCompletion.choices[0]?.message?.content;
