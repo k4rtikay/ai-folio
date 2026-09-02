@@ -10,7 +10,7 @@
 
 **From GitHub to Portfolio. Instantly.**
 
-Transform your GitHub profile into a stunning, AI-powered portfolio with beautiful templates and automated content generation.
+Transform your GitHub profile into a stunning, AI-powered portfolio with beautiful themes and automated content generation.
 
 [Demo](https://gitxhibit.vercel.app) · [Report Bug](https://github.com/k4rtikay/gitxhibit/issues) · [Request Feature](https://github.com/k4rtikay/gitxhibit/issues)
 
@@ -20,7 +20,7 @@ Transform your GitHub profile into a stunning, AI-powered portfolio with beautif
 
 ## Features
 
-- **Beautiful Templates** - Multiple developer-focused portfolio templates with modern design aesthetics
+- **Beautiful Themes** - Multiple developer-focused portfolio themes with modern design aesthetics
 - **AI-Powered Content** - Automatically generate compelling project descriptions using Groq AI
 - **Live GitHub Sync** - Fetch and display your latest repositories, stats, and contribution graphs
 - **Theme Customization** - Choose from multiple color themes and font combinations
