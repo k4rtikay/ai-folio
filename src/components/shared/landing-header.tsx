@@ -1,14 +1,21 @@
+"use client";
+
 import LoginButton from "@/components/shared/login-button";
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-    { label: "Overview", href: "#overview" },
+    { label: "Overview", href: "/" },
     { label: "Features", href: "#features" },
     { label: "FAQ", href: "#faq" },
 ];
 
 export default function LandingHeader() {
+    
+    const [isActive, setIsActive] = useState("overview");
+
     return (
         <header className="fixed top-0 left-0 w-full flex items-center justify-center pt-6 px-8 z-50 pointer-events-none">
             {/*<div className="w-40 hidden md:block" aria-hidden="true"></div>*/}
@@ -31,7 +38,8 @@ export default function LandingHeader() {
                         <Link
                             key={href}
                             href={href}
-                            className="text-sm text-muted-foreground hover:text-foreground transition-all transition-duration-200 ease-out"
+                            className={cn(`text-sm text-muted-foreground hover:text-foreground transition-all transition-duration-200 ease-out ${isActive === label.toLowerCase() ? "text-foreground" : ""}`)}
+                            onClick={() => setIsActive(label.toLowerCase())}
                         >
                             {label}
                         </Link>
