@@ -1,6 +1,11 @@
 import PortfolioWrapper from "@/components/portfolio/portfolio-wrapper";
 import { getGithubData } from "@/lib/github";
-import { DEV_MODE, MOCK_PORTFOLIO, MOCK_PROFILE, MOCK_REPOS } from "@/lib/mock-data";
+import {
+    DEV_MODE,
+    MOCK_PORTFOLIO,
+    MOCK_PROFILE,
+    MOCK_REPOS,
+} from "@/lib/mock-data";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { RenderData } from "@/lib/types";
@@ -10,13 +15,21 @@ import { eq } from "drizzle-orm";
 import { portfolioToRender } from "@/lib/mappers";
 import { generatePortfolio } from "@/lib/groq";
 import { PortfolioColors } from "@/store/use-portfolio-state";
+import { redis } from "@/lib/redis";
+import { Ratelimit } from "@upstash/ratelimit";
 
-export default async function PortfolioPage({ params }: { params: Promise<{ username: string }> }) {
+export default async function PortfolioPage({
+    params,
+}: {
+    params: Promise<{ username: string }>;
+}) {
     const { username } = await params;
 
     // DEV TESTING MODE: Skip auth, database, and API calls
     if (DEV_MODE) {
-        console.log("DEV MODE: Using mock data (no auth, no database, no API calls)");
+        console.log(
+            "DEV MODE: Using mock data (no auth, no database, no API calls)",
+        );
 
         const mockRenderData: RenderData = {
             profile: MOCK_PROFILE,
@@ -47,6 +60,12 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
         headers: await headers(),
     });
 
+    const rateLimiter = new Ratelimit({
+        redis,
+        limiter: Ratelimit.tokenBucket(10, "20 m", 10),
+        prefix: "ratelimit:generation",
+    });
+
     const isOwnPortfolio = session?.user?.name === username;
 
     let renderData: RenderData | null = null;
@@ -69,7 +88,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
                 .orderBy(projects.sortOrder);
 
             renderData = portfolioToRender(savedPortfolio, savedProjects);
-            savedPortfolioId = savedPortfolio.id
+            savedPortfolioId = savedPortfolio.id;
             savedColors = savedPortfolio.colors as PortfolioColors;
             savedFont = savedPortfolio.font;
 
@@ -78,6 +97,12 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
     }
 
     if (!renderData) {
+        const ip = (await headers()).get("x-forwarded-for") ?? "127.0.0.1";
+        const { success } = await rateLimiter.limit(`generate_${ip}`);
+
+        if (!success) {
+            throw new Error("RATE_LIMIT_EXCEEDED");
+        }
         const { profile, repos } = await getGithubData(username);
 
         //mock or generate with AI
@@ -87,7 +112,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
         renderData = {
             profile,
             repos,
-            portfolio: aiPortfolio
+            portfolio: aiPortfolio,
         };
 
         console.log("Generated fresh portfolio from GitHub");
@@ -109,4 +134,4 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
             />
         </div>
     );
-};
+}
