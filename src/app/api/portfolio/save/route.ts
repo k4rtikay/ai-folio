@@ -8,6 +8,8 @@ import { githubToPortfolio } from "@/lib/mappers";
 import { db } from "@/db";
 import { portfolios, projects } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { redis } from "@/lib/redis";
+import { revalidatePath } from "next/cache";
 
 export async function POST(request: Request) {
     try {
@@ -101,6 +103,10 @@ export async function POST(request: Request) {
               console.log("Created new portfolio:", newPortfolio.id);
           }
         });
+
+        await redis.del(`portfolio:render:${username}`);
+
+        revalidatePath(`/portfolio/${username}`);
 
         return NextResponse.json({
             portfolioId: savedPortfolioId,

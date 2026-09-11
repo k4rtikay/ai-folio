@@ -68,70 +68,146 @@ export default async function PortfolioPage({
 
     const isOwnPortfolio = session?.user?.name === username;
 
+    const cacheKey = `portfolio:render:${username}`;
+
     let renderData: RenderData | null = null;
     let savedPortfolioId: string | null = null;
     let savedColors: PortfolioColors | undefined;
     let savedFont: string | undefined;
 
-    if (isOwnPortfolio && session?.user) {
-        const [savedPortfolio] = await db
-            .select()
-            .from(portfolios)
-            .where(eq(portfolios.userId, session.user.id))
-            .limit(1);
+    const cachedPayload = await redis.get<{
+        renderData: RenderData;
+        savedPortfolioId: string | null;
+        savedColors?: PortfolioColors;
+        savedFont?: string;
+    }>(cacheKey);
 
-        if (savedPortfolio) {
-            const savedProjects = await db
+    if (cachedPayload) {
+        console.log(`[CACHE HIT] Served ${username} from Redis`);
+        renderData = cachedPayload.renderData;
+        savedPortfolioId = cachedPayload.savedPortfolioId;
+        savedColors = cachedPayload.savedColors;
+        savedFont = cachedPayload.savedFont;
+    } else {
+        console.log(`[CACHE MISS] Generating or fetching ${username}...`);
+
+        // STEP 2: DATABASE CHECK (If it's the owner checking their saved work)
+        if (isOwnPortfolio && session?.user) {
+            const [savedPortfolio] = await db
                 .select()
-                .from(projects)
-                .where(eq(projects.portfolioId, savedPortfolio.id))
-                .orderBy(projects.sortOrder);
+                .from(portfolios)
+                .where(eq(portfolios.userId, session.user.id))
+                .limit(1);
 
-            renderData = portfolioToRender(savedPortfolio, savedProjects);
-            savedPortfolioId = savedPortfolio.id;
-            savedColors = savedPortfolio.colors as PortfolioColors;
-            savedFont = savedPortfolio.font;
+            if (savedPortfolio) {
+                const savedProjects = await db
+                    .select()
+                    .from(projects)
+                    .where(eq(projects.portfolioId, savedPortfolio.id))
+                    .orderBy(projects.sortOrder);
 
-            console.log("Loaded saved portfolio from DB");
+                renderData = portfolioToRender(savedPortfolio, savedProjects);
+                savedPortfolioId = savedPortfolio.id;
+                savedColors = savedPortfolio.colors as PortfolioColors;
+                savedFont = savedPortfolio.font;
+            } else {
+                console.log(
+                    `[CACHE MISS] Generating or fetching ${username}...`,
+                );
+                if (isOwnPortfolio && session?.user) {
+                    const [savedPortfolio] = await db
+                        .select()
+                        .from(portfolios)
+                        .where(eq(portfolios.userId, session.user.id))
+                        .limit(1);
+
+                    if (savedPortfolio) {
+                        const savedProjects = await db
+                            .select()
+                            .from(projects)
+                            .where(eq(projects.portfolioId, savedPortfolio.id))
+                            .orderBy(projects.sortOrder);
+
+                        renderData = portfolioToRender(
+                            savedPortfolio,
+                            savedProjects,
+                        );
+                        savedPortfolioId = savedPortfolio.id;
+                        savedColors = savedPortfolio.colors as PortfolioColors;
+                        savedFont = savedPortfolio.font;
+                    }
+                }
+            }
         }
-    }
 
-    if (!renderData) {
-        const ip = (await headers()).get("x-forwarded-for") ?? "127.0.0.1";
-        const { success } = await rateLimiter.limit(`generate_${ip}`);
+        if (isOwnPortfolio && session?.user) {
+            const [savedPortfolio] = await db
+                .select()
+                .from(portfolios)
+                .where(eq(portfolios.userId, session.user.id))
+                .limit(1);
 
-        if (!success) {
-            throw new Error("RATE_LIMIT_EXCEEDED");
+            if (savedPortfolio) {
+                const savedProjects = await db
+                    .select()
+                    .from(projects)
+                    .where(eq(projects.portfolioId, savedPortfolio.id))
+                    .orderBy(projects.sortOrder);
+
+                renderData = portfolioToRender(savedPortfolio, savedProjects);
+                savedPortfolioId = savedPortfolio.id;
+                savedColors = savedPortfolio.colors as PortfolioColors;
+                savedFont = savedPortfolio.font;
+
+                console.log("Loaded saved portfolio from DB");
+            }
         }
-        const { profile, repos } = await getGithubData(username);
 
-        //mock or generate with AI
-        // const aiPortfolio = MOCK_PORTFOLIO;
-        const aiPortfolio = await generatePortfolio(profile, repos);
+        if (!renderData) {
+            const ip = (await headers()).get("x-forwarded-for") ?? "127.0.0.1";
+            const { success } = await rateLimiter.limit(`generate_${ip}`);
 
-        renderData = {
-            profile,
-            repos,
-            portfolio: aiPortfolio,
-        };
+            if (!success) {
+                throw new Error("RATE_LIMIT_EXCEEDED");
+            }
+            const { profile, repos } = await getGithubData(username);
 
-        console.log("Generated fresh portfolio from GitHub");
+            //mock or generate with AI
+            // const aiPortfolio = MOCK_PORTFOLIO;
+            const aiPortfolio = await generatePortfolio(profile, repos);
+
+            renderData = {
+                profile,
+                repos,
+                portfolio: aiPortfolio,
+            };
+
+            if (renderData) {
+                await redis.set(
+                    cacheKey,
+                    { renderData, savedPortfolioId, savedColors, savedFont },
+                    { ex: 86400 }, // TTL: 24 hours (86400 seconds)
+                );
+            }
+
+            console.log("Generated fresh portfolio from GitHub");
+        }
+
+        return (
+            <div className="flex min-h-screen">
+                <PortfolioWrapper
+                    username={username}
+                    portfolio={renderData.portfolio}
+                    profile={renderData.profile}
+                    repos={renderData.repos}
+                    isOwnPortfolio={isOwnPortfolio}
+                    currentUserId={session?.user?.id}
+                    currentUserName={session?.user?.name}
+                    savedPortfolioId={savedPortfolioId}
+                    colors={savedColors}
+                    font={savedFont}
+                />
+            </div>
+        );
     }
-
-    return (
-        <div className="flex min-h-screen">
-            <PortfolioWrapper
-                username={username}
-                portfolio={renderData.portfolio}
-                profile={renderData.profile}
-                repos={renderData.repos}
-                isOwnPortfolio={isOwnPortfolio}
-                currentUserId={session?.user?.id}
-                currentUserName={session?.user?.name}
-                savedPortfolioId={savedPortfolioId}
-                colors={savedColors}
-                font={savedFont}
-            />
-        </div>
-    );
 }
