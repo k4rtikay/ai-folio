@@ -1,4 +1,6 @@
-export default function NotFound(){
+import Link from "next/link";
+
+export default function NotFound() {
     return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="text-center">
@@ -6,9 +8,9 @@ export default function NotFound(){
                 <p className="text-muted-foreground mb-8">
                     The page you are looking for does not exist.
                 </p>
-                <a href="/" className="text-primary hover:underline transition-colors">
+                <Link href="/" className="text-primary hover:underline transition-colors">
                     Go back to home →
-                </a>
+                </Link>
             </div>
         </div>
     )
