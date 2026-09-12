@@ -92,8 +92,6 @@ export default async function PortfolioPage({
     } else {
         console.log(`[CACHE MISS] Generating or fetching ${username}...`);
 
-        // STEP 2: DATABASE CHECK (If it's the owner checking their saved work)
-        // Single lookup — previously this same query ran up to 3x in a row.
         if (isOwnPortfolio && session?.user) {
             const [savedPortfolio] = await db
                 .select()
@@ -115,10 +113,6 @@ export default async function PortfolioPage({
 
                 console.log("Loaded saved portfolio from DB");
 
-                // NOTE: previously this path never wrote to Redis, so owners
-                // hit the DB on every request regardless of cache. Caching
-                // it here now — remove this block if you want owner views
-                // to always read fresh from the DB instead.
                 await redis.set(
                     cacheKey,
                     { renderData, savedPortfolioId, savedColors, savedFont },
