@@ -1,6 +1,11 @@
 import PortfolioWrapper from "@/components/portfolio/portfolio-wrapper";
 import { getGithubData } from "@/lib/github";
-import { DEV_MODE, MOCK_PORTFOLIO, MOCK_PROFILE, MOCK_REPOS } from "@/lib/mock-data";
+import {
+    DEV_MODE,
+    MOCK_PORTFOLIO,
+    MOCK_PROFILE,
+    MOCK_REPOS,
+} from "@/lib/mock-data";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { RenderData } from "@/lib/types";
@@ -10,13 +15,21 @@ import { eq } from "drizzle-orm";
 import { portfolioToRender } from "@/lib/mappers";
 import { generatePortfolio } from "@/lib/groq";
 import { PortfolioColors } from "@/store/use-portfolio-state";
+import { redis } from "@/lib/redis";
+import { Ratelimit } from "@upstash/ratelimit";
 
-export default async function PortfolioPage({ params }: { params: Promise<{ username: string }> }) {
+export default async function PortfolioPage({
+    params,
+}: {
+    params: Promise<{ username: string }>;
+}) {
     const { username } = await params;
 
     // DEV TESTING MODE: Skip auth, database, and API calls
     if (DEV_MODE) {
-        console.log("DEV MODE: Using mock data (no auth, no database, no API calls)");
+        console.log(
+            "DEV MODE: Using mock data (no auth, no database, no API calls)",
+        );
 
         const mockRenderData: RenderData = {
             profile: MOCK_PROFILE,
@@ -47,50 +60,100 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
         headers: await headers(),
     });
 
+    const rateLimiter = new Ratelimit({
+        redis,
+        limiter: Ratelimit.tokenBucket(10, "20 m", 10),
+        prefix: "ratelimit:generation",
+    });
+
     const isOwnPortfolio = session?.user?.name === username;
+
+    const cacheKey = `portfolio:render:${username}`;
 
     let renderData: RenderData | null = null;
     let savedPortfolioId: string | null = null;
     let savedColors: PortfolioColors | undefined;
     let savedFont: string | undefined;
 
-    if (isOwnPortfolio && session?.user) {
-        const [savedPortfolio] = await db
-            .select()
-            .from(portfolios)
-            .where(eq(portfolios.userId, session.user.id))
-            .limit(1);
+    const cachedPayload = await redis.get<{
+        renderData: RenderData;
+        savedPortfolioId: string | null;
+        savedColors?: PortfolioColors;
+        savedFont?: string;
+    }>(cacheKey);
 
-        if (savedPortfolio) {
-            const savedProjects = await db
+    if (cachedPayload) {
+        console.log(`[CACHE HIT] Served ${username} from Redis`);
+
+        renderData = cachedPayload.renderData;
+        savedPortfolioId = cachedPayload.savedPortfolioId;
+        savedColors = cachedPayload.savedColors;
+        savedFont = cachedPayload.savedFont;
+    } else {
+        console.log(`[CACHE MISS] Generating or fetching ${username}...`);
+
+        if (isOwnPortfolio && session?.user) {
+            const [savedPortfolio] = await db
                 .select()
-                .from(projects)
-                .where(eq(projects.portfolioId, savedPortfolio.id))
-                .orderBy(projects.sortOrder);
+                .from(portfolios)
+                .where(eq(portfolios.userId, session.user.id))
+                .limit(1);
 
-            renderData = portfolioToRender(savedPortfolio, savedProjects);
-            savedPortfolioId = savedPortfolio.id
-            savedColors = savedPortfolio.colors as PortfolioColors;
-            savedFont = savedPortfolio.font;
+            if (savedPortfolio) {
+                const savedProjects = await db
+                    .select()
+                    .from(projects)
+                    .where(eq(projects.portfolioId, savedPortfolio.id))
+                    .orderBy(projects.sortOrder);
 
-            console.log("Loaded saved portfolio from DB");
+                renderData = portfolioToRender(savedPortfolio, savedProjects);
+                savedPortfolioId = savedPortfolio.id;
+                savedColors = savedPortfolio.colors as PortfolioColors;
+                savedFont = savedPortfolio.font;
+
+                console.log("Loaded saved portfolio from DB");
+
+                await redis.set(
+                    cacheKey,
+                    { renderData, savedPortfolioId, savedColors, savedFont },
+                    { ex: 86400 },
+                );
+            }
         }
-    }
 
-    if (!renderData) {
-        const { profile, repos } = await getGithubData(username);
+        // STEP 3: Nothing saved yet — generate fresh from GitHub + AI
+        if (!renderData) {
+            const ip =
+                (await headers()).get("x-forwarded-for") ?? "127.0.0.1";
+            const { success } = await rateLimiter.limit(`generate_${ip}`);
 
-        //mock or generate with AI
-        // const aiPortfolio = MOCK_PORTFOLIO;
-        const aiPortfolio = await generatePortfolio(profile, repos);
+            if (!success) {
+                throw new Error("RATE_LIMIT_EXCEEDED");
+            }
+            const { profile, repos } = await getGithubData(username);
 
-        renderData = {
-            profile,
-            repos,
-            portfolio: aiPortfolio
-        };
+            //mock or generate with AI
+            // const aiPortfolio = MOCK_PORTFOLIO;
+            const aiPortfolio = await generatePortfolio(profile, repos);
 
-        console.log("Generated fresh portfolio from GitHub");
+            renderData = {
+                profile,
+                repos,
+                portfolio: aiPortfolio,
+            };
+
+            console.log(
+                "SAVING TO REDIS:",
+                JSON.stringify(renderData, null, 2),
+            );
+            await redis.set(
+                cacheKey,
+                { renderData, savedPortfolioId, savedColors, savedFont },
+                { ex: 86400 }, // TTL: 24 hours (86400 seconds)
+            );
+
+            console.log("Generated fresh portfolio from GitHub");
+        }
     }
 
     return (
@@ -109,4 +172,4 @@ export default async function PortfolioPage({ params }: { params: Promise<{ user
             />
         </div>
     );
-};
+}
