@@ -31,7 +31,21 @@ export async function proxy(request: NextRequest) {
         limiter = viewLimiter;
     }
 
-    const { success, limit, reset, remaining } = await limiter.limit(ip);
+    let rateLimitResult: Awaited<ReturnType<Ratelimit["limit"]>>;
+
+    try {
+        rateLimitResult = await limiter.limit(ip);
+    } catch (error) {
+        console.error("Upstash rate limit request failed", {
+            pathname,
+            ip,
+            error,
+            cause: error instanceof Error ? error.cause : undefined,
+        });
+        throw error;
+    }
+
+    const { success, limit, reset, remaining } = rateLimitResult;
 
     if (!success) {
         return NextResponse.json(
